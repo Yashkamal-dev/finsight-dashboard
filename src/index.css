@@ -1,0 +1,81 @@
+@import "tailwindcss";
+
+:root {
+  /* ── Background Layers ── */
+  --bg-primary: #ffffff; /* main app background */
+  --bg-secondary: #e5e3f9; /* sidebar background */
+  --bg-card: #ffffff; /* cards, modals, dropdowns */
+  --bg-card-hover: #eceaff; /* card hover state */
+  --bg-input: #efeff1; /* input fields, search bar */
+
+  /* ── Text ── */
+  --text-primary: #111113; /* headings, important numbers */
+  --text-secondary: #56565e; /* subtitles, labels, table headers */
+  --text-muted: #a1a1a9; /* placeholders, disabled text, hints */
+  --text-inverse: #ffffff; /* text on dark/purple backgrounds */
+
+  /* ── Brand / Accent ── */
+  --accent-primary: #8470ff; /* active sidebar item, primary buttons */
+  --accent-primary-hover: #b0a5fc; /* button hover */
+  --accent-soft: #bfb7ff; /* progress bar fill, subtle highlights */
+  --accent-subtle: #f5f4ff; /* accent background tint */
+
+  /* ── Border & Divider ── */
+  --border-default: #d0d0d4; /* card borders, input borders */
+  --border-subtle: #efeff1; /* table row dividers, section separators */
+
+  /* ── Status Colors ── */
+  --success: #297b32; /* income amount, on-track budget, positive % */
+  --success-bg: #e5fae6; /* success badge background */
+  --danger: #e83838; /* expense amount, over-budget, negative % */
+  --danger-bg: #ffebeb; /* danger badge background */
+  --warning: #f9970c; /* needs attention, approaching limit */
+  --warning-bg: #fef4e1; /* warning badge background */
+
+  /* ── Sidebar specific ── */
+  --sidebar-bg: #f5f4ff; /* sidebar background */
+  --sidebar-text: #56565e; /* inactive nav item text */
+  --sidebar-active-bg: #8470ff; /* active nav item background */
+  --sidebar-active-text: #ffffff; /* active nav item text */
+  --sidebar-icon: #a1a1a9; /* inactive icon color */
+}
+
+.dark {
+  /* ── Background Layers ── */
+  --bg-primary: #111113; /* main app background */
+  --bg-secondary: #1a1a1f; /* sidebar background */
+  --bg-card: #222226; /* cards, modals, dropdowns */
+  --bg-card-hover: #343438; /* card hover state */
+  --bg-input: #343438; /* input fields, search bar */
+
+  /* ── Text ── */
+  --text-primary: #ffffff; /* headings, important numbers */
+  --text-secondary: #a1a1a9; /* subtitles, labels, table headers */
+  --text-muted: #56565e; /* placeholders, disabled text, hints */
+  --text-inverse: #111113; /* text on light backgrounds */
+
+  /* ── Brand / Accent ── */
+  --accent-primary: #8470ff; /* stays the same in dark mode */
+  --accent-primary-hover: #7664e4;
+  --accent-soft: #5347a1; /* muted in dark mode */
+  --accent-subtle: #222226; /* accent background tint */
+
+  /* ── Border & Divider ── */
+  --border-default: #343438; /* card borders, input borders */
+  --border-subtle: #222226; /* table row dividers */
+
+  /* ── Status Colors ── */
+  --success: #e5fae6; /* lighter for dark bg readability */
+  --success-bg: #1a2e1b;
+  --danger: #ffebeb;
+  --danger-bg: #2e1a1a;
+  --warning: #f9970c;
+  --warning-bg: #2e2410;
+
+  /* ── Sidebar specific ── */
+  --sidebar-bg: #1a1a1f;
+  --sidebar-text: #a1a1a9;
+  --sidebar-active-bg: #8470ff;
+  --sidebar-active-text: #ffffff;
+  --sidebar-icon: #56565e;
+}
