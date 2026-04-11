@@ -1,11 +1,12 @@
 import Navbar from "./layouts/Navbar";
 import TopBar from "./layouts/TopBar";
+import Dashboard from "./pages/Dashboard";
 
 const App = () => {
   return (
-    <div className="grid auto-cols-[auto_1fr] grid-flow-col gap-2">
+    <div className="grid auto-cols-[auto_1fr] grid-flow-col">
       <Navbar />
-      <TopBar />
+      <Dashboard />
     </div>
   );
 };

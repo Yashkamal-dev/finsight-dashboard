@@ -2,9 +2,9 @@ import React from "react";
 
 const TopBar = () => {
   return (
-    <header className="flex h-max w-full items-center justify-between p-4">
+    <header className="flex h-max w-full py-4 items-center justify-between ">
       {/* heading and message */}
-      <div className="flex flex-col gap-1">
+      <div className="flex flex-col gap-2">
         <h1 className="text-3xl font-semibold text-[var(--text-primary)]">
           Welcome back, Luke!
         </h1>
