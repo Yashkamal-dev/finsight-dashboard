@@ -29,12 +29,16 @@ const TransactionContext = ({ children }: { children: ReactNode }) => {
   // data of current month
   const [CurrentMonthTransactions, setCurrentMonthTransactions] = useState<
     transactionInterface[]
-  >(getData(currentMonthString));
+  >(() => {
+    return getData(currentMonthString);
+  });
 
   // data for selected month
   const [SelectedMonthTransactions, setSelectedMonthTransactions] = useState<
     transactionInterface[]
-  >(getData(SelectedMonth));
+  >(() => {
+    return getData(SelectedMonth);
+  });
 
   // to change the selected month transaction array on month change
   useEffect(() => {
