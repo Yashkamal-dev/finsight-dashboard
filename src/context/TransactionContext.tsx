@@ -1,5 +1,6 @@
 import { createContext, useEffect, useState, type ReactNode } from "react";
 import type { transactionInterface } from "../types/transaction";
+import { getData, monthStringGen } from "../utils/transactionContextUtils";
 
 type contextType = {
   CurrentMonthTransactions: transactionInterface[];
@@ -7,26 +8,6 @@ type contextType = {
   SelectedMonth: string;
   setSelectedMonth: React.Dispatch<React.SetStateAction<string>>;
   addTransaction(transaction: transactionInterface, month: string): void;
-};
-
-// month generater
-export const monthStringGen = (date: Date) => {
-  const month = date.getMonth() + 1;
-  const year = date.getFullYear();
-
-  return `${year}-${month}`;
-};
-
-// data fetcher from a month
-const getData = (month: string) => {
-  const key = `Transactions_${month}`;
-
-  if (!localStorage.getItem(key)) {
-    localStorage.setItem(key, JSON.stringify([]));
-  }
-
-  const storedData = localStorage.getItem(key);
-  return storedData ? JSON.parse(storedData) : [];
 };
 
 export const transactionData = createContext<contextType | null>(null);
