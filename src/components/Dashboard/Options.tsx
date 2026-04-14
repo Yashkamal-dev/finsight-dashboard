@@ -1,7 +1,11 @@
 import { useState } from "react";
 
-const Options = () => {
-  const [selected, setSelected] = useState<"month" | "week">("month");
+type props = {
+  selected: "month" | "week";
+  setSelected: React.Dispatch<React.SetStateAction<"month" | "week">>;
+};
+
+const Options = ({ selected, setSelected }: props) => {
   return (
     <div className="flex justify-between py-5">
       {/* filter option */}

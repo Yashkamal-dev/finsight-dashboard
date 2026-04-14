@@ -1,10 +1,14 @@
 import React from "react";
 import ChartRecentTransactionCon from "./HeroContainer/ChartRecentTransactionCon";
 
-const Hero = () => {
+type props = {
+  selected: "month" | "week";
+};
+
+const Hero = ({ selected }: props) => {
   return (
     <div className="h-full w-full">
-      <ChartRecentTransactionCon />
+      <ChartRecentTransactionCon selected={selected} />
     </div>
   );
 };

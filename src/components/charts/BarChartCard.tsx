@@ -9,10 +9,14 @@ import {
 } from "recharts";
 import { useTransaction } from "../../hooks/useTransaction";
 
-type mappedObj = {
-  type: "Income" | "Expense";
-  amount: number;
-  date: string;
+type props = {
+  selected: "month" | "week";
+};
+
+type result = {
+  label: number | string;
+  Income: number;
+  Expense: number;
 };
 
 // function to get the month length of month
@@ -23,38 +27,71 @@ const getDayInMonth = (date: Date) => {
   return new Date(year, month + 1, 0).getDate();
 };
 
-// the bar chart of dashbaord
-const BarChartCard = () => {
+// the bar chart of dashbaord component
+const BarChartCard = ({ selected }: props) => {
+  // getting data from transaction context
   const { CurrentMonthTransactions } = useTransaction();
+
+  // today's date
   const todaydate = new Date().getDate();
 
-  // initial array with 0 as income eand expenses
-  const result = Array.from({ length: 7 }, (_, i) => {
-    return { label: String(i + 1), Income: 0, Expense: 0 };
-  });
+  // initial array with 0 as income eand expenses for the graph
+  let result: result[] = []; // used for graph
 
-  // filled up reuslt with data based on lcoalstorage
-  CurrentMonthTransactions.forEach((txn) => {
-    const day = new Date(txn.date).getDate();
+  // function to fill up result with the value of current month
+  const monthResult = () => {
+    result = Array.from({ length: new Date().getDate() }, (_, i) => {
+      return { label: String(i + 1), Income: 0, Expense: 0 };
+    });
 
-    if (day <= todaydate && todaydate - 7 < day) {
-      let idx = day - todaydate + 7;
-      result[idx - 1]["label"] = new Date(txn.date).toLocaleDateString(
-        "en-US",
-        {
-          weekday: "short",
-        },
-      );
+    // filled up reuslt with data based on lcoalstorage for this month
+    CurrentMonthTransactions.forEach((txn) => {
+      const day = new Date(txn.date).getDate();
 
-      if (txn["type"] === "Income") {
-        result[idx - 1]["Income"] += txn["amount"];
-      } else if (txn["type"] === "Expense") {
-        result[idx - 1]["Expense"] += txn["amount"];
+      if (day <= todaydate) {
+        console.log(day);
+        if (txn["type"] === "Income") {
+          result[day - 1]["Income"] += txn["amount"];
+        } else if (txn["type"] === "Expense") {
+          result[day - 1]["Expense"] += txn["amount"];
+        }
       }
-    }
-  });
+    });
+  };
 
-  console.log(result);
+  // function to fill up result with the value of past 7 days
+  const weekResult = () => {
+    result = Array.from({ length: 7 }, (_, i) => {
+      return { label: String(i + 1), Income: 0, Expense: 0 };
+    });
+
+    // filled up reuslt with data based on lcoalstorage for past 7 days
+    CurrentMonthTransactions.forEach((txn) => {
+      const day = new Date(txn.date).getDate();
+
+      if (day <= todaydate && todaydate - 7 < day) {
+        let idx = day - todaydate + 7;
+        result[idx - 1]["label"] = new Date(txn.date).toLocaleDateString(
+          "en-US",
+          {
+            weekday: "short",
+          },
+        );
+
+        if (txn["type"] === "Income") {
+          result[idx - 1]["Income"] += txn["amount"];
+        } else if (txn["type"] === "Expense") {
+          result[idx - 1]["Expense"] += txn["amount"];
+        }
+      }
+    });
+  };
+
+  if (selected === "month") {
+    monthResult();
+  } else if (selected === "week") {
+    weekResult();
+  }
 
   return (
     <div className="h-100 w-full rounded-4xl border border-[var(--border-default)]">

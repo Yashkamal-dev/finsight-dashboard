@@ -1,15 +1,18 @@
+import { useState } from "react";
 import Hero from "../components/Dashboard/Hero";
 import Options from "../components/Dashboard/Options";
 import SummaryCard from "../components/Dashboard/SummaryCard";
 import TopBar from "../layouts/TopBar";
 
 const Dashboard = () => {
+  const [selected, setSelected] = useState<"month" | "week">("week");
+
   return (
     <div className="px-4">
       <TopBar />
-      <Options />
+      <Options selected={selected} setSelected={setSelected} />
       <SummaryCard />
-      <Hero />
+      <Hero selected={selected} />
     </div>
   );
 };

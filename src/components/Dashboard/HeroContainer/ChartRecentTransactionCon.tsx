@@ -1,10 +1,14 @@
 import BarChartCard from "../../charts/BarChartCard";
 import RecentTransaction from "../HeroComponents/RecentTransaction";
 
-const ChartRecentTransactionCon = () => {
+type props = {
+  selected: "month" | "week";
+};
+
+const ChartRecentTransactionCon = ({ selected }: props) => {
   return (
     <div className="h-full w-full">
-      <BarChartCard />
+      <BarChartCard selected={selected} />
       <RecentTransaction />
     </div>
   );
