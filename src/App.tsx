@@ -1,6 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import Navbar from "./layouts/Navbar";
 import Dashboard from "./pages/Dashboard";
+import Transactions from "./pages/Transactions";
 
 const App = () => {
   return (
@@ -11,6 +12,9 @@ const App = () => {
       <Routes>
         {/* dashboard route */}
         <Route path="/" element={<Dashboard />} />
+        
+        {/* transaction route */}
+        <Route path="/transactions" element={<Transactions />} />
       </Routes>
     </div>
   );
