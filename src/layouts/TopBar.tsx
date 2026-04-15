@@ -1,15 +1,20 @@
 import React from "react";
 
-const TopBar = () => {
+type props ={
+  pageTitle : string
+  message : string
+}
+
+const TopBar = ({ pageTitle, message } : props ) => {
   return (
     <header className="flex h-max w-full py-4 items-center justify-between ">
       {/* heading and message */}
       <div className="flex flex-col gap-2">
         <h1 className="text-3xl font-semibold text-[var(--text-primary)]">
-          Welcome back, Luke!
+          {pageTitle}
         </h1>
         <p className="text-lg text-[var(--text-secondary)]">
-          You're doing great—keep your finances on track.
+          {message}
         </p>
       </div>
 

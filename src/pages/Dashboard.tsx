@@ -9,7 +9,10 @@ const Dashboard = () => {
 
   return (
     <div className="px-4">
-      <TopBar />
+      <TopBar
+        pageTitle="Welcome back, Luke!"
+        message="You're doing great—keep your finances on track."
+      />
       <Options selected={selected} setSelected={setSelected} />
       <SummaryCard />
       <Hero selected={selected} />
