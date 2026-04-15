@@ -15,6 +15,7 @@
   --text-inverse: #ffffff; /* text on dark/purple backgrounds */
 
   /* ── Brand / Accent ── */
+  --accent-text: #412ebe;
   --accent-primary: #8470ff; /* active sidebar item, primary buttons */
   --accent-primary-hover: #b0a5fc; /* button hover */
   --accent-soft: #bfb7ff; /* progress bar fill, subtle highlights */
