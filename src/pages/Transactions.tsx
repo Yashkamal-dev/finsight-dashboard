@@ -64,9 +64,9 @@ const Transactions = () => {
   const [selectedMethod, setSelectedMethod] = useState<option>(method[0]);
 
   // assigning categories based on the seleceted type
-  if (selectedType["value"] === "income") {
+  if (selectedType["value"] === "Income") {
     categories = [{ label: "All", value: "all" }, ...incomeCategories];
-  } else if (selectedType["value"] === "expense") {
+  } else if (selectedType["value"] === "Expense") {
     categories = [{ label: "All", value: "all" }, ...expenseCategories];
   }
 
