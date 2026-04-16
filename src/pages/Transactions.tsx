@@ -3,6 +3,9 @@ import Filters from "../components/transaction/Filters";
 import Options from "../components/transaction/Options";
 import TopBar from "../layouts/TopBar";
 import type { option } from "../types/optionsType";
+import TransactionList from "../components/transaction/TransactionList";
+import { getData, monthStringGen } from "../utils/transactionContextUtils";
+import type { transactionInterface } from "../types/transaction";
 
 // options for the transaction type selection
 const types: option[] = [
@@ -70,6 +73,11 @@ const Transactions = () => {
   // the date to for the transaction list (default as current date)
   const [selectedDate, setSelectedDate] = useState<Date>(new Date());
 
+  // transaction data for the selected month
+  const selectedDateTransactions: transactionInterface[] = getData(
+    monthStringGen(selectedDate),
+  );
+
   return (
     <div className="px-4">
       {/* topbar of the page */}
@@ -93,6 +101,9 @@ const Transactions = () => {
         selectedMethod={selectedMethod}
         setSelectedMethod={setSelectedMethod}
       />
+
+      {/* transaction list */}
+      <TransactionList selectedDateTransactions={selectedDateTransactions} />
     </div>
   );
 };
