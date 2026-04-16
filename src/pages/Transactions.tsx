@@ -67,6 +67,9 @@ const Transactions = () => {
     categories = [{ label: "All", value: "all" }, ...expenseCategories];
   }
 
+  // the date to for the transaction list (default as current date)
+  const [selectedDate, setSelectedDate] = useState<Date>(new Date());
+
   return (
     <div className="px-4">
       {/* topbar of the page */}
@@ -76,7 +79,7 @@ const Transactions = () => {
       />
 
       {/* month and Add transaction option's component */}
-      <Options />
+      <Options selectedDate={selectedDate} setSelectedDate={setSelectedDate} />
 
       {/* filter menu component */}
       <Filters

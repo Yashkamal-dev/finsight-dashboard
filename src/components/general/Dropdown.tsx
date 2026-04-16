@@ -24,7 +24,7 @@ const Dropdown = ({
       {/* dropdown label */}
       <div
         onClick={() => setIsOpen(!isOpen)}
-        className="flex min-w-40 cursor-pointer rounded-full border border-[var(--border-default)] bg-[var(--accent-subtle)] py-1.5 text-center"
+        className="flex min-w-40 cursor-pointer rounded-full border border-[var(--border-default)] py-1.5 text-center shadow-xl hover:bg-[var(--accent-subtle)]"
       >
         <div className="grow border-r border-r-[var(--border-default)] px-3">
           {selected["value"] !== options[0]["value"]
@@ -51,7 +51,7 @@ const Dropdown = ({
       {/* dropdown options to show on open */}
       {isOpen && (
         // options container
-        <div className="absolute mt-1 flex h-fit w-full cursor-pointer flex-col gap-1 rounded-xl border border-[var(--border-default)] bg-[var(--bg-primary)] p-1">
+        <div className="absolute mt-1 flex h-fit w-full cursor-pointer flex-col gap-1 rounded-xl border border-[var(--border-default)] bg-[var(--bg-primary)] p-1 shadow-xl">
           {options.map((opt) => (
             // each option
             <div
