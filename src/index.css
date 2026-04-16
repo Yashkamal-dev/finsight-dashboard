@@ -23,7 +23,7 @@
 
   /* ── Border & Divider ── */
   --border-default: #9a9a9a; /* card borders, input borders */
-  --border-subtle: #efeff1; /* table row dividers, section separators */
+  --border-subtle: #dfdfe3; /* table row dividers, section separators */
 
   /* ── Status Colors ── */
   --success: #297b32; /* income amount, on-track budget, positive % */
