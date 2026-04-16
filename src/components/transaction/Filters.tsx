@@ -2,26 +2,59 @@ import { useState } from "react";
 import Dropdown from "../general/Dropdown";
 import type { option } from "../../types/optionsType";
 
-const options: option[] = [
-  { label: "All", value: "all" },
-  { label: "Income", value: "income" },
-  { label: "Expense", value: "expense" },
-];
+type props = {
+  types: option[];
+  selectedType: option;
+  setselectedType: React.Dispatch<React.SetStateAction<option>>;
+  categories: option[];
+  selectedCategories: option;
+  setselectedCategories: React.Dispatch<React.SetStateAction<option>>;
+  method: option[];
+  selectedMethod: option;
+  setSelectedMethod: React.Dispatch<React.SetStateAction<option>>;
+};
 
-const Filters = () => {
-  const [selectedType, setselected] = useState<option | null>(null);
-  console.log(selectedType);
-
+const Filters = ({
+  types,
+  selectedType,
+  setselectedType,
+  categories,
+  selectedCategories,
+  setselectedCategories,
+  method,
+  selectedMethod,
+  setSelectedMethod,
+}: props) => {
   return (
-    <div className="flex items-center">
-      dropdown : -
+    <div className="flex items-center gap-2">
+      {/* dropdown for types */}
       <Dropdown
-        options={options}
+        options={types}
         selected={selectedType}
         onChange={(val) => {
-          setselected(val);
+          setselectedType(val);
         }}
-        placeholder="Select type"
+        placeholder="Select Type"
+      />
+
+      {/* dropdown for categories */}
+      <Dropdown
+        options={categories}
+        selected={selectedCategories}
+        onChange={(val) => {
+          setselectedCategories(val);
+        }}
+        placeholder="Select Categories"
+      />
+
+      {/* dropdown for method */}
+      <Dropdown
+        options={method}
+        selected={selectedMethod}
+        onChange={(val) => {
+          setSelectedMethod(val);
+        }}
+        placeholder="Select Method"
       />
     </div>
   );

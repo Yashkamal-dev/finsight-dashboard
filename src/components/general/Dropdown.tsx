@@ -4,7 +4,7 @@ import type { option } from "../../types/optionsType";
 // props for the component
 type dropdownProp = {
   options: option[];
-  selected: option | null;
+  selected: option;
   onChange(val: option): void;
   placeholder?: string;
 };
@@ -26,8 +26,10 @@ const Dropdown = ({
         onClick={() => setIsOpen(!isOpen)}
         className="flex min-w-40 cursor-pointer rounded-full border border-[var(--border-default)] bg-[var(--accent-subtle)] py-1.5 text-center"
       >
-        <div className="grow border-r border-r-[var(--border-default)]">
-          {selected ? selected["label"] : placeholder}
+        <div className="grow border-r border-r-[var(--border-default)] px-3">
+          {selected["value"] !== options[0]["value"]
+            ? selected["label"]
+            : placeholder}
         </div>
         {/* down icon */}
         <span
@@ -49,7 +51,7 @@ const Dropdown = ({
       {/* dropdown options to show on open */}
       {isOpen && (
         // options container
-        <div className="absolute mt-1 flex h-fit w-full cursor-pointer flex-col gap-1 border border-[var(--border-default)] bg-[var(--bg-primary)] p-1">
+        <div className="absolute mt-1 flex h-fit w-full cursor-pointer flex-col gap-1 rounded-xl border border-[var(--border-default)] bg-[var(--bg-primary)] p-1">
           {options.map((opt) => (
             // each option
             <div
