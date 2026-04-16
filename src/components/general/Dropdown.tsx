@@ -55,7 +55,7 @@ const Dropdown = ({
           {options.map((opt) => (
             // each option
             <div
-              key={new Date().getTime()}
+              key={crypto.randomUUID()}
               onClick={() => {
                 onChange(opt);
                 setIsOpen(!isOpen);
