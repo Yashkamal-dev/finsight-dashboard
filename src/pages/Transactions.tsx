@@ -1,3 +1,4 @@
+import Filters from "../components/transaction/Filters";
 import Options from "../components/transaction/Options";
 import TopBar from "../layouts/TopBar";
 
@@ -9,6 +10,7 @@ const Transactions = () => {
         message="Track, filter, and manage your financial transactions with ease."
       />
       <Options />
+      <Filters />
     </div>
   );
 };
