@@ -38,3 +38,61 @@ export const sortExpenseFromTransactions = (
 
   return expenseTransactions;
 };
+
+// ------------------------------------------------------------------------
+
+// * functions that are used in transaction list in the transaction page
+
+// function to sort provided transactionArray by provided type
+export const sortByType = (
+  type: string,
+  transactionArray: transactionInterface[],
+) => {
+  // returning same array if the type is "all" (no filtering)
+  if (type === "all") {
+    return transactionArray;
+  }
+
+  // filtering array based on type provided
+  const sortedArray = transactionArray.filter((txn) => {
+    return txn["type"] === type;
+  });
+
+  return sortedArray;
+};
+
+// function to sort provided transactionArray by provided category
+export const sortByCategory = (
+  category: string,
+  transactionArray: transactionInterface[],
+) => {
+  // returning same array if the category is "all" (no filtering)
+  if (category === "all") {
+    return transactionArray;
+  }
+
+  // filtering array based on category provided
+  const sortedArray = transactionArray.filter((txn) => {
+    return txn["category"] === category;
+  });
+
+  return sortedArray;
+};
+
+// function to sort provided transactionArray by provided method
+export const sortByMethod = (
+  method: string,
+  transactionArray: transactionInterface[],
+) => {
+  // returning same array if the method is "all" (no filtering)
+  if (method === "all") {
+    return transactionArray;
+  }
+
+  // filtering array based on method provided
+  const sortedArray = transactionArray.filter((txn) => {
+    return txn["paymentMethod"] === method;
+  });
+
+  return sortedArray;
+};

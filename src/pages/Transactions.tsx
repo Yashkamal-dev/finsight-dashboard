@@ -10,8 +10,8 @@ import type { transactionInterface } from "../types/transaction";
 // options for the transaction type selection
 const types: option[] = [
   { label: "All", value: "all" },
-  { label: "Income", value: "income" },
-  { label: "Expense", value: "expense" },
+  { label: "Income", value: "Income" },
+  { label: "Expense", value: "Expense" },
 ];
 
 // options for categories of income
@@ -102,8 +102,13 @@ const Transactions = () => {
         setSelectedMethod={setSelectedMethod}
       />
 
-      {/* transaction list */}
-      <TransactionList selectedDateTransactions={selectedDateTransactions} />
+      {/* transaction list / Table */}
+      <TransactionList
+        selectedDateTransactions={selectedDateTransactions}
+        selectedType={selectedType}
+        selectedCategories={selectedCategories}
+        selectedMethod={selectedMethod}
+      />
     </div>
   );
 };

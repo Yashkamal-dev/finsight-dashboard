@@ -1,10 +1,43 @@
+import type { option } from "../../types/optionsType";
 import type { transactionInterface } from "../../types/transaction";
+import {
+  sortByCategory,
+  sortByMethod,
+  sortByType,
+  sortTransactions,
+} from "../../utils/sortTransactionUtil";
 
 type props = {
   selectedDateTransactions: transactionInterface[];
+  selectedType: option;
+  selectedCategories: option;
+  selectedMethod: option;
 };
 
-const TransactionList = ({ selectedDateTransactions }: props) => {
+// * transactionList component containing table of the list
+const TransactionList = ({
+  selectedDateTransactions,
+  selectedType,
+  selectedCategories,
+  selectedMethod,
+}: props) => {
+  // destructuring values and assigning names to them for the filtering
+  const { value: type } = selectedType;
+  const { value: category } = selectedCategories;
+  const { value: method } = selectedMethod;
+
+  // sorting list in most recent order
+  let displayedTransactions = sortTransactions([...selectedDateTransactions]);
+
+  // sorting array based on type
+  displayedTransactions = sortByType(type, displayedTransactions);
+
+  // sorting array based on category
+  displayedTransactions = sortByCategory(category, displayedTransactions);
+
+  // sorting array based on method
+  displayedTransactions = sortByMethod(method, displayedTransactions);
+
   return (
     <div className="py-4">
       {/* table header */}
@@ -18,7 +51,7 @@ const TransactionList = ({ selectedDateTransactions }: props) => {
       </div>
 
       {/* table data */}
-      {selectedDateTransactions.map((txn) => {
+      {displayedTransactions.map((txn) => {
         return (
           <div
             key={txn["id"]}
