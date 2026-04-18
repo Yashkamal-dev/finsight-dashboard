@@ -5,6 +5,10 @@ import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { Calendar } from "../ui/calendar";
 import { format } from "date-fns";
 
+type prop = {
+  setIsAdding: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
 // today's date and string for comparision
 const todayDate = new Date();
 const todayDatestr = todayDate.toISOString().split("T")[0];
@@ -44,7 +48,8 @@ const expenseCategories: option[] = [
   { label: "Transfer", value: "transfer" },
 ];
 
-const AddTransactonForm = () => {
+// modal component
+const AddTransactonForm = ({ setIsAdding }: prop) => {
   // type of the transaction to set
   const [type, setType] = useState("Expense");
 
@@ -266,7 +271,12 @@ const AddTransactonForm = () => {
 
         {/* cancel and save button */}
         <div className="mt-1 flex gap-3 border-t border-[var(--border-default)] pt-4.5 pb-1">
-          <button className="grow cursor-pointer rounded-full border border-[var(--border-default)] bg-[var(--bg-primary)] py-2.5 text-[var(--text-primary)] shadow-xl">
+          <button
+            onClick={() => {
+              setIsAdding(false);
+            }}
+            className="grow cursor-pointer rounded-full border border-[var(--border-default)] bg-[var(--bg-primary)] py-2.5 text-[var(--text-primary)] shadow-xl"
+          >
             Cancel
           </button>
           <button className="grow cursor-pointer rounded-full border border-[var(--border-default)] bg-[var(--accent-primary)] py-2.5 text-[var(--text-inverse)] shadow-xl">

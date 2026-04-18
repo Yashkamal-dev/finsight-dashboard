@@ -46,6 +46,9 @@ const method: option[] = [
 
 // transaction page
 const Transactions = () => {
+  // state to mount and unmount the add transaction component
+  const [isAdding, setIsAdding] = useState<boolean>(false);
+
   // initial categories with options for "All"
   let categories: option[] = [
     { label: "All", value: "all" },
@@ -88,7 +91,11 @@ const Transactions = () => {
       />
 
       {/* month and Add transaction option's component */}
-      <Options selectedDate={selectedDate} setSelectedDate={setSelectedDate} />
+      <Options
+        selectedDate={selectedDate}
+        setSelectedDate={setSelectedDate}
+        setIsAdding={setIsAdding}
+      />
 
       {/* filter menu component */}
       <Filters
@@ -111,7 +118,7 @@ const Transactions = () => {
         selectedMethod={selectedMethod}
       />
 
-      <AddTransaction />
+      {isAdding && <AddTransaction setIsAdding={setIsAdding} />}
     </div>
   );
 };
