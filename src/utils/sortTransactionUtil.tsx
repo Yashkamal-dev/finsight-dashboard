@@ -3,7 +3,7 @@ import type { transactionInterface } from "../types/transaction";
 // function that will fetch transactions from the array in sorted order
 export const sortTransactions = (transactionArray: transactionInterface[]) => {
   const recentTransactions = [...transactionArray].sort((a, b) => {
-    return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+    return new Date(b["date"]).getTime() - new Date(a["date"]).getTime();
   });
 
   return recentTransactions;
