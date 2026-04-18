@@ -143,6 +143,8 @@ const AddTransactonForm = ({ setIsAdding }: prop) => {
     // validating and fetching current errors
     const newErrors = validateTransaction();
 
+    console.log(date.toLocaleDateString("en-CA"));
+
     // returning even if one error is true
     if (Object.values(newErrors).some(Boolean)) return;
 
@@ -155,7 +157,7 @@ const AddTransactonForm = ({ setIsAdding }: prop) => {
       amount: amount,
       category: category["value"],
       createdAt: new Date().toISOString(),
-      date: date.toISOString().split("T")[0],
+      date: date.toLocaleDateString("en-CA"),
       id: crypto.randomUUID(),
       note: note || "",
       paymentMethod: method["value"],
@@ -378,10 +380,10 @@ const AddTransactonForm = ({ setIsAdding }: prop) => {
               <PopoverTrigger asChild>
                 {/* custom date button */}
                 <button
-                  className={`grow cursor-pointer rounded-full border border-[var(--border-default)] px-5 py-1 text-lg shadow-lg hover:bg-[var(--accent-subtle)]`}
+                  className={`grow cursor-pointer ${isCustom ? "bg-[var(--accent-primary)] text-[var(--text-inverse)]" : "hover:bg-[var(--accent-subtle)]"} rounded-full border border-[var(--border-default)] px-5 py-1 text-lg shadow-lg`}
                 >
                   {isCustom
-                    ? `${date?.toISOString().split("T")[0]}`
+                    ? `${date?.toLocaleDateString("en-CA")}`
                     : "Pick Date"}
                   {/* Pick Date */}
                 </button>
