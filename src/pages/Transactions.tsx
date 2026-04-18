@@ -6,6 +6,7 @@ import type { option } from "../types/optionsType";
 import TransactionList from "../components/transaction/TransactionList";
 import { getData, monthStringGen } from "../utils/transactionContextUtils";
 import type { transactionInterface } from "../types/transaction";
+import AddTransaction from "../components/general/AddTransaction";
 
 // options for the transaction type selection
 const types: option[] = [
@@ -109,6 +110,8 @@ const Transactions = () => {
         selectedCategories={selectedCategories}
         selectedMethod={selectedMethod}
       />
+
+      <AddTransaction />
     </div>
   );
 };
