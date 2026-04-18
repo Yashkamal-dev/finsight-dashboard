@@ -7,6 +7,7 @@ type dropdownProp = {
   selected: option;
   onChange(val: option): void;
   placeholder?: string;
+  error?: boolean;
 };
 
 // dropdown component
@@ -15,6 +16,7 @@ const Dropdown = ({
   selected,
   onChange,
   placeholder = "select option",
+  error = false,
 }: dropdownProp) => {
   //  state to define if dropdown is open or not
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -24,7 +26,7 @@ const Dropdown = ({
       {/* dropdown label */}
       <div
         onClick={() => setIsOpen(!isOpen)}
-        className="flex min-w-40 cursor-pointer rounded-full border border-[var(--border-default)] py-1.5 text-center shadow-xl hover:bg-[var(--accent-subtle)]"
+        className={`flex ${error === true ? "border-[var(--danger)]" : ""} min-w-40 cursor-pointer rounded-full border border-[var(--border-default)] py-1.5 text-center shadow-xl hover:bg-[var(--accent-subtle)]`}
       >
         <div className="grow border-r border-r-[var(--border-default)] px-3">
           {selected["value"] !== options[0]["value"]

@@ -1,29 +1,11 @@
-type transactionType = "Income" | "Expense";
-
-type paymentMethod = "cash" | "upi" | "card" | "bank";
-
-type category =
-  | "food"
-  | "transport"
-  | "shopping"
-  | "entertainment"
-  | "health"
-  | "salary"
-  | "freelance"
-  | "cashback"
-  | "refund"
-  | "transfer"
-  | "rent"
-  | "investment";
-
 export interface transactionInterface {
   id: string;
-  type: transactionType;
+  type: string;
   amount: number;
-  category: category;
+  category: string;
   title: string;
   note: string;
-  paymentMethod: paymentMethod;
+  paymentMethod: string;
   date: string;
   createdAt: string;
 }

@@ -4,6 +4,9 @@ import type { option } from "../../types/optionsType";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { Calendar } from "../ui/calendar";
 import { format } from "date-fns";
+import type { transactionInterface } from "../../types/transaction";
+import { useTransaction } from "../../hooks/useTransaction";
+import { monthStringGen } from "../../utils/transactionContextUtils";
 
 type prop = {
   setIsAdding: React.Dispatch<React.SetStateAction<boolean>>;
@@ -21,6 +24,7 @@ const yesterdayDatestr = yesterdayDate.toISOString().split("T")[0];
 // type for the types button in the form
 const Types = ["Income", "Expense"];
 
+// list used for dropdown and specifying mehtod
 const methods: option[] = [
   { label: "", value: "" },
   { label: "Cash", value: "cash" },
@@ -29,6 +33,7 @@ const methods: option[] = [
   { label: "Bank", value: "bank" },
 ];
 
+// categories that income should have
 const incomeCategories: option[] = [
   { label: "Salary", value: "salary" },
   { label: "Freelance", value: "freelance" },
@@ -50,8 +55,11 @@ const expenseCategories: option[] = [
 
 // modal component
 const AddTransactonForm = ({ setIsAdding }: prop) => {
+  // useing addTransaction to store the data into localstorage for specified month
+  const { addTransaction } = useTransaction();
+
   // type of the transaction to set
-  const [type, setType] = useState("Expense");
+  const [type, setType] = useState<string>("Expense");
 
   // amount state
   const [amount, setAmount] = useState<number>();
@@ -65,6 +73,7 @@ const AddTransactonForm = ({ setIsAdding }: prop) => {
   // method state
   const [method, setMethod] = useState<option>(methods[0]);
 
+  // assigning category based on the selected type
   let categories: option[] =
     type === "Income"
       ? [{ label: "", value: "" }, ...incomeCategories]
@@ -87,6 +96,78 @@ const AddTransactonForm = ({ setIsAdding }: prop) => {
   // function to handle default behaviour
   const submitHandler = (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
+  };
+
+  // error state to determine if any value if pending
+  const [errors, setErrors] = useState({
+    amount: false,
+    name: false,
+    method: false,
+    category: false,
+  });
+
+  // function to validate transaction
+  const validateTransaction = () => {
+    const newErrors = {
+      amount: false,
+      name: false,
+      method: false,
+      category: false,
+    };
+
+    //  amount validation
+    if (!amount || amount <= 0) {
+      newErrors["amount"] = true;
+    }
+    // name of the transaction validation
+    if (!name || name.trim() === "") {
+      newErrors["name"] = true;
+    }
+    //  method validation
+    if (method === methods[0]) {
+      newErrors["method"] = true;
+    }
+    // category validation
+    if (category["value"] === categories[0]["value"]) {
+      // used value to compare as categories will be recalculated each time - no same reference
+      newErrors["category"] = true;
+    }
+
+    setErrors(newErrors);
+
+    return newErrors;
+  };
+
+  // function to save Transaction into localstorage after validation
+  const saveTransaction = () => {
+    // validating and fetching current errors
+    const newErrors = validateTransaction();
+
+    // returning even if one error is true
+    if (Object.values(newErrors).some(Boolean)) return;
+
+    // handling types
+    if (!amount) return;
+    if (!name) return;
+
+    // building a transaction object to store in localstorage
+    const newTransacstion: transactionInterface = {
+      amount: amount,
+      category: category["value"],
+      createdAt: new Date().toISOString(),
+      date: date.toISOString().split("T")[0],
+      id: crypto.randomUUID(),
+      note: note || "",
+      paymentMethod: method["value"],
+      title: name,
+      type: type,
+    };
+
+    // storing transaction into localstorage for selected date
+    addTransaction(newTransacstion, monthStringGen(new Date(date)));
+
+    // unmounting the addTransaction component
+    setIsAdding(false);
   };
 
   return (
@@ -137,15 +218,28 @@ const AddTransactonForm = ({ setIsAdding }: prop) => {
           {/* amount */}
           <div className="flex grow flex-col gap-2">
             {/* amount label */}
-            <p className="text-lg font-medium">Amount</p>
+            <div className="flex items-center gap-2">
+              <p className="text-lg font-medium">Amount</p>
+              {errors["amount"] && (
+                // text to show on error - (if empty)
+                <span className="text-lg text-[var(--danger)]">
+                  {amount == undefined ? "*" : "Invalid"}
+                </span>
+              )}
+            </div>
 
             {/* amount input */}
             <input
               type="number"
               placeholder="₹ 100.00"
               value={amount}
-              onChange={(e) => setAmount(Number(e.target.value))}
-              className="w-full rounded-full border border-[var(--border-default)] py-2 pl-3 shadow-lg focus:outline-0"
+              onChange={(e) => {
+                setErrors((prev) => {
+                  return { ...prev, amount: false };
+                });
+                return setAmount(Number(e.target.value));
+              }}
+              className={`w-full rounded-full border ${errors["amount"] === true ? "border-[var(--danger)]" : ""} border-[var(--border-default)] py-2 pl-3 shadow-lg focus:outline-0`}
             />
           </div>
         </div>
@@ -155,7 +249,13 @@ const AddTransactonForm = ({ setIsAdding }: prop) => {
           {/* name container */}
           <div className="flex grow flex-col gap-2">
             {/* name label */}
-            <p className="text-lg font-medium">Name</p>
+            <div className="flex items-center gap-2">
+              <p className="text-lg font-medium">Name</p>
+              {errors["name"] && (
+                // text to show on error - (if empty)
+                <span className="text-lg text-[var(--danger)]">*</span>
+              )}
+            </div>
 
             {/* name input */}
             <input
@@ -163,15 +263,21 @@ const AddTransactonForm = ({ setIsAdding }: prop) => {
               placeholder="e.g. Grocery shopping"
               value={name}
               onChange={(e) => {
+                setErrors((prev) => {
+                  return { ...prev, name: false };
+                });
                 setName(e.target.value);
               }}
-              className="grow rounded-full border border-[var(--border-default)] py-2 pl-5 text-lg shadow-lg focus:outline-0"
+              className={`grow rounded-full border ${errors["name"] === true ? "border-[var(--danger)]" : ""} border-[var(--border-default)] py-2 pl-5 text-lg shadow-lg focus:outline-0`}
             />
           </div>
 
           {/* note container */}
           <div className="flex grow flex-col gap-2">
+            {/* note label */}
             <p className="text-lg font-medium"> Note</p>
+
+            {/* note input */}
             <textarea
               placeholder="Add a note (optional)"
               value={note}
@@ -187,26 +293,52 @@ const AddTransactonForm = ({ setIsAdding }: prop) => {
         <div className="flex gap-3">
           {/* method */}
           <div className="flex grow flex-col gap-2.5">
-            <p className="text-lg font-medium">Method</p>
+            <div className="flex items-center gap-2">
+              {/* method label */}
+              <p className="text-lg font-medium">Method</p>
+              {errors["method"] && (
+                // text to show on error - (if empty)
+                <span className="text-lg text-[var(--danger)]">*</span>
+              )}
+            </div>
 
             {/* <Dropdown for method /> */}
             <Dropdown
+              error={errors["method"]}
               options={methods}
               selected={method}
-              onChange={(val) => setMethod(val)}
+              onChange={(val) => {
+                setErrors((prev) => {
+                  return { ...prev, method: false };
+                });
+                setMethod(val);
+              }}
               placeholder="Select Method"
             />
           </div>
 
-          {/* method */}
+          {/* category */}
           <div className="flex grow flex-col gap-2.5">
-            <p className="text-lg font-medium">Category</p>
+            <div className="flex items-center gap-2">
+              {/* category method */}
+              <p className="text-lg font-medium">Category</p>
+              {errors["category"] && (
+                // text to show on error - (if empty)
+                <span className="text-lg text-[var(--danger)]">*</span>
+              )}
+            </div>
 
             {/* <Dropdown for category /> */}
             <Dropdown
+              error={errors["category"]}
               options={categories}
               selected={category}
-              onChange={(val) => setCategory(val)}
+              onChange={(val) => {
+                setErrors((prev) => {
+                  return { ...prev, category: false };
+                });
+                setCategory(val);
+              }}
               placeholder="Select Category"
             />
           </div>
@@ -271,6 +403,7 @@ const AddTransactonForm = ({ setIsAdding }: prop) => {
 
         {/* cancel and save button */}
         <div className="mt-1 flex gap-3 border-t border-[var(--border-default)] pt-4.5 pb-1">
+          {/* cancel button */}
           <button
             onClick={() => {
               setIsAdding(false);
@@ -279,7 +412,12 @@ const AddTransactonForm = ({ setIsAdding }: prop) => {
           >
             Cancel
           </button>
-          <button className="grow cursor-pointer rounded-full border border-[var(--border-default)] bg-[var(--accent-primary)] py-2.5 text-[var(--text-inverse)] shadow-xl">
+
+          {/* save button */}
+          <button
+            onClick={saveTransaction}
+            className="grow cursor-pointer rounded-full border border-[var(--border-default)] bg-[var(--accent-primary)] py-2.5 text-[var(--text-inverse)] shadow-xl"
+          >
             Save
           </button>
         </div>
