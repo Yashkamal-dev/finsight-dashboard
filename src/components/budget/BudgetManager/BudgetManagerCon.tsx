@@ -1,4 +1,5 @@
 import type { option } from "../../../types/optionsType";
+import BudgetCard from "./BudgetCard";
 import Filter from "./Filter";
 import Options from "./Options";
 
@@ -24,6 +25,9 @@ const BudgetManagerCon = ({
 
       {/* filter component */}
       <Filter options={options} selected={selected} onChange={onChange} />
+
+      {/* budgetcard */}
+      <BudgetCard />
     </div>
   );
 };
