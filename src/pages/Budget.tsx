@@ -2,6 +2,7 @@ import { useState } from "react";
 import TopBar from "../layouts/TopBar";
 import BudgetManagerCon from "../components/budget/BudgetManager/BudgetManagerCon";
 import type { option } from "../types/optionsType";
+import { getBudget } from "../types/Budget";
 
 // options for status
 const statuses: option[] = [
@@ -17,6 +18,9 @@ const Budget = () => {
 
   // selected option
   const [selectedOption, setSelectedOption] = useState<option>(statuses[0]);
+
+  const budgetData = getBudget(selectedDate);
+  console.log(budgetData);
 
   return (
     <div className="px-4">

@@ -4,12 +4,12 @@ import type { budgetType } from "../../../types/Budget";
 const BudgetCard = () => {
   const budget: budgetType = {
     id: "budget_food_001",
-    name: "Food",
+    category: "Food",
     limit: 5000,
     spent: 3200,
     month: "April",
     createdAt: "2026-04-20T10:30:00Z",
-    status: "safe", // "safe" | "warning" | "exceeded"
+    status: 90, // "safe" | "warning" | "exceeded"
   };
 
   const safeSpent = Math.min(budget.limit, budget.spent!);
@@ -24,7 +24,7 @@ const BudgetCard = () => {
       {/* name container */}
       <div className="">
         {/* budget title */}
-        <h2 className={`text-2xl font-semibold`}>{budget["name"]}</h2>
+        <h2 className={`text-2xl font-semibold`}>{budget["category"]}</h2>
       </div>
 
       {/* summary */}
