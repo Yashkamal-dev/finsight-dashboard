@@ -38,7 +38,7 @@ const Budget = () => {
         return bdgt["status"]! > 100;
       }
     });
-  }, [selectedOption]);
+  }, [selectedDate, selectedOption]);
 
   return (
     <div className="px-4">
