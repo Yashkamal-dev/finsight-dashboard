@@ -35,8 +35,10 @@
   --success-bg: #e5fae6; /* success badge background */
   --danger: #e83838; /* expense amount, over-budget, negative % */
   --danger-bg: #ffebeb; /* danger badge background */
-  --warning: #f9970c; /* needs attention, approaching limit */
-  --warning-bg: #fef4e1; /* warning badge background */
+  --danger-bg-secondary: #fcf9f9;
+  --warning: #ec8e0a; /* needs attention, approaching limit */
+  --warning-bg: #fcecce; /* warning badge background */
+  --warning-bg-secondary: #f7ac61;
 
   /* ── Sidebar specific ── */
   --sidebar-bg: #f5f4ff; /* sidebar background */

@@ -53,7 +53,7 @@ const Dropdown = ({
       {/* dropdown options to show on open */}
       {isOpen && (
         // options container
-        <div className="absolute mt-1 flex h-fit w-full cursor-pointer flex-col gap-1 rounded-xl border border-[var(--border-default)] bg-[var(--bg-primary)] p-1 shadow-xl">
+        <div className="absolute z-1 mt-1 flex h-fit w-full cursor-pointer flex-col gap-1 rounded-xl border border-[var(--border-default)] bg-[var(--bg-primary)] p-1 shadow-xl">
           {options.map((opt) => (
             // each option
             <div

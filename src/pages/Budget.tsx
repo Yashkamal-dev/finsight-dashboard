@@ -3,6 +3,7 @@ import TopBar from "../layouts/TopBar";
 import BudgetManagerCon from "../components/budget/BudgetManager/BudgetManagerCon";
 import type { option } from "../types/optionsType";
 import { getBudget } from "../types/Budget";
+import BudgetSummaryCon from "../components/budget/BudgetSummary/BudgetSummaryCon";
 
 // options for status
 const statuses: option[] = [
@@ -45,7 +46,7 @@ const Budget = () => {
       <TopBar pageTitle="Budget" message="Set limits and track your spending" />
 
       {/* hero component container */}
-      <div>
+      <div className="flex flex-wrap">
         {/* budgetManager component compnent */}
         <BudgetManagerCon
           selectedDate={selectedDate}
@@ -55,7 +56,10 @@ const Budget = () => {
           onChange={(val) => {
             setSelectedOption(val);
           }}
+          budgetData={budgetData}
         />
+
+        <BudgetSummaryCon />
       </div>
     </div>
   );

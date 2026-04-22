@@ -1,30 +1,39 @@
 import { Cell, Pie, PieChart } from "recharts";
 import type { budgetType } from "../../../types/Budget";
 
-const BudgetCard = () => {
-  const budget: budgetType = {
-    id: "budget_food_001",
-    category: "Food",
-    limit: 5000,
-    spent: 3200,
-    month: "April",
-    createdAt: "2026-04-20T10:30:00Z",
-    status: 90, // "safe" | "warning" | "exceeded"
-  };
+type props = {
+  category: string;
+  status: number;
+  spent: number;
+  limit: number;
+};
 
-  const safeSpent = Math.min(budget.limit, budget.spent!);
+const BudgetCard = ({ category, status, spent, limit }: props) => {
+  // specifing the value for the pie chart
+  const safeSpent = Math.min(limit, spent);
 
+  // data object to generate pie chart
   const data = [
     { name: "spent", value: safeSpent },
-    { name: "remaining", value: budget.limit - safeSpent },
+    { name: "remaining", value: limit - safeSpent },
   ];
 
   return (
-    <div className="relative w-95 rounded-4xl border border-[var(--border-default)] p-4">
+    <div
+      className={`relative ${
+        status < 70
+          ? "border-[var(--border-default)]"
+          : status < 100
+            ? "border-[var(--warning-bg-secondary)]"
+            : status === 100
+              ? "border-[var(--warning)] bg-[var(--danger-bg-secondary)]"
+              : "border-[var(--danger)] bg-[var(--danger-bg)]"
+      } rounded-4xl border p-4`}
+    >
       {/* name container */}
       <div className="">
         {/* budget title */}
-        <h2 className={`text-2xl font-semibold`}>{budget["category"]}</h2>
+        <h2 className={`text-2xl font-semibold`}>{category}</h2>
       </div>
 
       {/* summary */}
@@ -38,8 +47,8 @@ const BudgetCard = () => {
               dataKey={"value"}
               cx="50%"
               cy="50%"
-              innerRadius={59}
-              outerRadius={70}
+              innerRadius={63}
+              outerRadius={75}
               startAngle={90}
               endAngle={-270}
               cornerRadius={10}
@@ -55,9 +64,14 @@ const BudgetCard = () => {
             className={`absolute top-1/2 left-1/2 flex w-max -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-0.5`}
           >
             {/* percentage difference */}
-            <span className="text-sm text-[var(--text-muted)]">75% spent</span>
+            <span className="text-sm text-[var(--text-muted)]">
+              {Number.isInteger(status)
+                ? status
+                : Math.round(status * 100) / 100}
+              % spent
+            </span>
             {/* amount spent */}
-            <span className={`text-2xl font-bold`}>$1800</span>
+            <span className={`text-2xl font-bold`}>₹{spent}</span>
           </div>
         </div>
 
@@ -68,24 +82,43 @@ const BudgetCard = () => {
 
           {/* amount Container */}
           <div className={`flex items-end`}>
-            <span className={`text-3xl font-bold`}>{budget["spent"]}</span>
+            <span className={`text-4xl font-bold`}>
+              {limit - spent}
+              <span className={`text-4xl font-bold text-[var(--text-muted)]`}>
+                .00
+              </span>
+            </span>
             <span className={`font-medium text-[var(--accent-text)]`}>
-              /{budget["limit"]}
+              /{limit}
             </span>
           </div>
 
           {/* status */}
           <span
-            className={`mt-3 w-max rounded-full bg-[var(--success-bg)] px-2 text-sm text-[var(--success)]`}
+            className={`mt-3 ${
+              status < 70
+                ? "bg-[var(--success-bg)] text-[var(--success)]"
+                : status < 100
+                  ? "bg-[var(--warning-bg)] text-[var(--warning)]"
+                  : status === 100
+                    ? "bg-[var(--warning-bg)] text-[var(--warning)]"
+                    : "bg-[var(--danger-bg)] text-[var(--danger)]"
+            } w-max rounded-full px-2 text-sm`}
           >
-            on track
+            {status < 70
+              ? "On Track"
+              : status < 100
+                ? "Approaching Limit"
+                : status === 100
+                  ? "At limit"
+                  : "Over budget"}
           </span>
         </div>
       </div>
 
       {/* edit button */}
       <button
-        className={`absolute top-1 right-1 rounded-full border border-[var(--border-default)] p-2.5`}
+        className={`absolute top-1 right-1 cursor-pointer rounded-full border border-[var(--border-default)] p-2.5`}
       >
         <svg
           className={`fill-[var(--text-secondary)]`}

@@ -1,5 +1,6 @@
+import type { budgetType } from "../../../types/Budget";
 import type { option } from "../../../types/optionsType";
-import BudgetCard from "./BudgetCard";
+import BudgetCardCon from "./BudgetCardCon";
 import Filter from "./Filter";
 import Options from "./Options";
 
@@ -9,6 +10,7 @@ type props = {
   options: option[];
   selected: option;
   onChange(val: option): void;
+  budgetData: budgetType[];
 };
 
 const BudgetManagerCon = ({
@@ -17,17 +19,18 @@ const BudgetManagerCon = ({
   options,
   selected,
   onChange,
+  budgetData,
 }: props) => {
   return (
-    <div>
+    <div className="flex-[2_1_1000px] flex-col gap-2">
       {/* options compnent */}
       <Options selectedDate={selectedDate} setSelectedDate={setSelectedDate} />
 
       {/* filter component */}
       <Filter options={options} selected={selected} onChange={onChange} />
 
-      {/* budgetcard */}
-      <BudgetCard />
+      {/* budgetcardcon */}
+      <BudgetCardCon budgetData={budgetData} />
     </div>
   );
 };
