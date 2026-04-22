@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import TopBar from "../layouts/TopBar";
 import BudgetManagerCon from "../components/budget/BudgetManager/BudgetManagerCon";
 import type { option } from "../types/optionsType";
@@ -9,7 +9,7 @@ const statuses: option[] = [
   { label: "All", value: "all" },
   { label: "Safe", value: "safe" },
   { label: "Warning", value: "warning" },
-  { label: "Exceeded", value: "exceeded" },
+  { label: "Over Budget", value: "exceeded" },
 ];
 
 const Budget = () => {
@@ -19,8 +19,25 @@ const Budget = () => {
   // selected option
   const [selectedOption, setSelectedOption] = useState<option>(statuses[0]);
 
-  const budgetData = getBudget(selectedDate);
-  console.log(budgetData);
+  // fetching the data when date changes
+  let budgetData = useMemo(() => {
+    return getBudget(selectedDate);
+  }, [selectedDate]);
+
+  // filtering data whenever the selected option changes
+  budgetData = useMemo(() => {
+    return budgetData.filter((bdgt) => {
+      if (selectedOption["value"] === "all") {
+        return bdgt;
+      } else if (selectedOption["value"] === "safe") {
+        return bdgt["status"]! < 70;
+      } else if (selectedOption["value"] === "warning") {
+        return bdgt["status"]! >= 70 && bdgt["status"]! <= 100;
+      } else if (selectedOption["value"] === "exceeded") {
+        return bdgt["status"]! > 100;
+      }
+    });
+  }, [selectedOption]);
 
   return (
     <div className="px-4">
