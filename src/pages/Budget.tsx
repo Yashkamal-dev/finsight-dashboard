@@ -65,7 +65,7 @@ const Budget = () => {
         />
 
         {/* budget summary component - container of monthly budget */}
-        <BudgetSummaryCon allBudget={allBudget} />
+        <BudgetSummaryCon allBudget={allBudget} selectedDate={selectedDate} />
       </div>
     </div>
   );
