@@ -1,5 +1,5 @@
-import { Cell, Pie, PieChart } from "recharts";
-import type { budgetType } from "../../../types/Budget";
+import { Cell, Pie, PieChart, Tooltip } from "recharts";
+import { CustomTooltip } from "../../ToolTip/CustomTooltip";
 
 type props = {
   category: string;
@@ -56,6 +56,11 @@ const BudgetCard = ({ category, status, spent, limit }: props) => {
               {/* filling up sells with their color */}
               <Cell fill="#8470ff" />
               <Cell fill="#EFECFF" />
+              <Tooltip
+                cursor={false}
+                content={<CustomTooltip />}
+                wrapperStyle={{ zIndex: 1000 }}
+              />
             </Pie>
           </PieChart>
 

@@ -20,6 +20,11 @@ const Budget = () => {
   // selected option
   const [selectedOption, setSelectedOption] = useState<option>(statuses[0]);
 
+  // all budget of this month
+  let allBudget = useMemo(() => {
+    return getBudget(selectedDate);
+  }, [selectedDate]);
+
   // fetching the data when date changes
   let budgetData = useMemo(() => {
     return getBudget(selectedDate);
@@ -46,7 +51,7 @@ const Budget = () => {
       <TopBar pageTitle="Budget" message="Set limits and track your spending" />
 
       {/* hero component container */}
-      <div className="flex flex-wrap">
+      <div className="flex flex-wrap gap-5">
         {/* budgetManager component compnent */}
         <BudgetManagerCon
           selectedDate={selectedDate}
@@ -59,7 +64,8 @@ const Budget = () => {
           budgetData={budgetData}
         />
 
-        <BudgetSummaryCon />
+        {/* budget summary component - container of monthly budget */}
+        <BudgetSummaryCon allBudget={allBudget} />
       </div>
     </div>
   );
