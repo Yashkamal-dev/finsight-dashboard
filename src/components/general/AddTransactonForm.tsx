@@ -143,8 +143,6 @@ const AddTransactonForm = ({ setIsAdding }: prop) => {
     // validating and fetching current errors
     const newErrors = validateTransaction();
 
-    console.log(date.toLocaleDateString("en-CA"));
-
     // returning even if one error is true
     if (Object.values(newErrors).some(Boolean)) return;
 

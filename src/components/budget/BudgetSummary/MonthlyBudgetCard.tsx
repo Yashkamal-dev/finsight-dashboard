@@ -19,7 +19,6 @@ const MonthlyBudgetCard = ({ allBudget }: props) => {
 
   // calculating status percentage
   const status = (spent / totalLimit) * 100;
-  console.log(status);
 
   // data for the graph
   const data = [

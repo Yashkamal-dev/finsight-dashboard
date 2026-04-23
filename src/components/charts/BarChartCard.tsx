@@ -49,7 +49,6 @@ const BarChartCard = ({ selected }: props) => {
       const day = new Date(txn.date).getDate();
 
       if (day <= todaydate) {
-        console.log(day);
         if (txn["type"] === "Income") {
           result[day - 1]["Income"] += txn["amount"];
         } else if (txn["type"] === "Expense") {
