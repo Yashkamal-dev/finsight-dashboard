@@ -1,9 +1,6 @@
 // month generater
 export const monthStringGen = (date: Date) => {
-  const month = date.getMonth() + 1;
-  const year = date.getFullYear();
-
-  return `${year}-${month}`;
+  return date.toISOString().slice(0, 7);
 };
 
 // data fetcher from a month
