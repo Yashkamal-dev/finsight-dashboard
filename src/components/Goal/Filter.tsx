@@ -25,6 +25,17 @@ const Filter = ({
   notStarted,
   setnotStarted,
 }: props) => {
+  // if "all" is false and rest are true, that would lead to "all" true
+  if (inProgress === true && completed === true && notStarted === true) {
+    // using timeout to show that all three option was selected before setting "all" true
+    setTimeout(() => {
+      setInProgress(false);
+      setCompleted(false);
+      setnotStarted(false);
+      setAll(true);
+    }, 200);
+  }
+
   return (
     <div className="flex justify-between">
       {/* buttons for status filtering */}
