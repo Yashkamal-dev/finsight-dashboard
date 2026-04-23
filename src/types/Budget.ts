@@ -6,10 +6,10 @@ export type budgetType = {
   id: string;
   category: string;
   limit: number;
-  spent?: number;
+  spent: number;
   month: string;
   createdAt: string;
-  status?: number;
+  status: number;
 };
 
 // funtion to get the budget data of selected month And

@@ -1,11 +1,13 @@
 import React from "react";
 import AddBudgetForm from "./AddBudgetForm";
+import type { budgetType } from "../../types/Budget";
 
 type props = {
   setIsAdding: React.Dispatch<React.SetStateAction<boolean>>;
+  setAllBudget: React.Dispatch<React.SetStateAction<budgetType[]>>;
 };
 
-const AddBudget = ({ setIsAdding }: props) => {
+const AddBudget = ({ setIsAdding, setAllBudget }: props) => {
   return (
     <div className="fixed inset-0 flex items-center justify-center">
       {/* Backdrop layer */}
@@ -17,7 +19,7 @@ const AddBudget = ({ setIsAdding }: props) => {
       </div>
 
       {/* modal layer - contains the form */}
-      <AddBudgetForm setIsAdding={setIsAdding}  />
+      <AddBudgetForm setIsAdding={setIsAdding} setAllBudget={setAllBudget} />
     </div>
   );
 };

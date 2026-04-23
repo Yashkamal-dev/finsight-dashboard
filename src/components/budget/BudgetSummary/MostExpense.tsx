@@ -1,11 +1,12 @@
 import React, { useMemo, useState } from "react";
-import { getBudget } from "../../../types/Budget";
+import { getBudget, type budgetType } from "../../../types/Budget";
 
 type props = {
   selectedDate: Date;
+  allBudget: budgetType[];
 };
 
-const MostExpense = ({ selectedDate }: props) => {
+const MostExpense = ({ selectedDate, allBudget }: props) => {
   // state for the order
   const [isAscending, setIsAscending] = useState<boolean>(false);
 
@@ -15,12 +16,12 @@ const MostExpense = ({ selectedDate }: props) => {
   // getting the data for the selected month
   let CurrentMonthBudget = useMemo(() => {
     return getBudget(selectedDate);
-  }, [selectedDate]);
+  }, [selectedDate, allBudget]);
 
   // getting the data for the previous month of the selected month
   const PrevMonthBudget = useMemo(() => {
     return getBudget(new Date(prevMonth.setMonth(prevMonth.getMonth() - 1)));
-  }, [selectedDate]);
+  }, [selectedDate, allBudget]);
 
   // checking only if the budget are present
   if (PrevMonthBudget.length !== 0) {

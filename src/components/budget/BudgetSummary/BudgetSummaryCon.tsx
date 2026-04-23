@@ -14,7 +14,7 @@ const BudgetSummaryCon = ({ allBudget, selectedDate }: props) => {
       <MonthlyBudgetCard allBudget={allBudget} />
 
       {/* most expenses teble */}
-      <MostExpense selectedDate={selectedDate} />
+      <MostExpense selectedDate={selectedDate} allBudget={allBudget} />
     </div>
   );
 };

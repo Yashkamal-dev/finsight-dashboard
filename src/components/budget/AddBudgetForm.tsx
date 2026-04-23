@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import type { option } from "../../types/optionsType";
 import Dropdown from "../general/Dropdown";
-import { monthStringGen } from "../../utils/transactionContextUtils";
+import { getData, monthStringGen } from "../../utils/transactionContextUtils";
 import type { budgetType } from "../../types/Budget";
+import type { transactionInterface } from "../../types/transaction";
 
 // expenses for the options of categories
 const expenseCategories: option[] = [
@@ -20,9 +21,10 @@ const expenseCategories: option[] = [
 
 type props = {
   setIsAdding: React.Dispatch<React.SetStateAction<boolean>>;
+  setAllBudget: React.Dispatch<React.SetStateAction<budgetType[]>>;
 };
 
-const AddBudgetForm = ({ setIsAdding }: props) => {
+const AddBudgetForm = ({ setIsAdding, setAllBudget }: props) => {
   // limit state
   const [limit, setLimit] = useState<number>();
 
@@ -63,6 +65,18 @@ const AddBudgetForm = ({ setIsAdding }: props) => {
     // returining if error exists
     if (Object.values(errs).some(Boolean)) return;
 
+    // getting the transaction for calculating spent and status
+    const transactions = getData(monthStringGen(new Date()));
+
+    // filtering status based on the selected category
+    const spent = transactions
+      .filter((txn: transactionInterface) => {
+        return txn["category"] === category["value"];
+      })
+      .reduce((acc: number, curr: transactionInterface) => {
+        return acc + curr["amount"];
+      }, 0);
+
     // defining new budget object
     const newBudget: budgetType = {
       id: crypto.randomUUID(),
@@ -70,6 +84,8 @@ const AddBudgetForm = ({ setIsAdding }: props) => {
       limit: limit!,
       createdAt: new Date().toISOString(),
       month: new Date().toISOString().slice(0, 7),
+      spent: spent,
+      status: (spent / limit!) * 100,
     };
 
     // getting the entire budget object from the localstorage
@@ -96,6 +112,11 @@ const AddBudgetForm = ({ setIsAdding }: props) => {
 
     // adding that array into the budget object
     budgets[monthStringGen(new Date())] = monthBudget;
+
+    // updating the budget state for UI update
+    setAllBudget((prev) => {
+      return [...prev, newBudget];
+    });
 
     // storing budget object in localstorage
     localStorage.setItem("budgets", JSON.stringify(budgets));

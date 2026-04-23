@@ -1,8 +1,8 @@
-import { useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import TopBar from "../layouts/TopBar";
 import BudgetManagerCon from "../components/budget/BudgetManager/BudgetManagerCon";
 import type { option } from "../types/optionsType";
-import { getBudget } from "../types/Budget";
+import { getBudget, type budgetType } from "../types/Budget";
 import BudgetSummaryCon from "../components/budget/BudgetSummary/BudgetSummaryCon";
 import AddBudget from "../components/budget/AddBudget";
 
@@ -25,29 +25,13 @@ const Budget = () => {
   const [selectedOption, setSelectedOption] = useState<option>(statuses[0]);
 
   // all budget of this month
-  let allBudget = useMemo(() => {
-    return getBudget(selectedDate);
-  }, [selectedDate]);
+  const [allBudget, setAllBudget] = useState<budgetType[]>([]);
 
-  // fetching the data when date changes
-  let budgetData = useMemo(() => {
-    return getBudget(selectedDate);
+  // fetching budget on date change
+  useEffect(() => {
+    const data = getBudget(selectedDate);
+    setAllBudget(data);
   }, [selectedDate]);
-
-  // filtering data whenever the selected option changes
-  budgetData = useMemo(() => {
-    return budgetData.filter((bdgt) => {
-      if (selectedOption["value"] === "all") {
-        return bdgt;
-      } else if (selectedOption["value"] === "safe") {
-        return bdgt["status"]! < 70;
-      } else if (selectedOption["value"] === "warning") {
-        return bdgt["status"]! >= 70 && bdgt["status"]! <= 100;
-      } else if (selectedOption["value"] === "exceeded") {
-        return bdgt["status"]! > 100;
-      }
-    });
-  }, [selectedDate, selectedOption]);
 
   return (
     <div className="px-4">
@@ -65,14 +49,17 @@ const Budget = () => {
           onChange={(val) => {
             setSelectedOption(val);
           }}
-          budgetData={budgetData}
+          allBudget={allBudget}
+          selectedOption={selectedOption}
           setIsAdding={setIsAdding}
         />
 
         {/* budget summary component - container of monthly budget */}
         <BudgetSummaryCon allBudget={allBudget} selectedDate={selectedDate} />
 
-        {isAdding && <AddBudget setIsAdding={setIsAdding} />}
+        {isAdding && (
+          <AddBudget setIsAdding={setIsAdding} setAllBudget={setAllBudget} />
+        )}
       </div>
     </div>
   );
