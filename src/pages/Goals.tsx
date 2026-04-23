@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Filter from "../components/Goal/Filter";
 import TopBar from "../layouts/TopBar";
+import Hero from "../components/Goal/Hero";
 
 const Goals = () => {
   // states for filtering
@@ -28,6 +29,9 @@ const Goals = () => {
         notStarted={notStarted}
         setnotStarted={setnotStarted}
       />
+
+      {/* hero component that cotaines all kinds of goals card */}
+      <Hero />
     </div>
   );
 };

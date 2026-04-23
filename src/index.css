@@ -25,6 +25,7 @@
   --accent-primary-hover: #b0a5fc; /* button hover */
   --accent-soft: #bfb7ff; /* progress bar fill, subtle highlights */
   --accent-subtle: #f5f4ff; /* accent background tint */
+  --accent-progress: #ece9fe;
 
   /* ── Border & Divider ── */
   --border-default: #9a9a9a; /* card borders, input borders */
