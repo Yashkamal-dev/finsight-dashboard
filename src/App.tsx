@@ -3,6 +3,7 @@ import Navbar from "./layouts/Navbar";
 import Dashboard from "./pages/Dashboard";
 import Transactions from "./pages/Transactions";
 import Budget from "./pages/Budget";
+import Goals from "./pages/Goals";
 
 const App = () => {
   return (
@@ -19,6 +20,9 @@ const App = () => {
 
         {/* budget route */}
         <Route path="/budget" element={<Budget />} />
+
+        {/* goals route */}
+        <Route path="/goals" element={<Goals />} />
       </Routes>
     </div>
   );
