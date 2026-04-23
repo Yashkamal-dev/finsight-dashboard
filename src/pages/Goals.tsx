@@ -30,8 +30,13 @@ const Goals = () => {
         setnotStarted={setnotStarted}
       />
 
-      {/* hero component that cotaines all kinds of goals card */}
-      <Hero />
+      {/* hero component that cotaines goals card fo all status */}
+      <Hero
+        all={all}
+        inProgress={inProgress}
+        completed={completed}
+        notStarted={notStarted}
+      />
     </div>
   );
 };
