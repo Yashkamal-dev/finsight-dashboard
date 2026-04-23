@@ -15,12 +15,20 @@ export type budgetType = {
 // funtion to get the budget data of selected month And
 // calculating spent and status for each budget
 export const getBudget = (Date: Date): budgetType[] => {
+  // creating budgets if not existed
+  if (!JSON.parse(localStorage.getItem("budgets")!)) {
+    localStorage.setItem("budgets", JSON.stringify({}));
+  }
+
   // fetching entire budget object from the localstorage / each month's data
   const allBudgets = JSON.parse(localStorage.getItem("budgets") || "{}");
 
-  // if not exists making an array
+  // if not exists making an array and storing it in localstorage
   if (!allBudgets[monthStringGen(Date)]) {
     allBudgets[monthStringGen(Date)] = [];
+
+    // storing in lcoalstorage
+    localStorage.setItem("budgets", JSON.stringify(allBudgets));
   }
 
   // getting the data of budget for selected month

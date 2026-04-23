@@ -11,6 +11,7 @@ type props = {
   selected: option;
   onChange(val: option): void;
   budgetData: budgetType[];
+  setIsAdding: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 const BudgetManagerCon = ({
@@ -20,11 +21,16 @@ const BudgetManagerCon = ({
   selected,
   onChange,
   budgetData,
+  setIsAdding,
 }: props) => {
   return (
     <div className="flex-[2_1_1000px] flex-col gap-2">
       {/* options compnent */}
-      <Options selectedDate={selectedDate} setSelectedDate={setSelectedDate} />
+      <Options
+        selectedDate={selectedDate}
+        setSelectedDate={setSelectedDate}
+        setIsAdding={setIsAdding}
+      />
 
       {/* filter component */}
       <Filter options={options} selected={selected} onChange={onChange} />

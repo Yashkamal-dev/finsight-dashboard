@@ -4,6 +4,7 @@ import BudgetManagerCon from "../components/budget/BudgetManager/BudgetManagerCo
 import type { option } from "../types/optionsType";
 import { getBudget } from "../types/Budget";
 import BudgetSummaryCon from "../components/budget/BudgetSummary/BudgetSummaryCon";
+import AddBudget from "../components/budget/AddBudget";
 
 // options for status
 const statuses: option[] = [
@@ -14,6 +15,9 @@ const statuses: option[] = [
 ];
 
 const Budget = () => {
+  // state for the rendering of the add budget
+  const [isAdding, setIsAdding] = useState<boolean>(false);
+
   // selected date
   const [selectedDate, setSelectedDate] = useState<Date>(new Date());
 
@@ -62,10 +66,13 @@ const Budget = () => {
             setSelectedOption(val);
           }}
           budgetData={budgetData}
+          setIsAdding={setIsAdding}
         />
 
         {/* budget summary component - container of monthly budget */}
         <BudgetSummaryCon allBudget={allBudget} selectedDate={selectedDate} />
+
+        {isAdding && <AddBudget setIsAdding={setIsAdding} />}
       </div>
     </div>
   );

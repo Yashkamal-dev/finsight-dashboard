@@ -1,9 +1,10 @@
 type props = {
   selectedDate: Date;
   setSelectedDate: React.Dispatch<React.SetStateAction<Date>>;
+  setIsAdding: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const Options = ({ selectedDate, setSelectedDate }: props) => {
+const Options = ({ selectedDate, setSelectedDate, setIsAdding }: props) => {
   // function to set month to the previous month
   const prevMonth = () => {
     const newDate = selectedDate.setMonth(selectedDate.getMonth() - 1);
@@ -46,7 +47,12 @@ const Options = ({ selectedDate, setSelectedDate }: props) => {
       {/* btn container */}
       <div className="">
         {/* add budget button */}
-        <button className="cursor-pointer rounded-full bg-[var(--accent-primary)] px-5 py-2 text-[var(--text-inverse)] shadow-lg active:scale-99">
+        <button
+          onClick={() => {
+            setIsAdding(true);
+          }}
+          className="cursor-pointer rounded-full bg-[var(--accent-primary)] px-5 py-2 text-[var(--text-inverse)] shadow-lg active:scale-99"
+        >
           + Add new Budget
         </button>
       </div>
