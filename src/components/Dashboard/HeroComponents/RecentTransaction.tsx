@@ -46,6 +46,7 @@ const RecentTransaction = () => {
             return (
               // table row for each trasnaction in the recentTransactions
               <tr
+                key={crypto.randomUUID()}
                 className={`${txn["type"] === "Income" ? "bg-[var(--success-bg)]" : "bg-[var(--danger-bg)]"}`}
               >
                 {/* date */}

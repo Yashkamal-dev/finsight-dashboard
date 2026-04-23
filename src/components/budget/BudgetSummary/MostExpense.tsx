@@ -87,7 +87,10 @@ const MostExpense = ({ selectedDate, allBudget }: props) => {
         {/* each expense */}
         {CurrentMonthBudget.map((bdgt) => {
           return (
-            <div className="flex items-center justify-between border-b border-b-[var(--border-default)] p-3">
+            <div
+              key={crypto.randomUUID()}
+              className="flex items-center justify-between border-b border-b-[var(--border-default)] p-3"
+            >
               {/* amount and category container */}
               <div className="">
                 {/* amount */}
