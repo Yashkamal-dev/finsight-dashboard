@@ -1,4 +1,7 @@
+import { useTransaction } from "../hooks/useTransaction";
 import type { goal } from "../types/goals";
+import type { transactionInterface } from "../types/transaction";
+import { monthStringGen } from "./transactionContextUtils";
 
 // function to get the goals from the localstorage
 export const getGoals = () => {
@@ -31,4 +34,49 @@ export const formatDate = (date: Date | string) => {
     month: "short",
     year: "numeric",
   });
+};
+
+// function to add Contribution to a goal
+export const addContributionToGoal = (
+  id: string,
+  contributionAmount: number,
+  title: string,
+  addTransaction: (transaction: transactionInterface, month: string) => void,
+) => {
+  // getting goals from the localstaorage
+  const goals = getGoals();
+
+  // getting the entire array by
+  // Add contribution to the selected goal's saved amount
+  const newGoals = goals.map((goal) => {
+    if (goal["id"] === id) {
+      // returning if id found
+      return {
+        ...goal,
+        savedAmount: goal["savedAmount"] + contributionAmount,
+      };
+    }
+
+    // returning if id not found
+    return goal;
+  });
+
+  // adding the goal array into localstorage
+  localStorage.setItem("goals", JSON.stringify(newGoals));
+
+  // transaction for the goal
+  const goalTransaction: transactionInterface = {
+    id: crypto.randomUUID(),
+    type: "Goal",
+    amount: contributionAmount,
+    category: "Goal Contribution",
+    title: `Contribution to ${title}`,
+    note: `Added ₹${contributionAmount} to ${title} goal `,
+    paymentMethod: "Balance",
+    date: new Date().toLocaleDateString("en-CA"),
+    createdAt: new Date().toISOString(),
+  };
+
+  // storing goal transaction into localstorage
+  addTransaction(goalTransaction, monthStringGen(new Date()));
 };

@@ -131,6 +131,7 @@ const GoalCard = ({ goal }: props) => {
             setIsContributing={setIsContributing}
             status={goal["status"]}
             remaining={remaining}
+            goal={goal}
           />
         )}
       </div>

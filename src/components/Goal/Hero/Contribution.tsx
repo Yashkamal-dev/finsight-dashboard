@@ -1,12 +1,24 @@
 import { useEffect, useRef, useState } from "react";
+import { addContributionToGoal } from "../../../utils/goalUtil";
+import type { goal } from "../../../types/goals";
+import { useTransaction } from "../../../hooks/useTransaction";
 
 type props = {
   setIsContributing: React.Dispatch<React.SetStateAction<Boolean>>;
   status: string;
   remaining: number;
+  goal: goal;
 };
 
-const Contribution = ({ setIsContributing, status, remaining }: props) => {
+const Contribution = ({
+  setIsContributing,
+  status,
+  remaining,
+  goal,
+}: props) => {
+  // getting addtransaction here to pass it to the add contribution function, since custom hooks are not allowed in normal functions
+  const { addTransaction } = useTransaction();
+
   // state amount to contribute
   const [contributionAmount, setContributionAmount] = useState<number>();
 
@@ -40,11 +52,21 @@ const Contribution = ({ setIsContributing, status, remaining }: props) => {
   };
 
   // funtion to add contribution
-  const addContribution = () => {
+  const handleAddContribution = () => {
     const newErrors = validateContribution();
 
     // returning even if one error is true
     if (Object.values(newErrors).some(Boolean)) return;
+
+    // adding countribution to the localstorage and making a transaction
+    addContributionToGoal(
+      goal["id"],
+      contributionAmount!,
+      goal["title"],
+      addTransaction,
+    );
+
+    setIsContributing(false);
   };
 
   return (
@@ -99,7 +121,7 @@ const Contribution = ({ setIsContributing, status, remaining }: props) => {
 
         {/* save button */}
         <button
-          onClick={addContribution}
+          onClick={handleAddContribution}
           className={`grow cursor-pointer rounded-full border border-[var(--border-default)] py-2.5 text-[var(--text-inverse)] ${status === "not-started" ? "bg-[var(--warning-bg-secondary)]" : "bg-[var(--accent-primary)]"} shadow-xl`}
         >
           Contribute
