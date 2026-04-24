@@ -13,6 +13,7 @@ const types: option[] = [
   { label: "All", value: "all" },
   { label: "Income", value: "Income" },
   { label: "Expense", value: "Expense" },
+  { label: "Goals", value: "Goal" },
 ];
 
 // options for categories of income
@@ -42,6 +43,7 @@ const method: option[] = [
   { label: "UPI", value: "upi" },
   { label: "Card", value: "card" },
   { label: "Bank", value: "bank" },
+  { label: "Balance", value: "Balance" },
 ];
 
 // transaction page
@@ -52,6 +54,7 @@ const Transactions = () => {
   // initial categories with options for "All"
   let categories: option[] = [
     { label: "All", value: "all" },
+    { label: "Goal Contribution", value: "Goal Contribution" },
     ...incomeCategories,
     ...expenseCategories,
   ];
@@ -72,6 +75,8 @@ const Transactions = () => {
     categories = [{ label: "All", value: "all" }, ...incomeCategories];
   } else if (selectedType["value"] === "Expense") {
     categories = [{ label: "All", value: "all" }, ...expenseCategories];
+  } else if (selectedType["value"] === "Goal") {
+    categories = [{ label: "All", value: "all" }];
   }
 
   // the date to for the transaction list (default as current date)

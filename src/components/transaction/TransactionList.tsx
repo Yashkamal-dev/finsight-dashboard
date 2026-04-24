@@ -95,9 +95,24 @@ const TransactionList = ({
 
                   {/* amount */}
                   <p
-                    className={`w-3/5 text-right ${txn["type"] === "Income" ? "text-[var(--success)]" : "text-[var(--danger)]"}`}
+                    className={`w-3/5 text-right ${
+                      txn["type"] === "Income"
+                        ? "text-[var(--success)]"
+                        : txn["type"] === "Expense"
+                          ? "text-[var(--danger)]"
+                          : txn["type"] === "Goal"
+                            ? "text-[var(--warning)]"
+                            : ""
+                    }`}
                   >
-                    {txn["type"] === "Income" ? "+ " : "- "} {txn["amount"]}
+                    {txn["type"] === "Income"
+                      ? "+ "
+                      : txn["type"] === "Expense"
+                        ? "- "
+                        : txn["type"] === "Goal"
+                          ? ""
+                          : ""}{" "}
+                    {txn["amount"]}
                   </p>
 
                   {/* name */}
@@ -115,7 +130,15 @@ const TransactionList = ({
 
                   {/* type */}
                   <p
-                    className={`${txn["type"] === "Income" ? "bg-[var(--success-bg)] text-[var(--success)]" : "bg-[var(--danger-bg)] text-[var(--danger)]"} flex w-max items-center rounded-full px-2`}
+                    className={`${
+                      txn["type"] === "Income"
+                        ? "bg-[var(--success-bg)] text-[var(--success)]"
+                        : txn["type"] === "Expense"
+                          ? "bg-[var(--danger-bg)] text-[var(--danger)]"
+                          : txn["type"] === "Goal"
+                            ? "bg-[var(--warning-bg)] text-[var(--warning)]"
+                            : ""
+                    } flex w-max min-w-20 items-center justify-center rounded-full px-2`}
                   >
                     {txn["type"]}
                   </p>
