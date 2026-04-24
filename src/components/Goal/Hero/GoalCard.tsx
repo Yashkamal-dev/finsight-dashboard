@@ -127,7 +127,10 @@ const GoalCard = ({ goal }: props) => {
         className={`overflow-hidden ${isContributing ? "max-h-100 opacity-100" : "max-h-0 opacity-0"} transition-all duration-400 ease-in-out`}
       >
         {isContributing && (
-          <Contribution setIsContributing={setIsContributing} />
+          <Contribution
+            setIsContributing={setIsContributing}
+            status={goal["status"]}
+          />
         )}
       </div>
 

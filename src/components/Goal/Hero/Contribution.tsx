@@ -2,9 +2,10 @@ import { useEffect, useRef, useState } from "react";
 
 type props = {
   setIsContributing: React.Dispatch<React.SetStateAction<Boolean>>;
+  status: string;
 };
 
-const Contribution = ({ setIsContributing }: props) => {
+const Contribution = ({ setIsContributing, status }: props) => {
   // state amount to contribute
   const [contributionAmount, setContributionAmount] = useState<number>();
 
@@ -51,7 +52,9 @@ const Contribution = ({ setIsContributing }: props) => {
         </button>
 
         {/* save button */}
-        <button className="grow cursor-pointer rounded-full border border-[var(--border-default)] bg-[var(--accent-primary)] py-2.5 text-[var(--text-inverse)] shadow-xl">
+        <button
+          className={`grow cursor-pointer rounded-full border border-[var(--border-default)] py-2.5 text-[var(--text-inverse)] ${status === "not-started" ? "bg-[var(--warning-bg-secondary)]" : "bg-[var(--accent-primary)]"} shadow-xl`}
+        >
           Contribute
         </button>
       </div>
