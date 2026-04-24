@@ -1,5 +1,5 @@
+import { useGoals } from "../../hooks/useGoals";
 import type { goal } from "../../types/goals";
-import { getGoals } from "../../utils/goalUtil";
 import GoalCard from "./Hero/GoalCard";
 
 type props = {
@@ -10,7 +10,8 @@ type props = {
 };
 
 const Hero = ({ all, inProgress, completed, notStarted }: props) => {
-  const goals: goal[] = getGoals();
+  // getting the data from the context through useGoals custom hook
+  const { goals } = useGoals();
 
   // goals that are in progress
   const goalsInProgress = goals.filter((goal: goal) => {

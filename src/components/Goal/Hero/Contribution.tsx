@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { addContributionToGoal } from "../../../utils/goalUtil";
 import type { goal } from "../../../types/goals";
 import { useTransaction } from "../../../hooks/useTransaction";
+import { useGoals } from "../../../hooks/useGoals";
 
 type props = {
   setIsContributing: React.Dispatch<React.SetStateAction<Boolean>>;
@@ -18,6 +19,9 @@ const Contribution = ({
 }: props) => {
   // getting addtransaction here to pass it to the add contribution function, since custom hooks are not allowed in normal functions
   const { addTransaction } = useTransaction();
+
+  // getting setGoals from the context useGoals custom hook to pass it in the add contribution function.
+  const { setGoals } = useGoals();
 
   // state amount to contribute
   const [contributionAmount, setContributionAmount] = useState<number>();
@@ -64,6 +68,7 @@ const Contribution = ({
       contributionAmount!,
       goal["title"],
       addTransaction,
+      setGoals,
     );
 
     setIsContributing(false);

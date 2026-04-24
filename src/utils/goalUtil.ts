@@ -1,4 +1,3 @@
-import { useTransaction } from "../hooks/useTransaction";
 import type { goal } from "../types/goals";
 import type { transactionInterface } from "../types/transaction";
 import { monthStringGen } from "./transactionContextUtils";
@@ -42,6 +41,7 @@ export const addContributionToGoal = (
   contributionAmount: number,
   title: string,
   addTransaction: (transaction: transactionInterface, month: string) => void,
+  setGoals: React.Dispatch<React.SetStateAction<goal[]>>,
 ) => {
   // getting goals from the localstaorage
   const goals = getGoals();
@@ -79,4 +79,7 @@ export const addContributionToGoal = (
 
   // storing goal transaction into localstorage
   addTransaction(goalTransaction, monthStringGen(new Date()));
+
+  // updating the goals state for UI update
+  setGoals(newGoals);
 };
