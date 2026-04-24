@@ -2,8 +2,12 @@ import { useState } from "react";
 import Filter from "../components/Goal/Filter";
 import TopBar from "../layouts/TopBar";
 import Hero from "../components/Goal/Hero";
+import AddGoal from "../components/Goal/Add Goal/AddGoal";
 
 const Goals = () => {
+  // state to show addGoal modal
+  const [isAdding, setIsAdding] = useState<boolean>(false);
+
   // states for filtering
   const [all, setAll] = useState<boolean>(true); // state for "all" filter
   const [inProgress, setInProgress] = useState<boolean>(false); // state for "in progress" filter
@@ -28,6 +32,7 @@ const Goals = () => {
         setCompleted={setCompleted}
         notStarted={notStarted}
         setnotStarted={setnotStarted}
+        setIsAdding={setIsAdding}
       />
 
       {/* hero component that cotaines goals card fo all status */}
@@ -37,6 +42,9 @@ const Goals = () => {
         completed={completed}
         notStarted={notStarted}
       />
+
+      {/* conditional rendering for the add Goal component - based on isAdding */}
+      {isAdding && <AddGoal setIsAdding={setIsAdding} />}
     </div>
   );
 };

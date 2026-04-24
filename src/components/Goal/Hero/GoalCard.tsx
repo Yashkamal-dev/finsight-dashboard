@@ -23,7 +23,8 @@ const GoalCard = ({ goal }: props) => {
         </h1>
         <p className={`text-[var(--text-secondary)]`}>
           {" "}
-          Due date - {formatDate(goal["deadline"])}
+          Due date -{" "}
+          {goal["deadline"] ? formatDate(goal["deadline"]) : "No Deadline"}
         </p>
       </header>
 

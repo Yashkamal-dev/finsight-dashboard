@@ -10,6 +10,8 @@ type props = {
 
   notStarted: boolean;
   setnotStarted: React.Dispatch<React.SetStateAction<boolean>>;
+
+  setIsAdding: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 const Filter = ({
@@ -24,6 +26,8 @@ const Filter = ({
 
   notStarted,
   setnotStarted,
+
+  setIsAdding,
 }: props) => {
   // if "all" is false and rest are true, that would lead to "all" true
   if (inProgress === true && completed === true && notStarted === true) {
@@ -90,7 +94,12 @@ const Filter = ({
       {/* add goal btn container */}
       <div>
         {/* add goal button */}
-        <button className="cursor-pointer rounded-full bg-[var(--accent-primary)] px-5 py-2 text-[var(--text-inverse)] shadow-lg active:scale-99">
+        <button
+          onClick={() => {
+            setIsAdding(true);
+          }}
+          className="cursor-pointer rounded-full bg-[var(--accent-primary)] px-5 py-2 text-[var(--text-inverse)] shadow-lg active:scale-99"
+        >
           + Add new goal
         </button>
       </div>

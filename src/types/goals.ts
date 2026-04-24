@@ -4,7 +4,7 @@ export type goal = {
   title: string;
   targetAmount: number;
   savedAmount: number;
-  deadline: Date;
+  deadline: Date | undefined;
   status: string;
   createdAt: Date;
 };
