@@ -43,7 +43,7 @@ const Hero = ({ all, inProgress, completed, notStarted }: props) => {
           </header>
 
           {/* conatainer that holds goals card */}
-          <div className="grid grid-cols-[repeat(auto-fit,minmax(340px,1fr))] gap-7 py-7">
+          <div className="grid grid-cols-[repeat(auto-fit,minmax(340px,1fr))] items-start gap-7 py-7">
             {goalsInProgress.map((goal) => {
               return <GoalCard key={crypto.randomUUID()} goal={goal} />;
             })}
@@ -63,7 +63,7 @@ const Hero = ({ all, inProgress, completed, notStarted }: props) => {
           </header>
 
           {/* conatainer that holds goals card */}
-          <div className="grid grid-cols-[repeat(auto-fit,minmax(340px,1fr))] gap-7 py-7">
+          <div className="grid grid-cols-[repeat(auto-fit,minmax(340px,1fr))] items-start gap-7 py-7">
             {goalsCompleted.map((goal) => {
               return <GoalCard key={crypto.randomUUID()} goal={goal} />;
             })}
@@ -85,7 +85,7 @@ const Hero = ({ all, inProgress, completed, notStarted }: props) => {
           </header>
 
           {/* conatainer that holds goals card */}
-          <div className="grid grid-cols-[repeat(auto-fit,minmax(340px,1fr))] gap-7 py-7">
+          <div className="grid grid-cols-[repeat(auto-fit,minmax(340px,1fr))] items-start gap-7 py-7">
             {goalsNotStarted.map((goal) => {
               return <GoalCard key={crypto.randomUUID()} goal={goal} />;
             })}
