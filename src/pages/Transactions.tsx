@@ -4,9 +4,14 @@ import Options from "../components/transaction/Options";
 import TopBar from "../layouts/TopBar";
 import type { option } from "../types/optionsType";
 import TransactionList from "../components/transaction/TransactionList";
-import { getData, monthStringGen } from "../utils/transactionContextUtils";
+import {
+  deleteTransaction,
+  getData,
+  monthStringGen,
+} from "../utils/transactionContextUtils";
 import type { transactionInterface } from "../types/transaction";
 import AddTransaction from "../components/general/AddTransaction";
+import DeleteRecord from "../components/general/DeleteRecord";
 
 // options for the transaction type selection
 const types: option[] = [
@@ -50,6 +55,13 @@ const method: option[] = [
 const Transactions = () => {
   // state to mount and unmount the add transaction component
   const [isAdding, setIsAdding] = useState<boolean>(false);
+
+  // state to display delete modal
+  const [isDeleting, setIsDeleting] = useState<boolean>(false);
+  // state that holds the actual transaction delete
+  const [txnToDelete, settxnToDelete] = useState<transactionInterface | null>(
+    null,
+  );
 
   // initial categories with options for "All"
   let categories: option[] = [
@@ -121,9 +133,22 @@ const Transactions = () => {
         selectedType={selectedType}
         selectedCategories={selectedCategories}
         selectedMethod={selectedMethod}
+        setIsDeleting={setIsDeleting}
+        settxnToDelete={settxnToDelete}
       />
 
+      {/* conditional rendering for the add Transaction modal */}
       {isAdding && <AddTransaction setIsAdding={setIsAdding} />}
+
+      {/* conditional rendering for the delete Transaction modal */}
+      {isDeleting && (
+        <DeleteRecord
+          setIsDeleting={setIsDeleting}
+          deleteFun={() => {
+            deleteTransaction(txnToDelete);
+          }}
+        />
+      )}
     </div>
   );
 };

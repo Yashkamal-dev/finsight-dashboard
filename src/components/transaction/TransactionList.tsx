@@ -1,3 +1,4 @@
+import { Trash2 } from "lucide-react";
 import type { option } from "../../types/optionsType";
 import type { transactionInterface } from "../../types/transaction";
 import {
@@ -12,6 +13,10 @@ type props = {
   selectedType: option;
   selectedCategories: option;
   selectedMethod: option;
+  setIsDeleting: React.Dispatch<React.SetStateAction<boolean>>;
+  settxnToDelete: React.Dispatch<
+    React.SetStateAction<transactionInterface | null>
+  >;
 };
 
 // * transactionList component containing table of the list
@@ -20,6 +25,8 @@ const TransactionList = ({
   selectedType,
   selectedCategories,
   selectedMethod,
+  setIsDeleting,
+  settxnToDelete,
 }: props) => {
   // destructuring values and assigning names to them for the filtering
   const { value: type } = selectedType;
@@ -45,13 +52,14 @@ const TransactionList = ({
       </p>
       <div className="">
         {/* table header */}
-        <div className="grid grid-cols-[1fr_1fr_3fr_1fr_1fr_1fr] gap-4 rounded-full bg-[#ebe8ff] px-4 py-3 text-[var(--accent-text)]">
+        <div className="grid grid-cols-[1fr_1fr_3fr_1fr_1fr_1fr_0.5fr] gap-4 rounded-full bg-[#ebe8ff] px-4 py-3 text-[var(--accent-text)]">
           <h3 className="uppercase">Date</h3>
           <h3 className="uppercase">amount</h3>
           <h3 className="uppercase">payment name</h3>
           <h3 className="uppercase">method</h3>
           <h3 className="uppercase">category</h3>
           <h3 className="uppercase">type</h3>
+          <h3 className="uppercase">options</h3>
         </div>
 
         {/* table data */}
@@ -88,7 +96,7 @@ const TransactionList = ({
               return (
                 <div
                   key={txn["id"]}
-                  className={`grid grid-cols-[1fr_1fr_3fr_1fr_1fr_1fr] gap-4 rounded-full border-b border-b-[var(--border-subtle)] px-3 py-3`}
+                  className={`grid grid-cols-[1fr_1fr_3fr_1fr_1fr_1fr_0.5fr] gap-4 rounded-full border-b border-b-[var(--border-subtle)] px-3 py-3`}
                 >
                   {/* date */}
                   <p className="text-[var(--text-primary)]">{txn["date"]}</p>
@@ -142,6 +150,17 @@ const TransactionList = ({
                   >
                     {txn["type"]}
                   </p>
+
+                  {/* icon to delete */}
+                  <button
+                    onClick={() => {
+                      settxnToDelete(txn);
+                      setIsDeleting(true);
+                    }}
+                    className="cursor-pointer justify-self-center rounded-full px-1"
+                  >
+                    <Trash2 className="text-[var(--text-muted)]" />
+                  </button>
                 </div>
               );
             })}
