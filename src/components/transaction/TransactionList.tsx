@@ -1,4 +1,3 @@
-import { Pencil, Trash2 } from "lucide-react";
 import type { option } from "../../types/optionsType";
 import type { transactionInterface } from "../../types/transaction";
 import {
@@ -7,6 +6,7 @@ import {
   sortByType,
   sortTransactions,
 } from "../../utils/sortTransactionUtil";
+import { useState } from "react";
 
 type props = {
   selectedDateTransactions: transactionInterface[];
@@ -51,6 +51,9 @@ const TransactionList = ({
   // sorting array based on method
   displayedTransactions = sortByMethod(method, displayedTransactions);
 
+  // state to open option
+  const [isOptionOpen, setIsOptionOpen] = useState<string | null>(null);
+
   return (
     <div className="flex flex-col gap-2 py-4">
       <p className="px-2 text-[var(--text-secondary)]">
@@ -58,7 +61,7 @@ const TransactionList = ({
       </p>
       <div className="">
         {/* table header */}
-        <div className="grid grid-cols-[1fr_1fr_3fr_1fr_1fr_1fr_0.5fr] gap-4 rounded-full bg-[#ebe8ff] px-4 py-3 text-[var(--accent-text)]">
+        <div className="grid grid-cols-[1fr_1fr_3fr_1fr_2fr_1fr_0.5fr] gap-4 rounded-full bg-[#ebe8ff] px-4 py-3 text-[var(--accent-text)]">
           <h3 className="uppercase">Date</h3>
           <h3 className="uppercase">amount</h3>
           <h3 className="uppercase">payment name</h3>
@@ -102,7 +105,7 @@ const TransactionList = ({
               return (
                 <div
                   key={txn["id"]}
-                  className={`grid grid-cols-[1fr_1fr_3fr_1fr_1fr_1fr_0.5fr] gap-4 rounded-full border-b border-b-[var(--border-subtle)] px-3 py-3`}
+                  className={`grid grid-cols-[1fr_1fr_3fr_1fr_2fr_1fr_0.5fr] gap-4 rounded-full px-3 py-3 transition-all duration-300 ease-in-out ${isOptionOpen === txn["id"] ? "border border-[var(--accent-primary)]" : "border-b border-b-[var(--border-subtle)]"} `}
                 >
                   {/* date */}
                   <p className="text-[var(--text-primary)]">{txn["date"]}</p>
@@ -152,13 +155,60 @@ const TransactionList = ({
                           : txn["type"] === "Goal"
                             ? "bg-[var(--warning-bg)] text-[var(--warning)]"
                             : ""
-                    } flex w-max min-w-20 items-center justify-center rounded-full px-2`}
+                    } flex h-min w-max min-w-20 items-center justify-center rounded-full px-2`}
                   >
                     {txn["type"]}
                   </p>
 
-                  {/* icon to delete */}
-                  <div className="flex">
+                  {/* options dropdown */}
+                  <div className="relative justify-self-center">
+                    <button
+                      onClick={() => {
+                        if (isOptionOpen === txn["id"]) {
+                          setIsOptionOpen(null);
+                        } else {
+                          setIsOptionOpen(txn["id"]);
+                        }
+                      }}
+                      className="cursor-pointer font-extrabold"
+                    >
+                      {isOptionOpen === txn["id"] ? "✕" : ". . ."}
+                    </button>
+
+                    {/* conditional rendering using id to prevent global state effect */}
+                    {isOptionOpen === txn["id"] && (
+                      // options dropdown
+                      <div className="-bottom absolute -right-2/3 z-10 flex w-35 flex-col gap-2 rounded-xl border border-[var(--border-default)] bg-[var(--bg-primary)] p-1">
+                        {/* Edit button */}
+                        <button
+                          onClick={() => {
+                            setIsOptionOpen(null);
+                            settxnToEdit(txn);
+                            {
+                              txn["type"] !== "Goal" && setIsEditing(true);
+                            }
+                          }}
+                          className="cursor-pointer rounded-full py-0.5 transition-all duration-150 ease-in-out hover:bg-[var(--accent-soft)] hover:text-[var(--text-inverse)]"
+                        >
+                          {txn["type"] === "Goal" ? "Cannot edit" : "Edit"}
+                        </button>
+
+                        {/* Delete button */}
+                        <button
+                          onClick={() => {
+                            settxnToDelete(txn);
+                            setIsDeleting(true);
+                            setIsOptionOpen(null);
+                          }}
+                          className="cursor-pointer rounded-full bg-[var(--danger-bg)] py-0.5 text-[var(--danger)] transition-all duration-150 ease-in-out hover:bg-[var(--danger)] hover:text-[var(--danger-bg)]"
+                        >
+                          Delete
+                        </button>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* <div className="flex">
                     <button
                       onClick={() => {
                         settxnToEdit(txn);
@@ -180,7 +230,7 @@ const TransactionList = ({
                     >
                       <Trash2 className="text-[var(--text-muted)]" />
                     </button>
-                  </div>
+                  </div> */}
                 </div>
               );
             })}
