@@ -143,6 +143,7 @@ const Transactions = () => {
       {/* conditional rendering for the delete Transaction modal */}
       {isDeleting && (
         <DeleteRecord
+          entity="Transaction"
           setIsDeleting={setIsDeleting}
           deleteFun={() => {
             deleteTransaction(txnToDelete);

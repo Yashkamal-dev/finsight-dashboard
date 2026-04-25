@@ -1,9 +1,10 @@
 type props = {
+  entity: string;
   setIsDeleting: React.Dispatch<React.SetStateAction<boolean>>;
   deleteFun: () => void;
 };
 
-const DeleteRecord = ({ setIsDeleting, deleteFun }: props) => {
+const DeleteRecord = ({ entity, setIsDeleting, deleteFun }: props) => {
   return (
     <div className="fixed inset-0 flex items-center justify-center">
       {/* backdrop layer */}
@@ -19,7 +20,7 @@ const DeleteRecord = ({ setIsDeleting, deleteFun }: props) => {
         <header className="flex flex-col justify-center gap-1">
           {/* main title to delete record */}
           <h2 className="text-2xl font-semibold text-[var(--text-primary)]">
-            Delete Transaction
+            Delete {entity}
           </h2>
 
           {/* sub title */}
