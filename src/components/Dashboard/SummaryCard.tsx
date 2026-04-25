@@ -34,7 +34,7 @@ const SummaryCard = ({
       {/* amount message */}
       <div className="flex flex-col gap-6">
         <p className="text-4xl font-bold">
-          {amount}
+          {amount.toLocaleString("en-IN")}
           <span className="text-[var(--text-muted)]">.00</span>
         </p>
         <p className="text-[var(--text-secondary)]">
@@ -70,38 +70,61 @@ const SummaryContainer = () => {
     return totalExpense + txn["amount"];
   }, 0);
 
-  // measureing total balance for current month
-  const totalBalance = totalIncome - totalExpense;
+  // getting total savings based on the goal transaction of the current month
+  const totalSavings = CurrentMonthTransactions.filter((txn) => {
+    return txn["type"] === "Goal";
+  }).reduce((acc, txn) => {
+    return acc + txn["amount"];
+  }, 0);
 
-  // getting total income for current month
+  // measureing total balance for current month
+  const totalBalance = totalIncome - totalExpense - totalSavings;
+
+  // getting total income for prev month
   const prevMonthTotalIncome = SelectedMonthTransactions.filter((txn) => {
     return txn["type"] === "Income" ? txn : false;
   }).reduce((totalIncome, txn) => {
     return totalIncome + txn["amount"];
   }, 0);
 
-  // getting total expense for current month
+  // getting total expense for prev month
   const prevMonthTotalExpense = SelectedMonthTransactions.filter((txn) => {
     return txn["type"] === "Expense" ? txn : false;
   }).reduce((totalExpense, txn) => {
     return totalExpense + txn["amount"];
   }, 0);
 
+  // getting total savings based on the goal transaction of the current month
+  const prevMonthotalSavings = SelectedMonthTransactions.filter((txn) => {
+    return txn["type"] === "Goal";
+  }).reduce((acc, txn) => {
+    return acc + txn["amount"];
+  }, 0);
+
   // measureing total balance for prev month
-  const prevMonthTotalBalance = prevMonthTotalIncome - prevMonthTotalExpense;
+  const prevMonthTotalBalance =
+    prevMonthTotalIncome - prevMonthTotalExpense - prevMonthotalSavings;
 
   // function to find the status compared with prev month amount
   const percentageChangeFun = (
     currentMonth: number,
     prevMonth: number,
   ): number => {
+    // calculating perccentage
     const percentage = (currentMonth * 100) / prevMonth - 100;
+
+    // condition if the prev month has got 0 amount
+    if (prevMonth === 0) {
+      return 0;
+    }
+
     return Math.round(percentage * 10) / 10;
   };
 
   return (
     <div className="grid w-full grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-4">
       <div className="grid grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-4">
+        {/* card for the total balance */}
         <SummaryCard
           title="Total Balanace"
           amount={totalBalance}
@@ -110,6 +133,8 @@ const SummaryContainer = () => {
             prevMonthTotalBalance,
           )}
         />
+
+        {/* card for the income */}
         <SummaryCard
           title="Income"
           amount={totalIncome}
@@ -119,7 +144,9 @@ const SummaryContainer = () => {
           )}
         />
       </div>
+
       <div className="grid grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-4">
+        {/* card for the expense */}
         <SummaryCard
           title="Expense"
           amount={totalExpense}
@@ -128,7 +155,16 @@ const SummaryContainer = () => {
             prevMonthTotalExpense,
           )}
         />
-        <SummaryCard title="" amount={0} />
+
+        {/* card for the total savings */}
+        <SummaryCard
+          title="Total Savings"
+          amount={totalSavings}
+          percentageChange={percentageChangeFun(
+            totalSavings,
+            prevMonthotalSavings,
+          )}
+        />
       </div>
     </div>
   );
