@@ -17,6 +17,34 @@ export const getData = (month: string) => {
   return storedData ? JSON.parse(storedData) : [];
 };
 
+// function to update record
+export const updateTransactionInLocalStorage = (txn: transactionInterface) => {
+  // destructuring required keys
+  const { id, date } = txn;
+
+  // getting data from the localstorage for the slected txn's date to update
+  const transactions: transactionInterface[] = getData(
+    monthStringGen(new Date(date)),
+  );
+
+  // updating only the one transaction which matched with the given id
+  const updatedTransactions = transactions.map((transaction) => {
+    // returning updated transaction based on the matched id
+    if (transaction["id"] === id) {
+      return txn;
+    }
+
+    // returning the rest of the transaction as untouched
+    return transaction;
+  });
+
+  // setting new transaction list with updated transaction into localstorage
+  localStorage.setItem(
+    `Transactions_${monthStringGen(new Date(date))}`,
+    JSON.stringify(updatedTransactions),
+  );
+};
+
 // funtion to delete record
 export const deleteTransaction = (txn: transactionInterface | null) => {
   // if the transaction is null, returning immediately

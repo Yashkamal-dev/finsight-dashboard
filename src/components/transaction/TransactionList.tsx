@@ -1,4 +1,4 @@
-import { Trash2 } from "lucide-react";
+import { Pencil, Trash2 } from "lucide-react";
 import type { option } from "../../types/optionsType";
 import type { transactionInterface } from "../../types/transaction";
 import {
@@ -17,6 +17,10 @@ type props = {
   settxnToDelete: React.Dispatch<
     React.SetStateAction<transactionInterface | null>
   >;
+  setIsEditing: React.Dispatch<React.SetStateAction<boolean>>;
+  settxnToEdit: React.Dispatch<
+    React.SetStateAction<transactionInterface | null>
+  >;
 };
 
 // * transactionList component containing table of the list
@@ -27,6 +31,8 @@ const TransactionList = ({
   selectedMethod,
   setIsDeleting,
   settxnToDelete,
+  setIsEditing,
+  settxnToEdit,
 }: props) => {
   // destructuring values and assigning names to them for the filtering
   const { value: type } = selectedType;
@@ -152,15 +158,29 @@ const TransactionList = ({
                   </p>
 
                   {/* icon to delete */}
-                  <button
-                    onClick={() => {
-                      settxnToDelete(txn);
-                      setIsDeleting(true);
-                    }}
-                    className="cursor-pointer justify-self-center rounded-full px-1"
-                  >
-                    <Trash2 className="text-[var(--text-muted)]" />
-                  </button>
+                  <div className="flex">
+                    <button
+                      onClick={() => {
+                        settxnToEdit(txn);
+                        {
+                          txn["type"] !== "Goal" && setIsEditing(true);
+                        }
+                      }}
+                      className="cursor-pointer justify-self-center rounded-full px-1"
+                    >
+                      <Pencil className="text-[var(--text-muted)]" />
+                    </button>
+
+                    <button
+                      onClick={() => {
+                        settxnToDelete(txn);
+                        setIsDeleting(true);
+                      }}
+                      className="cursor-pointer justify-self-center rounded-full px-1"
+                    >
+                      <Trash2 className="text-[var(--text-muted)]" />
+                    </button>
+                  </div>
                 </div>
               );
             })}

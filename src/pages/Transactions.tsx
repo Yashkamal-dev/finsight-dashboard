@@ -12,6 +12,7 @@ import {
 import type { transactionInterface } from "../types/transaction";
 import AddTransaction from "../components/general/AddTransaction";
 import DeleteRecord from "../components/general/DeleteRecord";
+import EditTransaction from "../components/transaction/Edit/EditTransaction";
 
 // options for the transaction type selection
 const types: option[] = [
@@ -56,6 +57,11 @@ const Transactions = () => {
   // state to mount and unmount the add transaction component
   const [isAdding, setIsAdding] = useState<boolean>(false);
 
+  // state to display editing modal
+  const [isEditing, setIsEditing] = useState<boolean>(false);
+  // state that holds the actual transaction editing
+  const [txnToEdit, settxnToEdit] = useState<transactionInterface | null>(null);
+
   // state to display delete modal
   const [isDeleting, setIsDeleting] = useState<boolean>(false);
   // state that holds the actual transaction delete
@@ -99,6 +105,18 @@ const Transactions = () => {
     monthStringGen(selectedDate),
   );
 
+  const txn: transactionInterface = {
+    amount: 450,
+    category: "food",
+    createdAt: "2026-04-03T11:30:00.000Z",
+    date: "2026-04-03",
+    id: "txn_a006",
+    note: "Monthly groceries",
+    paymentMethod: "upi",
+    title: "Grocery Shopping — D-Mart",
+    type: "Expense",
+  };
+
   return (
     <div className="px-4">
       {/* topbar of the page */}
@@ -134,11 +152,18 @@ const Transactions = () => {
         selectedCategories={selectedCategories}
         selectedMethod={selectedMethod}
         setIsDeleting={setIsDeleting}
+        setIsEditing={setIsEditing}
         settxnToDelete={settxnToDelete}
+        settxnToEdit={settxnToEdit}
       />
 
       {/* conditional rendering for the add Transaction modal */}
       {isAdding && <AddTransaction setIsAdding={setIsAdding} />}
+
+      {/* conditional rendering for the updating Transaction modal */}
+      {isEditing && (
+        <EditTransaction prevTxn={txnToEdit!} setIsEditing={setIsEditing} />
+      )}
 
       {/* conditional rendering for the delete Transaction modal */}
       {isDeleting && (
