@@ -207,30 +207,6 @@ const TransactionList = ({
                       </div>
                     )}
                   </div>
-
-                  {/* <div className="flex">
-                    <button
-                      onClick={() => {
-                        settxnToEdit(txn);
-                        {
-                          txn["type"] !== "Goal" && setIsEditing(true);
-                        }
-                      }}
-                      className="cursor-pointer justify-self-center rounded-full px-1"
-                    >
-                      <Pencil className="text-[var(--text-muted)]" />
-                    </button>
-
-                    <button
-                      onClick={() => {
-                        settxnToDelete(txn);
-                        setIsDeleting(true);
-                      }}
-                      className="cursor-pointer justify-self-center rounded-full px-1"
-                    >
-                      <Trash2 className="text-[var(--text-muted)]" />
-                    </button>
-                  </div> */}
                 </div>
               );
             })}
