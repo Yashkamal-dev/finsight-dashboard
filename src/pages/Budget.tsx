@@ -5,6 +5,7 @@ import type { option } from "../types/optionsType";
 import { getBudget, type budgetType } from "../types/Budget";
 import BudgetSummaryCon from "../components/budget/BudgetSummary/BudgetSummaryCon";
 import AddBudget from "../components/budget/AddBudget";
+import EditBudget from "../components/budget/Edit budget/EditBudget";
 
 // options for status
 const statuses: option[] = [
@@ -17,6 +18,11 @@ const statuses: option[] = [
 const Budget = () => {
   // state for the rendering of the add budget
   const [isAdding, setIsAdding] = useState<boolean>(false);
+
+  // state for the rendering of the add budget
+  const [isEditing, setIsEditing] = useState<boolean>(false);
+  // state that holds budget to edit
+  const [bdgtToEdit, setbdgtToEdit] = useState<budgetType | null>(null);
 
   // selected date
   const [selectedDate, setSelectedDate] = useState<Date>(new Date());
@@ -52,13 +58,25 @@ const Budget = () => {
           allBudget={allBudget}
           selectedOption={selectedOption}
           setIsAdding={setIsAdding}
+          setbdgtToEdit={setbdgtToEdit}
+          setIsEditing={setIsEditing}
         />
 
         {/* budget summary component - container of monthly budget */}
         <BudgetSummaryCon allBudget={allBudget} selectedDate={selectedDate} />
 
+        {/* conditional rendering for the adding new budget modal */}
         {isAdding && (
           <AddBudget setIsAdding={setIsAdding} setAllBudget={setAllBudget} />
+        )}
+
+        {/* conditional rendering for the edditing modal */}
+        {isEditing && (
+          <EditBudget
+            budget={bdgtToEdit!}
+            setIsEditing={setIsEditing}
+            setAllBudget={setAllBudget}
+          />
         )}
       </div>
     </div>

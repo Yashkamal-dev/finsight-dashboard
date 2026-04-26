@@ -13,6 +13,8 @@ type props = {
   allBudget: budgetType[];
   setIsAdding: React.Dispatch<React.SetStateAction<boolean>>;
   selectedOption: option;
+  setbdgtToEdit: React.Dispatch<React.SetStateAction<budgetType | null>>;
+  setIsEditing: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 const BudgetManagerCon = ({
@@ -24,6 +26,8 @@ const BudgetManagerCon = ({
   allBudget,
   setIsAdding,
   selectedOption,
+  setbdgtToEdit,
+  setIsEditing,
 }: props) => {
   return (
     <div className="flex-[2_1_1000px] flex-col gap-2">
@@ -38,7 +42,12 @@ const BudgetManagerCon = ({
       <Filter options={options} selected={selected} onChange={onChange} />
 
       {/* budgetcardcon */}
-      <BudgetCardCon allBudget={allBudget} selectedOption={selectedOption} />
+      <BudgetCardCon
+        allBudget={allBudget}
+        selectedOption={selectedOption}
+        setbdgtToEdit={setbdgtToEdit}
+        setIsEditing={setIsEditing}
+      />
     </div>
   );
 };

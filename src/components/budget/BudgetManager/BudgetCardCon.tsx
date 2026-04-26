@@ -6,9 +6,16 @@ import BudgetCard from "./BudgetCard";
 type props = {
   allBudget: budgetType[];
   selectedOption: option;
+  setbdgtToEdit: React.Dispatch<React.SetStateAction<budgetType | null>>;
+  setIsEditing: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const BudgetCardCon = ({ allBudget, selectedOption }: props) => {
+const BudgetCardCon = ({
+  allBudget,
+  selectedOption,
+  setbdgtToEdit,
+  setIsEditing,
+}: props) => {
   // sorted allBudget based on status percentage
   let budget = allBudget.sort((a, b) => {
     return a["status"] - b["status"];
@@ -39,6 +46,9 @@ const BudgetCardCon = ({ allBudget, selectedOption }: props) => {
             status={bdgt["status"] || 0}
             spent={bdgt["spent"] || 0}
             limit={bdgt["limit"]}
+            bdgt={bdgt}
+            setbdgtToEdit={setbdgtToEdit}
+            setIsEditing={setIsEditing}
           />
         );
       })}

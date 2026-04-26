@@ -1,14 +1,29 @@
 import { Cell, Pie, PieChart, Tooltip } from "recharts";
 import { CustomTooltip } from "../../ToolTip/CustomTooltip";
+import { useEffect, useRef, useState } from "react";
+import { Ellipsis, X } from "lucide-react";
+import EditBudget from "../Edit budget/EditBudget";
+import type { budgetType } from "../../../types/Budget";
 
 type props = {
   category: string;
   status: number;
   spent: number;
   limit: number;
+  bdgt: budgetType;
+  setbdgtToEdit: React.Dispatch<React.SetStateAction<budgetType | null>>;
+  setIsEditing: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const BudgetCard = ({ category, status, spent, limit }: props) => {
+const BudgetCard = ({
+  category,
+  status,
+  spent,
+  limit,
+  bdgt,
+  setbdgtToEdit,
+  setIsEditing,
+}: props) => {
   // specifing the value for the pie chart
   const safeSpent = Math.min(limit, spent);
 
@@ -18,8 +33,39 @@ const BudgetCard = ({ category, status, spent, limit }: props) => {
     { name: "remaining", value: limit - safeSpent },
   ];
 
+  // state to open option
+  const [isOptionOpen, setIsOptionOpen] = useState<boolean>(false);
+
+  // ref of the budget container
+  const budgetCard = useRef<HTMLDivElement | null>(null);
+
+  // effect to close the options component
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      // if clicked outside the budget card, closing the option
+      if (
+        budgetCard.current &&
+        !budgetCard.current.contains(e.target as Node)
+      ) {
+        // closing the contribution
+        setIsOptionOpen(false);
+      }
+    };
+
+    // attaching event listener
+    if (isOptionOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
+    // detaching event listener
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isOptionOpen]);
+
   return (
     <div
+      ref={budgetCard}
       className={`relative ${
         status < 70
           ? "border-[var(--border-default)]"
@@ -33,7 +79,7 @@ const BudgetCard = ({ category, status, spent, limit }: props) => {
       {/* name container */}
       <div className="">
         {/* budget title */}
-        <h2 className={`text-2xl font-semibold`}>{category}</h2>
+        <h2 className={`text-2xl font-semibold capitalize`}>{category}</h2>
       </div>
 
       {/* summary */}
@@ -122,20 +168,45 @@ const BudgetCard = ({ category, status, spent, limit }: props) => {
       </div>
 
       {/* edit button */}
-      <button
-        className={`absolute top-1 right-1 cursor-pointer rounded-full border border-[var(--border-default)] p-2.5`}
-      >
-        <svg
-          className={`fill-[var(--text-secondary)]`}
-          xmlns="http://www.w3.org/2000/svg"
-          height="24px"
-          viewBox="0 -960 960 960"
-          width="24px"
-          fill="#e3e3e3"
+      {/* options dropdown */}
+      <div className="absolute top-1 right-1">
+        <button
+          onClick={() => {
+            setIsOptionOpen(!isOptionOpen);
+          }}
+          className="flex cursor-pointer items-center justify-center rounded-full border border-[var(--border-default)] p-2.5 font-extrabold shadow-lg"
         >
-          <path d="M80 0v-160h800V0H80Zm160-320h56l312-311-29-29-28-28-311 312v56Zm-80 80v-170l448-447q11-11 25.5-17t30.5-6q16 0 31 6t27 18l55 56q12 11 17.5 26t5.5 31q0 15-5.5 29.5T777-687L330-240H160Zm560-504-56-56 56 56ZM608-631l-29-29-28-28 57 57Z" />
-        </svg>
-      </button>
+          {isOptionOpen === true ? <X /> : <Ellipsis />}
+        </button>
+
+        {/* conditional rendering using id to prevent global state effect */}
+        {isOptionOpen === true && (
+          // options dropdown
+          <div className="-bottom absolute right-0 z-10 mt-1 flex w-35 flex-col gap-2 rounded-xl border border-[var(--border-default)] bg-[var(--bg-primary)] p-1 shadow-lg">
+            {/* Edit button */}
+            <button
+              onClick={() => {
+                setbdgtToEdit(bdgt);
+                setIsEditing(true);
+                setIsOptionOpen(false);
+              }}
+              className="cursor-pointer rounded-full py-0.5 transition-all duration-150 ease-in-out hover:bg-[var(--accent-soft)] hover:text-[var(--text-inverse)]"
+            >
+              Edit
+            </button>
+
+            {/* Delete button */}
+            <button
+              onClick={() => {
+                setIsOptionOpen(false);
+              }}
+              className="cursor-pointer rounded-full bg-[var(--danger-bg)] py-0.5 text-[var(--danger)] transition-all duration-150 ease-in-out hover:bg-[var(--danger)] hover:text-[var(--danger-bg)]"
+            >
+              Delete
+            </button>
+          </div>
+        )}
+      </div>
     </div>
   );
 };
