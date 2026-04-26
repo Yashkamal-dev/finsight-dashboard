@@ -7,9 +7,18 @@ type props = {
   inProgress: boolean;
   completed: boolean;
   notStarted: boolean;
+  setIsEditing: React.Dispatch<React.SetStateAction<boolean>>;
+  setGoalToEdit: React.Dispatch<React.SetStateAction<goal | null>>;
 };
 
-const Hero = ({ all, inProgress, completed, notStarted }: props) => {
+const Hero = ({
+  all,
+  inProgress,
+  completed,
+  notStarted,
+  setGoalToEdit,
+  setIsEditing,
+}: props) => {
   // getting the data from the context through useGoals custom hook
   const { goals } = useGoals();
 
@@ -46,7 +55,14 @@ const Hero = ({ all, inProgress, completed, notStarted }: props) => {
           {/* conatainer that holds goals card */}
           <div className="grid grid-cols-[repeat(auto-fit,minmax(340px,1fr))] items-start gap-7 py-7">
             {goalsInProgress.map((goal) => {
-              return <GoalCard key={crypto.randomUUID()} goal={goal} />;
+              return (
+                <GoalCard
+                  key={crypto.randomUUID()}
+                  goal={goal}
+                  setIsEditing={setIsEditing}
+                  setGoalToEdit={setGoalToEdit}
+                />
+              );
             })}
           </div>
         </div>
@@ -66,7 +82,14 @@ const Hero = ({ all, inProgress, completed, notStarted }: props) => {
           {/* conatainer that holds goals card */}
           <div className="grid grid-cols-[repeat(auto-fit,minmax(340px,1fr))] items-start gap-7 py-7">
             {goalsCompleted.map((goal) => {
-              return <GoalCard key={crypto.randomUUID()} goal={goal} />;
+              return (
+                <GoalCard
+                  key={crypto.randomUUID()}
+                  goal={goal}
+                  setIsEditing={setIsEditing}
+                  setGoalToEdit={setGoalToEdit}
+                />
+              );
             })}
           </div>
         </div>
@@ -88,7 +111,14 @@ const Hero = ({ all, inProgress, completed, notStarted }: props) => {
           {/* conatainer that holds goals card */}
           <div className="grid grid-cols-[repeat(auto-fit,minmax(340px,1fr))] items-start gap-7 py-7">
             {goalsNotStarted.map((goal) => {
-              return <GoalCard key={crypto.randomUUID()} goal={goal} />;
+              return (
+                <GoalCard
+                  key={crypto.randomUUID()}
+                  goal={goal}
+                  setIsEditing={setIsEditing}
+                  setGoalToEdit={setGoalToEdit}
+                />
+              );
             })}
           </div>
         </div>

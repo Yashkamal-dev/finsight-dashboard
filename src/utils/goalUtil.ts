@@ -83,3 +83,28 @@ export const addContributionToGoal = (
   // updating the goals state for UI update
   setGoals(newGoals);
 };
+
+// function to edit a goal
+export const editGoal = (
+  goal: goal,
+  setGoals: React.Dispatch<React.SetStateAction<goal[]>>,
+) => {
+  // getting goal from the localstorage
+  const goals = getGoals();
+
+  const newGoals = goals.map((g) => {
+    // returning updated if id matched
+    if (g["id"] === goal["id"]) {
+      return goal;
+    }
+
+    // returning the rest as untouched
+    return g;
+  });
+
+  // setting new goals into lcoalstorage
+  localStorage.setItem("goals", JSON.stringify(newGoals));
+
+  // updating goals state to update the UI
+  setGoals(newGoals);
+};

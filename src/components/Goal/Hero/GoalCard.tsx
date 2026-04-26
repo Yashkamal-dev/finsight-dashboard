@@ -2,14 +2,20 @@ import { useEffect, useRef, useState } from "react";
 import type { goal } from "../../../types/goals";
 import { formatDate } from "../../../utils/goalUtil";
 import Contribution from "./Contribution";
+import { Ellipsis, X } from "lucide-react";
 
 type props = {
   goal: goal;
+  setIsEditing: React.Dispatch<React.SetStateAction<boolean>>;
+  setGoalToEdit: React.Dispatch<React.SetStateAction<goal | null>>;
 };
 
-const GoalCard = ({ goal }: props) => {
+const GoalCard = ({ goal, setGoalToEdit, setIsEditing }: props) => {
   // the remaining amount for the goal to be completed
   const remaining = goal["targetAmount"] - goal["savedAmount"];
+
+  // state to open option
+  const [isOptionOpen, setIsOptionOpen] = useState<boolean>(false);
 
   // getting the ratio between the savedAmount targetAmount
   let pregress = Math.floor((goal["savedAmount"] / goal["targetAmount"]) * 100);
@@ -136,18 +142,56 @@ const GoalCard = ({ goal }: props) => {
         )}
       </div>
 
-      {/* conditional rendering for the contribution button, only if the remaining is more than 0. */}
-      {remaining > 0 && (
-        // contribution Button
+      {/* options dropdown */}
+      <div className="absolute top-1 right-1">
         <button
           onClick={() => {
-            setIsContributing(!isContributing);
+            setIsOptionOpen(!isOptionOpen);
           }}
-          className="absolute top-2 right-2 cursor-pointer rounded-full border border-[var(--border-default)] px-3 py-1 text-2xl shadow-xl"
+          className="flex cursor-pointer items-center justify-center rounded-full border border-[var(--border-default)] p-2.5 font-extrabold shadow-lg"
         >
-          +
+          {isOptionOpen === true ? <X /> : <Ellipsis />}
         </button>
-      )}
+
+        {/* conditional rendering using id to prevent global state effect */}
+        {isOptionOpen === true && (
+          // options dropdown
+          <div className="-bottom absolute right-0 z-10 mt-1 flex w-35 flex-col gap-2 rounded-xl border border-[var(--border-default)] bg-[var(--bg-primary)] p-1 shadow-lg">
+            {/* contribute button */}
+            <button
+              onClick={() => {
+                setIsContributing(true);
+                setIsOptionOpen(false);
+              }}
+              className="cursor-pointer rounded-full py-0.5 transition-all duration-150 ease-in-out hover:bg-[var(--accent-soft)] hover:text-[var(--text-inverse)]"
+            >
+              Contribute
+            </button>
+
+            {/* Edit button */}
+            <button
+              onClick={() => {
+                setGoalToEdit(goal);
+                setIsEditing(true);
+                setIsOptionOpen(false);
+              }}
+              className="cursor-pointer rounded-full py-0.5 transition-all duration-150 ease-in-out hover:bg-[var(--accent-soft)] hover:text-[var(--text-inverse)]"
+            >
+              Edit
+            </button>
+
+            {/* Delete button */}
+            <button
+              onClick={() => {
+                setIsOptionOpen(false);
+              }}
+              className="cursor-pointer rounded-full bg-[var(--danger-bg)] py-0.5 text-[var(--danger)] transition-all duration-150 ease-in-out hover:bg-[var(--danger)] hover:text-[var(--danger-bg)]"
+            >
+              Delete
+            </button>
+          </div>
+        )}
+      </div>
 
       {/* label - type indicator */}
       <div
