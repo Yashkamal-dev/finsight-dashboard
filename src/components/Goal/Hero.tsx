@@ -81,7 +81,7 @@ const Hero = ({
           <header className="flex justify-between border-b border-b-[var(--border-default)] py-3">
             <h1 className="text-lg text-[var(--text-secondary)]">Completed</h1>
             <span className="text-lg text-[var(--text-secondary)]">
-              {goalsInProgress.length} Goals{" "}
+              {goalsCompleted.length} Goals{" "}
             </span>
           </header>
 
@@ -112,7 +112,7 @@ const Hero = ({
               Not started
             </h1>
             <span className="text-lg text-[var(--text-secondary)]">
-              {goalsInProgress.length} Goals{" "}
+              {goalsNotStarted.length} Goals{" "}
             </span>
           </header>
 
