@@ -37,11 +37,12 @@ const EditGoalForm = ({ setIsEditing, goal }: props) => {
   const [errors, setErrors] = useState({
     title: false,
     targetAmount: false,
+    belowSaved: false, // if try to edit amount below the already saved amount
   });
 
   // function to validate goal
   const validateGoal = () => {
-    const newErrors = { title: false, targetAmount: false };
+    const newErrors = { title: false, targetAmount: false, belowSaved: false };
 
     // validating title
     if (!title || title.trim() === "") {
@@ -51,6 +52,10 @@ const EditGoalForm = ({ setIsEditing, goal }: props) => {
     // validating target amount
     if (!targetAmount || targetAmount <= 0) {
       newErrors["targetAmount"] = true;
+    }
+
+    if (targetAmount < goal["savedAmount"]) {
+      newErrors["belowSaved"] = true;
     }
 
     setErrors(newErrors);
@@ -81,6 +86,17 @@ const EditGoalForm = ({ setIsEditing, goal }: props) => {
       deadline: date,
     };
 
+    // updating if amount matches
+    if (newGoal["savedAmount"] === newGoal["targetAmount"]) {
+      newGoal["status"] = "completed";
+    } else if (newGoal["savedAmount"] === 0) {
+      // updating if editing a completed goal
+      newGoal["status"] = "not-started";
+    } else if (newGoal["savedAmount"] < newGoal["targetAmount"]) {
+      // updating if editing a completed goal
+      newGoal["status"] = "in-progress";
+    }
+
     // editing the goal into localstorage
     editGoal(newGoal, setGoals);
 
@@ -94,11 +110,11 @@ const EditGoalForm = ({ setIsEditing, goal }: props) => {
       <div className="flex flex-col items-center justify-center gap-1">
         {/* title */}
         <h1 className="text-2xl font-semibold text-[var(--text-primary)]">
-          Add New Goal
+          Edit Goal
         </h1>
         {/* subttle */}
         <h2 className="text- text-[var(--text-secondary)]">
-          Set a target and start working toward it.
+          Modify your goal details anytime
         </h2>
       </div>
 
@@ -141,10 +157,14 @@ const EditGoalForm = ({ setIsEditing, goal }: props) => {
             {/* amount label */}
             <div className="flex items-center gap-2">
               <p className="text-lg font-medium">Amount</p>
-              {errors["targetAmount"] && (
+              {(errors["targetAmount"] || errors["belowSaved"]) && (
                 // text to show on error - (if empty)
                 <span className="text-lg text-[var(--danger)]">
-                  {targetAmount == undefined ? "*" : "Invalid"}
+                  {targetAmount == undefined
+                    ? "*"
+                    : errors["belowSaved"] === true
+                      ? "Min = saved amount"
+                      : "Invalid"}
                 </span>
               )}
             </div>
@@ -156,7 +176,7 @@ const EditGoalForm = ({ setIsEditing, goal }: props) => {
               value={targetAmount}
               onChange={(e) => {
                 setErrors((prev) => {
-                  return { ...prev, targetAmount: false };
+                  return { ...prev, targetAmount: false, belowSaved: false };
                 });
                 return setTargetAmount(Number(e.target.value));
               }}

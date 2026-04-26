@@ -51,10 +51,20 @@ export const addContributionToGoal = (
   const newGoals = goals.map((goal) => {
     if (goal["id"] === id) {
       // returning if id found
-      return {
+      const newGoal = {
         ...goal,
         savedAmount: goal["savedAmount"] + contributionAmount,
       };
+
+      if (newGoal["savedAmount"] === newGoal["targetAmount"]) {
+        // if goal has saved amount same as target than it should be completed
+        newGoal["status"] = "completed";
+      } else {
+        // if goal has saved amount less than target than it should be in-progress
+        newGoal["status"] = "in-progress";
+      }
+
+      return newGoal;
     }
 
     // returning if id not found

@@ -166,15 +166,17 @@ const GoalCard = ({
           // options dropdown
           <div className="-bottom absolute right-0 z-10 mt-1 flex w-35 flex-col gap-2 rounded-xl border border-[var(--border-default)] bg-[var(--bg-primary)] p-1 shadow-lg">
             {/* contribute button */}
-            <button
-              onClick={() => {
-                setIsContributing(true);
-                setIsOptionOpen(false);
-              }}
-              className="cursor-pointer rounded-full py-0.5 transition-all duration-150 ease-in-out hover:bg-[var(--accent-soft)] hover:text-[var(--text-inverse)]"
-            >
-              Contribute
-            </button>
+            {goal["status"] !== "completed" && (
+              <button
+                onClick={() => {
+                  setIsContributing(true);
+                  setIsOptionOpen(false);
+                }}
+                className="cursor-pointer rounded-full py-0.5 transition-all duration-150 ease-in-out hover:bg-[var(--accent-soft)] hover:text-[var(--text-inverse)]"
+              >
+                Contribute
+              </button>
+            )}
 
             {/* Edit button */}
             <button
