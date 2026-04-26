@@ -108,3 +108,26 @@ export const editGoal = (
   // updating goals state to update the UI
   setGoals(newGoals);
 };
+
+// function to delete a goal
+export const deleteGoal = (
+  goal: goal | null,
+  setGoals: React.Dispatch<React.SetStateAction<goal[]>>,
+) => {
+  // returning immediately if goals is null
+  if (!goal) return;
+
+  // getting goal from the localstorage
+  const goals = getGoals();
+
+  // returning only if the id is different - goal defferent
+  const newGoals = goals.filter((g) => {
+    return g["id"] !== goal["id"];
+  });
+
+  // storing new Goals into localstorage
+  localStorage.setItem("goals", JSON.stringify(newGoals));
+
+  // updating the UI
+  setGoals(newGoals);
+};

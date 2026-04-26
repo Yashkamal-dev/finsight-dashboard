@@ -8,9 +8,17 @@ type props = {
   goal: goal;
   setIsEditing: React.Dispatch<React.SetStateAction<boolean>>;
   setGoalToEdit: React.Dispatch<React.SetStateAction<goal | null>>;
+  setIsDeleteing: React.Dispatch<React.SetStateAction<boolean>>;
+  setGoalToDelete: React.Dispatch<React.SetStateAction<goal | null>>;
 };
 
-const GoalCard = ({ goal, setGoalToEdit, setIsEditing }: props) => {
+const GoalCard = ({
+  goal,
+  setGoalToEdit,
+  setIsEditing,
+  setIsDeleteing,
+  setGoalToDelete,
+}: props) => {
   // the remaining amount for the goal to be completed
   const remaining = goal["targetAmount"] - goal["savedAmount"];
 
@@ -183,6 +191,8 @@ const GoalCard = ({ goal, setGoalToEdit, setIsEditing }: props) => {
             {/* Delete button */}
             <button
               onClick={() => {
+                setGoalToDelete(goal);
+                setIsDeleteing(true);
                 setIsOptionOpen(false);
               }}
               className="cursor-pointer rounded-full bg-[var(--danger-bg)] py-0.5 text-[var(--danger)] transition-all duration-150 ease-in-out hover:bg-[var(--danger)] hover:text-[var(--danger-bg)]"

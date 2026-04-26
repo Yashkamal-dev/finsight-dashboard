@@ -9,6 +9,8 @@ type props = {
   notStarted: boolean;
   setIsEditing: React.Dispatch<React.SetStateAction<boolean>>;
   setGoalToEdit: React.Dispatch<React.SetStateAction<goal | null>>;
+  setIsDeleteing: React.Dispatch<React.SetStateAction<boolean>>;
+  setGoalToDelete: React.Dispatch<React.SetStateAction<goal | null>>;
 };
 
 const Hero = ({
@@ -18,6 +20,8 @@ const Hero = ({
   notStarted,
   setGoalToEdit,
   setIsEditing,
+  setIsDeleteing,
+  setGoalToDelete,
 }: props) => {
   // getting the data from the context through useGoals custom hook
   const { goals } = useGoals();
@@ -61,6 +65,8 @@ const Hero = ({
                   goal={goal}
                   setIsEditing={setIsEditing}
                   setGoalToEdit={setGoalToEdit}
+                  setIsDeleteing={setIsDeleteing}
+                  setGoalToDelete={setGoalToDelete}
                 />
               );
             })}
@@ -88,6 +94,8 @@ const Hero = ({
                   goal={goal}
                   setIsEditing={setIsEditing}
                   setGoalToEdit={setGoalToEdit}
+                  setIsDeleteing={setIsDeleteing}
+                  setGoalToDelete={setGoalToDelete}
                 />
               );
             })}
@@ -117,6 +125,8 @@ const Hero = ({
                   goal={goal}
                   setIsEditing={setIsEditing}
                   setGoalToEdit={setGoalToEdit}
+                  setIsDeleteing={setIsDeleteing}
+                  setGoalToDelete={setGoalToDelete}
                 />
               );
             })}

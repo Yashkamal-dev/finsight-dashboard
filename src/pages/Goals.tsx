@@ -5,8 +5,14 @@ import Hero from "../components/Goal/Hero";
 import AddGoal from "../components/Goal/Add Goal/AddGoal";
 import EditGoal from "../components/Goal/Edit Goal/EditGoal";
 import type { goal } from "../types/goals";
+import DeleteRecord from "../components/general/DeleteRecord";
+import { deleteGoal } from "../utils/goalUtil";
+import { useGoals } from "../hooks/useGoals";
 
 const Goals = () => {
+  // getting the setgoal to update UI after deleting a goal
+  const { setGoals } = useGoals();
+
   // state to show addGoal modal
   const [isAdding, setIsAdding] = useState<boolean>(false);
 
@@ -15,21 +21,16 @@ const Goals = () => {
   // state to hold goal for editing
   const [goalToEdit, setGoalToEdit] = useState<goal | null>(null);
 
+  // state for rendering the delete modal
+  const [isDeleteing, setIsDeleteing] = useState<boolean>(false);
+  // state that hold the goal to delete
+  const [goalToDelete, setGoalToDelete] = useState<goal | null>(null);
+
   // states for filtering
   const [all, setAll] = useState<boolean>(true); // state for "all" filter
   const [inProgress, setInProgress] = useState<boolean>(false); // state for "in progress" filter
   const [completed, setCompleted] = useState<boolean>(false); // state for "completed" filter
   const [notStarted, setnotStarted] = useState<boolean>(false); // state for "not started" filter
-
-  const goal: goal = {
-    createdAt: new Date("2026-01-01"),
-    deadline: undefined,
-    id: "g3",
-    savedAmount: 30000,
-    status: "in-progress",
-    targetAmount: 100000,
-    title: "Emergency Fund",
-  };
 
   return (
     <div className="px-4">
@@ -60,6 +61,8 @@ const Goals = () => {
         notStarted={notStarted}
         setIsEditing={setIsEditing}
         setGoalToEdit={setGoalToEdit}
+        setIsDeleteing={setIsDeleteing}
+        setGoalToDelete={setGoalToDelete}
       />
 
       {/* conditional rendering for the add Goal component - based on isAdding */}
@@ -67,6 +70,17 @@ const Goals = () => {
 
       {/* conditional rendering for the edit Goal component - based on setIsEditing */}
       {isEditing && <EditGoal setIsEditing={setIsEditing} goal={goalToEdit!} />}
+
+      {/* conditional rendering for the delete Transaction modal */}
+      {isDeleteing && (
+        <DeleteRecord
+          entity="Goal"
+          setIsDeleting={setIsDeleteing}
+          deleteFun={() => {
+            deleteGoal(goalToDelete, setGoals);
+          }}
+        />
+      )}
     </div>
   );
 };
