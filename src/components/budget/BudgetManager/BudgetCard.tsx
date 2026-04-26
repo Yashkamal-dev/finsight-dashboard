@@ -13,6 +13,8 @@ type props = {
   bdgt: budgetType;
   setbdgtToEdit: React.Dispatch<React.SetStateAction<budgetType | null>>;
   setIsEditing: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsDeleteing: React.Dispatch<React.SetStateAction<boolean>>;
+  setbdgtToDelete: React.Dispatch<React.SetStateAction<budgetType | null>>;
 };
 
 const BudgetCard = ({
@@ -23,6 +25,8 @@ const BudgetCard = ({
   bdgt,
   setbdgtToEdit,
   setIsEditing,
+  setIsDeleteing,
+  setbdgtToDelete,
 }: props) => {
   // specifing the value for the pie chart
   const safeSpent = Math.min(limit, spent);
@@ -198,6 +202,8 @@ const BudgetCard = ({
             {/* Delete button */}
             <button
               onClick={() => {
+                setbdgtToDelete(bdgt);
+                setIsDeleteing(true);
                 setIsOptionOpen(false);
               }}
               className="cursor-pointer rounded-full bg-[var(--danger-bg)] py-0.5 text-[var(--danger)] transition-all duration-150 ease-in-out hover:bg-[var(--danger)] hover:text-[var(--danger-bg)]"

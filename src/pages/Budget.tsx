@@ -2,10 +2,11 @@ import { useEffect, useState } from "react";
 import TopBar from "../layouts/TopBar";
 import BudgetManagerCon from "../components/budget/BudgetManager/BudgetManagerCon";
 import type { option } from "../types/optionsType";
-import { getBudget, type budgetType } from "../types/Budget";
+import { deleteBudget, getBudget, type budgetType } from "../types/Budget";
 import BudgetSummaryCon from "../components/budget/BudgetSummary/BudgetSummaryCon";
 import AddBudget from "../components/budget/AddBudget";
 import EditBudget from "../components/budget/Edit budget/EditBudget";
+import DeleteRecord from "../components/general/DeleteRecord";
 
 // options for status
 const statuses: option[] = [
@@ -23,6 +24,11 @@ const Budget = () => {
   const [isEditing, setIsEditing] = useState<boolean>(false);
   // state that holds budget to edit
   const [bdgtToEdit, setbdgtToEdit] = useState<budgetType | null>(null);
+
+  // state for rendering the delete modal
+  const [isDeleteing, setIsDeleteing] = useState<boolean>(false);
+  // state that hold the bdgt to delete
+  const [bdgtToDelete, setbdgtToDelete] = useState<budgetType | null>(null);
 
   // selected date
   const [selectedDate, setSelectedDate] = useState<Date>(new Date());
@@ -60,6 +66,8 @@ const Budget = () => {
           setIsAdding={setIsAdding}
           setbdgtToEdit={setbdgtToEdit}
           setIsEditing={setIsEditing}
+          setIsDeleteing={setIsDeleteing}
+          setbdgtToDelete={setbdgtToDelete}
         />
 
         {/* budget summary component - container of monthly budget */}
@@ -76,6 +84,17 @@ const Budget = () => {
             budget={bdgtToEdit!}
             setIsEditing={setIsEditing}
             setAllBudget={setAllBudget}
+          />
+        )}
+
+        {/* conditional rendering for the delete Transaction modal */}
+        {isDeleteing && (
+          <DeleteRecord
+            entity="Budget"
+            setIsDeleting={setIsDeleteing}
+            deleteFun={() => {
+              deleteBudget(bdgtToDelete, setAllBudget);
+            }}
           />
         )}
       </div>

@@ -15,6 +15,8 @@ type props = {
   selectedOption: option;
   setbdgtToEdit: React.Dispatch<React.SetStateAction<budgetType | null>>;
   setIsEditing: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsDeleteing: React.Dispatch<React.SetStateAction<boolean>>;
+  setbdgtToDelete: React.Dispatch<React.SetStateAction<budgetType | null>>;
 };
 
 const BudgetManagerCon = ({
@@ -28,6 +30,8 @@ const BudgetManagerCon = ({
   selectedOption,
   setbdgtToEdit,
   setIsEditing,
+  setIsDeleteing,
+  setbdgtToDelete,
 }: props) => {
   return (
     <div className="flex-[2_1_1000px] flex-col gap-2">
@@ -47,6 +51,8 @@ const BudgetManagerCon = ({
         selectedOption={selectedOption}
         setbdgtToEdit={setbdgtToEdit}
         setIsEditing={setIsEditing}
+        setIsDeleteing={setIsDeleteing}
+        setbdgtToDelete={setbdgtToDelete}
       />
     </div>
   );

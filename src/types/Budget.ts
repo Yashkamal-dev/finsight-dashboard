@@ -58,3 +58,37 @@ export const getBudget = (Date: Date): budgetType[] => {
 
   return selectedMonthBudget;
 };
+
+// function to delete a given budget
+export const deleteBudget = (
+  budget: budgetType | null,
+  setAllBudget: React.Dispatch<React.SetStateAction<budgetType[]>>,
+) => {
+  // if the budget is null, returning immediately
+  if (!budget) return;
+
+  // destructuring required keys
+  const { id, month } = budget;
+
+  // getting the whole budget array
+  const allBudgets = JSON.parse(localStorage.getItem("budgets") || "{}");
+  console.log(allBudgets);
+
+  // getting the data of budget for selected month
+  const selectedMonthBudget: budgetType[] =
+    allBudgets[monthStringGen(new Date(month))];
+
+  // getting all the budget accept the provided budget to delete
+  const newSelectedMonthBudget = selectedMonthBudget.filter((bdgt) => {
+    return bdgt["id"] !== id;
+  });
+
+  // initializing all array with the deleted array
+  allBudgets[monthStringGen(new Date(month))] = newSelectedMonthBudget;
+
+  // storing the data into localstorage
+  localStorage.setItem("budgets", JSON.stringify(allBudgets));
+
+  // setting all budget for UI updating
+  setAllBudget(getBudget(new Date(month)));
+};

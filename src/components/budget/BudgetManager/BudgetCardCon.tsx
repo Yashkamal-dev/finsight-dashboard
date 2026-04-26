@@ -8,6 +8,8 @@ type props = {
   selectedOption: option;
   setbdgtToEdit: React.Dispatch<React.SetStateAction<budgetType | null>>;
   setIsEditing: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsDeleteing: React.Dispatch<React.SetStateAction<boolean>>;
+  setbdgtToDelete: React.Dispatch<React.SetStateAction<budgetType | null>>;
 };
 
 const BudgetCardCon = ({
@@ -15,6 +17,8 @@ const BudgetCardCon = ({
   selectedOption,
   setbdgtToEdit,
   setIsEditing,
+  setIsDeleteing,
+  setbdgtToDelete,
 }: props) => {
   // sorted allBudget based on status percentage
   let budget = allBudget.sort((a, b) => {
@@ -49,6 +53,8 @@ const BudgetCardCon = ({
             bdgt={bdgt}
             setbdgtToEdit={setbdgtToEdit}
             setIsEditing={setIsEditing}
+            setIsDeleteing={setIsDeleteing}
+            setbdgtToDelete={setbdgtToDelete}
           />
         );
       })}
