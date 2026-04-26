@@ -46,6 +46,7 @@ const GoalCard = ({
       ) {
         // closing the contribution
         setIsContributing(false);
+        setIsOptionOpen(false);
       }
     };
 
@@ -53,11 +54,12 @@ const GoalCard = ({
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
         setIsContributing(false);
+        setIsOptionOpen(false);
       }
     };
 
     // attaching event listeners
-    if (isContributing) {
+    if (isContributing || isOptionOpen) {
       // attaching event to close on outside click
       document.addEventListener("mousedown", handleClickOutside);
 
@@ -70,7 +72,7 @@ const GoalCard = ({
       document.removeEventListener("mousedown", handleClickOutside);
       document.removeEventListener("keydown", handleKeyDown);
     };
-  }, [isContributing]);
+  }, [isContributing, isOptionOpen]);
 
   return (
     <div
