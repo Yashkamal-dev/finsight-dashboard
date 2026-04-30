@@ -7,7 +7,7 @@ type props = {
 
 const ChartRecentTransactionCon = ({ selected }: props) => {
   return (
-    <div className="">
+    <div className="flex flex-col gap-4">
       <BarChartCard selected={selected} />
       <RecentTransaction />
     </div>

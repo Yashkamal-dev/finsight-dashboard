@@ -7,7 +7,7 @@ type props = {
 
 const Hero = ({ selected }: props) => {
   return (
-    <div className="">
+    <div className="py-4">
       <ChartRecentTransactionCon selected={selected} />
     </div>
   );
