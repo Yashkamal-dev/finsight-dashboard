@@ -1,3 +1,4 @@
+import BudgetGraphCon from "../components/Analytics/BudgetGraphCon";
 import SummaryCon from "../components/Analytics/summaryCon";
 import TopBar from "../layouts/TopBar";
 
@@ -12,6 +13,11 @@ const Analytics = () => {
 
       {/* summary container */}
       <SummaryCon />
+
+      <div>
+        {/* budget graph container */}
+        <BudgetGraphCon />
+      </div>
     </div>
   );
 };
