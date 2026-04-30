@@ -1,4 +1,5 @@
 import BudgetGraphCon from "../components/Analytics/BudgetGraphCon";
+import PieChartCon from "../components/Analytics/PieChartCon";
 import SummaryCon from "../components/Analytics/summaryCon";
 import TopBar from "../layouts/TopBar";
 
@@ -14,9 +15,12 @@ const Analytics = () => {
       {/* summary container */}
       <SummaryCon />
 
-      <div>
+      <div className="flex gap-4 py-4 flex-wrap" >
         {/* budget graph container */}
         <BudgetGraphCon />
+
+        {/* pie chart of the transaction */}
+        <PieChartCon /> 
       </div>
     </div>
   );

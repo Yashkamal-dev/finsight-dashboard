@@ -24,8 +24,8 @@ const BudgetGraph = () => {
   });
 
   return (
-    <div  className={`h-96 w-full`}>
-      <ResponsiveContainer width="100%" height="100%" >
+    <div className={`h-140 w-full`}>
+      <ResponsiveContainer width="100%" height="100%">
         <BarChart data={chartData}>
           <CartesianGrid strokeDasharray="3 3" />
 
@@ -49,7 +49,7 @@ const BudgetGraph = () => {
 // graph container
 const BudgetGraphCon = () => {
   return (
-    <div className="flex flex-col gap-4 rounded-4xl border border-[var(--border-default)] p-4">
+    <div className="flex flex-[1_1_700px] flex-col gap-4 rounded-4xl border border-[var(--border-default)] p-4">
       {/* title of the graph */}
       <header className="text-2xl font-semibold">
         <h1>Total Budget Overview</h1>
