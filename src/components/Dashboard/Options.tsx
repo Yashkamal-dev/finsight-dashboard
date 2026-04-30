@@ -26,7 +26,7 @@ const Options = ({ selected, setSelected, setIsAdding }: props) => {
           onClick={() => {
             setSelected("week");
           }}
-          className={`cursor-pointer rounded-full border border-[var(--border-default)] p-2 px-4 capitalize ${selected === "week" ? "bg-[var(--accent-primary)] text-[var(--text-inverse)]" : "hover:bg-[var(--accent-subtle)]"} `}
+          className={`cursor-pointer rounded-full border border-[var(--border-default)] p-2 px-4  capitalize ${selected === "week" ? "bg-[var(--accent-primary)] text-[var(--text-inverse)]" : "hover:bg-[var(--accent-subtle)]"} `}
         >
           past 7 days
         </button>
@@ -38,7 +38,7 @@ const Options = ({ selected, setSelected, setIsAdding }: props) => {
           onClick={() => {
             setIsAdding(true);
           }}
-          className={`cursor-pointer rounded-full border border-[var(--border-default)] bg-[var(--accent-primary)] p-2 px-4 text-[var(--text-inverse)] capitalize`}
+          className={`cursor-pointer  rounded-full border border-[var(--border-default)] bg-[var(--accent-primary)] p-2 px-4 text-[var(--text-inverse)] capitalize`}
         >
           + add transaction
         </button>

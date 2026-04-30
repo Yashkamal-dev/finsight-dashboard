@@ -61,7 +61,7 @@ const TransactionList = ({
       </p>
       <div className="">
         {/* table header */}
-        <div className="grid grid-cols-[1fr_1fr_3fr_1fr_2fr_1fr_0.5fr] gap-4 rounded-full bg-[#ebe8ff] px-4 py-3 text-[var(--accent-text)]">
+        <div className="grid grid-cols-[1fr_1fr_3fr_1fr_2fr_1fr_0.5fr] gap-4 rounded-full bg-[var(--accent-subtle)] px-4 py-3 text-[var(--accent-text)]">
           <h3 className="uppercase">Date</h3>
           <h3 className="uppercase">amount</h3>
           <h3 className="uppercase">payment name</h3>

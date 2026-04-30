@@ -206,7 +206,7 @@ const AddTransactonForm = ({ setIsAdding }: prop) => {
                     onClick={() => {
                       setType(typ);
                     }}
-                    className={`cursor-pointer rounded-full text-lg shadow-lg ${type === typ ? "bg-[var(--accent-primary)] text-[var(--text-inverse)]" : "hover:bg-[var(--accent-subtle)]"} border border-[var(--border-default)] px-3.5 py-1`}
+                    className={`cursor-pointer rounded-full text-lg shadow-lg ${type === typ ? "bg-[var(--accent-primary)] text-[var(--text-primary)]" : "hover:bg-[var(--accent-subtle)]"} border border-[var(--border-default)] px-3.5 py-1`}
                   >
                     {typ}
                   </button>
@@ -356,7 +356,7 @@ const AddTransactonForm = ({ setIsAdding }: prop) => {
               onClick={() => {
                 setDate(new Date());
               }}
-              className={`grow cursor-pointer rounded-full ${isToday ? "bg-[var(--accent-primary)] text-[var(--text-inverse)]" : "hover:bg-[var(--accent-subtle)]"} border border-[var(--border-default)] px-5 py-1 text-lg shadow-lg`}
+              className={`grow cursor-pointer rounded-full ${isToday ? "bg-[var(--accent-primary)] text-[var(--text-priamry)]" : "hover:bg-[var(--accent-subtle)]"} border border-[var(--border-default)] px-5 py-1 text-lg shadow-lg`}
             >
               Today
             </button>
@@ -366,7 +366,7 @@ const AddTransactonForm = ({ setIsAdding }: prop) => {
               onClick={() => {
                 setDate(yesterdayDate);
               }}
-              className={`grow ${isYesterday ? "bg-[var(--accent-primary)] text-[var(--text-inverse)]" : "hover:bg-[var(--accent-subtle)]"} cursor-pointer rounded-full border border-[var(--border-default)] px-5 py-1 text-lg shadow-lg`}
+              className={`grow ${isYesterday ? "bg-[var(--accent-primary)] text-[var(--text-priamry)]" : "hover:bg-[var(--accent-subtle)]"} cursor-pointer rounded-full border border-[var(--border-default)] px-5 py-1 text-lg shadow-lg`}
             >
               Yerterday
             </button>
@@ -378,7 +378,7 @@ const AddTransactonForm = ({ setIsAdding }: prop) => {
               <PopoverTrigger asChild>
                 {/* custom date button */}
                 <button
-                  className={`grow cursor-pointer ${isCustom ? "bg-[var(--accent-primary)] text-[var(--text-inverse)]" : "hover:bg-[var(--accent-subtle)]"} rounded-full border border-[var(--border-default)] px-5 py-1 text-lg shadow-lg`}
+                  className={`grow cursor-pointer ${isCustom ? "bg-[var(--accent-primary)] text-[var(--text-priamry)]" : "hover:bg-[var(--accent-subtle)]"} rounded-full border border-[var(--border-default)] px-5 py-1 text-lg shadow-lg`}
                 >
                   {isCustom
                     ? `${date?.toLocaleDateString("en-CA")}`
@@ -416,7 +416,7 @@ const AddTransactonForm = ({ setIsAdding }: prop) => {
           {/* save button */}
           <button
             onClick={saveTransaction}
-            className="grow cursor-pointer rounded-full border border-[var(--border-default)] bg-[var(--accent-primary)] py-2.5 text-[var(--text-inverse)] shadow-xl"
+            className="grow cursor-pointer rounded-full border border-[var(--border-default)] bg-[var(--accent-primary)] py-2.5 text-[var(--text-priamry)] shadow-xl"
           >
             Save
           </button>

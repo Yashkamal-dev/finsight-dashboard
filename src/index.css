@@ -24,7 +24,7 @@
   --accent-primary: #8470ff; /* active sidebar item, primary buttons */
   --accent-primary-hover: #b0a5fc; /* button hover */
   --accent-soft: #bfb7ff; /* progress bar fill, subtle highlights */
-  --accent-subtle: #f5f4ff; /* accent background tint */
+  --accent-subtle: #ebeafe; /* accent background tint */
   --accent-progress: #ece9fe;
 
   /* ── Border & Divider ── */
@@ -93,10 +93,11 @@
   --text-primary: #ffffff; /* headings, important numbers */
   --text-secondary: #a1a1a9; /* subtitles, labels, table headers */
   --text-muted: #56565e; /* placeholders, disabled text, hints */
-  --text-inverse: #111113; /* text on light backgrounds */
+  --text-inverse: #ffffff; /* text on light backgrounds */
 
   /* ── Brand / Accent ── */
-  --accent-primary: #8470ff; /* stays the same in dark mode */
+  --accent-text: #9d8ff8;
+  --accent-primary: #553cfc; /* stays the same in dark mode */
   --accent-primary-hover: #7664e4;
   --accent-soft: #5347a1; /* muted in dark mode */
   --accent-subtle: #222226; /* accent background tint */
@@ -106,10 +107,11 @@
   --border-subtle: #222226; /* table row dividers */
 
   /* ── Status Colors ── */
-  --success: #e5fae6; /* lighter for dark bg readability */
+  --success: #2da733; /* lighter for dark bg readability */
   --success-bg: #1a2e1b;
-  --danger: #ffebeb;
+  --danger: rgb(253, 123, 123);
   --danger-bg: #2e1a1a;
+  --danger-bg-secondary: #1a0808;
   --warning: #f9970c;
   --warning-bg: #2e2410;
 

@@ -104,8 +104,8 @@ const BudgetCard = ({
               cornerRadius={10}
             >
               {/* filling up sells with their color */}
-              <Cell fill="#8470ff" />
-              <Cell fill="#EFECFF" />
+              <Cell fill="var(--accent-primary)" />
+              <Cell fill="var(--accent-subtle)" />
               <Tooltip
                 cursor={false}
                 content={<CustomTooltip />}

@@ -56,8 +56,8 @@ const TransactionPieChart = () => {
             cornerRadius={10}
           >
             {/* filling up sells with their color */}
-            <Cell fill="#412ebe" />
-            <Cell fill="#8470ff" />
+            <Cell fill="var(--accent-primary)" />
+            <Cell fill="var(--accent-soft)" />
             <Cell fill="#b0a5fc" />
             <Tooltip />
           </Pie>
