@@ -4,6 +4,7 @@ import Dashboard from "./pages/Dashboard";
 import Transactions from "./pages/Transactions";
 import Budget from "./pages/Budget";
 import Goals from "./pages/Goals";
+import Analytics from "./pages/Analytics";
 
 const App = () => {
   return (
@@ -23,6 +24,9 @@ const App = () => {
 
         {/* goals route */}
         <Route path="/goals" element={<Goals />} />
+
+        {/* analytics route */}
+        <Route path="/analytics" element={<Analytics />} />
       </Routes>
     </div>
   );
