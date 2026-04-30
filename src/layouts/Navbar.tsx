@@ -1,9 +1,21 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import logo from "../assets/logo.avif";
 import { NavLink } from "react-router-dom";
+import { Moon, Sun } from "lucide-react";
 
 const Navbar = () => {
   const [collapsed, setcollapsed] = useState<boolean>(false);
+
+  // state for the theme
+  const [isDark, setIsDark] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (isDark) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+  }, [isDark]);
 
   const collapseFun = () => {
     setcollapsed((prev) => !prev);
@@ -238,6 +250,24 @@ const Navbar = () => {
           </NavLink>
         </li>
       </ul>
+
+      {/* theme toggle button */}
+      <div
+        className={`absolute bottom-10 ${collapsed === false && "pl-6"} flex w-full justify-center ${collapsed === false ? "justify-start" : ""} `}
+      >
+        <button
+          onClick={() => {
+            setIsDark(!isDark);
+          }}
+          className={`: ""} cursor-pointer rounded-full bg-[var(--accent-primary)] p-3`}
+        >
+          {isDark === true ? (
+            <Sun color="white" size={30} strokeWidth={2.5} />
+          ) : (
+            <Moon color="white" size={30} strokeWidth={2.5} />
+          )}
+        </button>
+      </div>
     </aside>
   );
 };

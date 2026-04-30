@@ -118,7 +118,7 @@ const Transactions = () => {
   };
 
   return (
-    <div className="px-4">
+    <div className="px-4 transition-all duration-500 ease-in-out">
       {/* topbar of the page */}
       <TopBar
         pageTitle="Transactions"

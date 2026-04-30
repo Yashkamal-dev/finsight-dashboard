@@ -13,7 +13,7 @@ const Dashboard = () => {
   const [isAdding, setIsAdding] = useState<boolean>(false);
 
   return (
-    <div className="px-4">
+    <div className="px-4 transition-all duration-500 ease-in-out ">
       <TopBar
         pageTitle="Welcome back, Luke!"
         message="You're doing great—keep your finances on track."

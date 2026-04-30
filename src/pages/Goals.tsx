@@ -33,7 +33,7 @@ const Goals = () => {
   const [notStarted, setnotStarted] = useState<boolean>(false); // state for "not started" filter
 
   return (
-    <div className="px-4">
+    <div className="px-4 transition-all duration-500 ease-in-out">
       {/* topbar for the goals page */}
       <TopBar
         pageTitle="Goals"

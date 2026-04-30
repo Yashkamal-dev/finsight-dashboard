@@ -1,11 +1,11 @@
 import BudgetGraphCon from "../components/Analytics/BudgetGraphCon";
 import PieChartCon from "../components/Analytics/PieChartCon";
-import SummaryCon from "../components/Analytics/summaryCon";
+import SummaryCon from "../components/Analytics/SummaryCon";
 import TopBar from "../layouts/TopBar";
 
 const Analytics = () => {
   return (
-    <div className="px-4">
+    <div className="px-4 transition-all duration-500 ease-in-out">
       {/* topbar of th analytics page */}
       <TopBar
         pageTitle="Analytics"
@@ -15,12 +15,12 @@ const Analytics = () => {
       {/* summary container */}
       <SummaryCon />
 
-      <div className="flex gap-4 py-4 flex-wrap" >
+      <div className="flex flex-wrap gap-4 py-4">
         {/* budget graph container */}
         <BudgetGraphCon />
 
         {/* pie chart of the transaction */}
-        <PieChartCon /> 
+        <PieChartCon />
       </div>
     </div>
   );
