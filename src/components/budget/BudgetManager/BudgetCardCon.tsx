@@ -42,6 +42,25 @@ const BudgetCardCon = ({
 
   return (
     <div className="grid grid-cols-[repeat(auto-fit,minmax(440px,1fr))] gap-6 py-5">
+      {/* if no budget found */}
+      {allBudget.length === 0 ? (
+        // if no records for the selected month
+        <div className="flex flex-col items-center py-10">
+          {/* main text if no records found for selected month */}
+          <p className="text-lg text-[var(--text-primary)]">
+            No budgets for this month
+          </p>
+
+          {/* sub text if no records found for selected month */}
+          <p className="text-base text-[var(--text-muted)]">
+            Start by creating a budget to track your spending and stay on top of
+            your finances
+          </p>
+        </div>
+      ) : (
+        false
+      )}
+
       {budget.map((bdgt) => {
         return (
           <BudgetCard
