@@ -1,17 +1,17 @@
-type props ={
-  pageTitle : string
-  message : string
-}
+type props = {
+  pageTitle: string;
+  message: string;
+};
 
-const TopBar = ({ pageTitle, message } : props ) => {
+const TopBar = ({ pageTitle, message }: props) => {
   return (
-    <header className="flex h-max w-full py-4 items-center justify-between ">
+    <header className="flex h-max w-full items-center justify-between py-4">
       {/* heading and message */}
       <div className="flex flex-col gap-2">
-        <h1 className="text-3xl font-semibold text-[var(--text-primary)]">
+        <h1 className="text-2xl font-semibold text-[var(--text-primary)] md:text-3xl">
           {pageTitle}
         </h1>
-        <p className="text-lg text-[var(--text-secondary)]">
+        <p className="text-base text-[var(--text-secondary)] md:text-lg">
           {message}
         </p>
       </div>
@@ -19,7 +19,7 @@ const TopBar = ({ pageTitle, message } : props ) => {
       {/* search, notify and profile */}
       <div className="flex gap-4">
         {/* search icon */}
-        <button className="h-12 w-12 cursor-pointer rounded-full border border-[var(--border-default)] p-2">
+        <button className="hidden h-12 w-12 cursor-pointer rounded-full border border-[var(--border-default)] p-2 md:block">
           <svg
             className="fill-[var(--text-primary)]"
             xmlns="http://www.w3.org/2000/svg"
@@ -33,7 +33,7 @@ const TopBar = ({ pageTitle, message } : props ) => {
         </button>
 
         {/* noify icon */}
-        <button className="h-12 w-12 cursor-pointer rounded-full border border-[var(--border-default)] p-2">
+        <button className="hidden h-12 w-12 cursor-pointer rounded-full border border-[var(--border-default)] p-2 md:block">
           <svg
             className="fill-[var(--text-primary)]"
             xmlns="http://www.w3.org/2000/svg"
@@ -57,7 +57,7 @@ const TopBar = ({ pageTitle, message } : props ) => {
             <p className="text-sm font-medium text-[var(--text-primary)]">
               Luke Robinson
             </p>
-            <span className="text-xs text-[var(--text-primary)] text-[var(--text-secondary)]">
+            <span className="text-xs hidden md:block text-[var(--text-primary)] text-[var(--text-secondary)]">
               luke@gmail.com
             </span>
           </div>
