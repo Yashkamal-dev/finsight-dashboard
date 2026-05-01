@@ -8,7 +8,7 @@ type props = {
 
 const EditTransaction = ({ prevTxn, setIsEditing }: props) => {
   return (
-    <div className="fixed inset-0 flex items-center justify-center">
+    <div className="fixed z-20 inset-0 flex items-center justify-center">
       {/* Backdrop layer */}
       <div
         onClick={() => {

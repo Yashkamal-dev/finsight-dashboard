@@ -6,7 +6,7 @@ type props = {
 
 const DeleteRecord = ({ entity, setIsDeleting, deleteFun }: props) => {
   return (
-    <div className="fixed inset-0 flex items-center justify-center">
+    <div className="fixed inset-0 z-20 flex items-center justify-center">
       {/* backdrop layer */}
       <div
         onClick={() => {
