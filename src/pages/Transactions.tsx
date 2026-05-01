@@ -105,18 +105,6 @@ const Transactions = () => {
     monthStringGen(selectedDate),
   );
 
-  const txn: transactionInterface = {
-    amount: 450,
-    category: "food",
-    createdAt: "2026-04-03T11:30:00.000Z",
-    date: "2026-04-03",
-    id: "txn_a006",
-    note: "Monthly groceries",
-    paymentMethod: "upi",
-    title: "Grocery Shopping — D-Mart",
-    type: "Expense",
-  };
-
   return (
     <div className="px-4 transition-all duration-500 ease-in-out">
       {/* topbar of the page */}

@@ -92,7 +92,7 @@ const SummaryCon = () => {
   // no of income transaction
   const incomeTxnCount = CurrentMonthTransactions.filter((txn) => {
     return txn["type"] === "Income" ? txn : false;
-  }).reduce((noOfIncome, txn) => {
+  }).reduce((noOfIncome) => {
     return noOfIncome + 1;
   }, 0);
 
@@ -106,7 +106,7 @@ const SummaryCon = () => {
   // no of expense transaction
   const expenseTxnCount = CurrentMonthTransactions.filter((txn) => {
     return txn["type"] === "Expense" ? txn : false;
-  }).reduce((noOfExpense, txn) => {
+  }).reduce((noOfExpense) => {
     return noOfExpense + 1;
   }, 0);
 
@@ -118,7 +118,7 @@ const SummaryCon = () => {
   }, 0);
 
   // no of total transaction
-  const allTxnCount = CurrentMonthTransactions.reduce((noOfexpense, txn) => {
+  const allTxnCount = CurrentMonthTransactions.reduce((noOfexpense) => {
     return noOfexpense + 1;
   }, 0);
 

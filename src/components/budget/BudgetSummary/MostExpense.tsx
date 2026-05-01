@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { getBudget, type budgetType } from "../../../types/Budget";
 
 type props = {

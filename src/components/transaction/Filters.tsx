@@ -1,4 +1,3 @@
-import { useState } from "react";
 import Dropdown from "../general/Dropdown";
 import type { option } from "../../types/optionsType";
 

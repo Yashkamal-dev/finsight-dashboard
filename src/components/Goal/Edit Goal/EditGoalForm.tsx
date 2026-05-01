@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Popover, PopoverContent, PopoverTrigger } from "../../ui/popover";
 import { CalendarDays } from "lucide-react";
 import { Calendar } from "../../ui/calendar";
-import { addGoal, editGoal, formatDate } from "../../../utils/goalUtil";
+import { editGoal, formatDate } from "../../../utils/goalUtil";
 import type { goal } from "../../../types/goals";
 import { useGoals } from "../../../hooks/useGoals";
 

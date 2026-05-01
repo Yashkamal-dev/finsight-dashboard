@@ -1,5 +1,3 @@
-import React from "react";
-
 type props ={
   pageTitle : string
   message : string

@@ -1,4 +1,3 @@
-import React from "react";
 import ChartRecentTransactionCon from "./HeroContainer/ChartRecentTransactionCon";
 
 type props = {

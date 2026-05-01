@@ -19,14 +19,6 @@ type result = {
   Expense: number;
 };
 
-// function to get the month length of month
-const getDayInMonth = (date: Date) => {
-  const year = date.getFullYear();
-  const month = date.getMonth();
-
-  return new Date(year, month + 1, 0).getDate();
-};
-
 // the bar chart of dashbaord component
 const BarChartCard = ({ selected }: props) => {
   // getting data from transaction context

@@ -2,7 +2,6 @@ import { Cell, Pie, PieChart, Tooltip } from "recharts";
 import { CustomTooltip } from "../../ToolTip/CustomTooltip";
 import { useEffect, useRef, useState } from "react";
 import { Ellipsis, X } from "lucide-react";
-import EditBudget from "../Edit budget/EditBudget";
 import type { budgetType } from "../../../types/Budget";
 
 type props = {

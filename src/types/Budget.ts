@@ -1,4 +1,3 @@
-import { dateMatchModifiers } from "react-day-picker";
 import { getData, monthStringGen } from "../utils/transactionContextUtils";
 import type { transactionInterface } from "./transaction";
 

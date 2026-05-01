@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 type props = {
   selected: "month" | "week";
   setSelected: React.Dispatch<React.SetStateAction<"month" | "week">>;
