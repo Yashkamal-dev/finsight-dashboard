@@ -8,26 +8,28 @@ import Analytics from "./pages/Analytics";
 
 const App = () => {
   return (
-    <div className="grid auto-cols-[auto_1fr] grid-flow-col">
+    <div className="flex flex-col md:grid md:auto-cols-[auto_1fr] md:grid-flow-col">
       <Navbar />
 
-      {/* routing here */}
-      <Routes>
-        {/* dashboard route */}
-        <Route path="/" element={<Dashboard />} />
+      <main className="flex-1 overflow-y-auto pb-20 md:pb-0">
+        {/* routing here */}
+        <Routes>
+          {/* dashboard route */}
+          <Route path="/" element={<Dashboard />} />
 
-        {/* transaction route */}
-        <Route path="/transactions" element={<Transactions />} />
+          {/* transaction route */}
+          <Route path="/transactions" element={<Transactions />} />
 
-        {/* budget route */}
-        <Route path="/budget" element={<Budget />} />
+          {/* budget route */}
+          <Route path="/budget" element={<Budget />} />
 
-        {/* goals route */}
-        <Route path="/goals" element={<Goals />} />
+          {/* goals route */}
+          <Route path="/goals" element={<Goals />} />
 
-        {/* analytics route */}
-        <Route path="/analytics" element={<Analytics />} />
-      </Routes>
+          {/* analytics route */}
+          <Route path="/analytics" element={<Analytics />} />
+        </Routes>
+      </main>
     </div>
   );
 };
