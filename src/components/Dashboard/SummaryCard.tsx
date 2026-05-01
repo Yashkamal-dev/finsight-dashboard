@@ -16,10 +16,12 @@ const SummaryCard = ({
     <div className="inline-flex w-full flex-col gap-4 rounded-4xl border border-[var(--border-default)] p-2 pb-4 pl-4">
       {/* heading link */}
       <div className="flex justify-between">
-        <h3 className="pt-1 text-2xl font-semibold capitalize">{title}</h3>
+        <h3 className="pt-1 text-xl font-semibold capitalize md:text-2xl">
+          {title}
+        </h3>
         <Link
           to={"/transactions"}
-          className="cursor-pointer rounded-full border border-[var(--border-default)] p-2"
+          className="h-min cursor-pointer rounded-full border border-[var(--border-default)] p-1 md:p-2"
         >
           <svg
             className="fill-[var(--text-primary)]"
@@ -36,17 +38,17 @@ const SummaryCard = ({
 
       {/* amount message */}
       <div className="flex flex-col gap-6">
-        <p className="text-4xl font-bold">
+        <p className="text-[28px] font-bold md:text-4xl">
           {amount.toLocaleString("en-IN")}
           <span className="text-[var(--text-muted)]">.00</span>
         </p>
-        <p className="text-[var(--text-secondary)]">
+        <p className="text-sm text-[var(--text-secondary)] md:text-base">
           <span
             className={`rounded-full px-1.5 ${percentageChange > 0 ? (title === "Expense" ? "bg-[var(--danger-bg)] text-[var(--danger)]" : "bg-[var(--success-bg)] text-[var(--success)]") : title === "Expense" ? "bg-[var(--success-bg)] text-[var(--success)]" : "bg-[var(--danger-bg)] text-[var(--danger)]"} `}
           >
             {percentageChange > 0 ? "↑ " : "↓ "}
             {Math.abs(percentageChange)}%
-          </span>
+          </span>{" "}
           vs last month
         </p>
       </div>
@@ -125,8 +127,8 @@ const SummaryContainer = () => {
   };
 
   return (
-    <div className="grid w-full grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-4">
-      <div className="grid grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-4">
+    <div className="grid w-full grid-cols-[repeat(auto-fit,minmax(170px,1fr))] gap-4 md:grid-cols-[repeat(auto-fit,minmax(250px,1fr))]">
+      <div className="grid grid-cols-[repeat(auto-fit,minmax(170px,1fr))] gap-4 md:grid-cols-[repeat(auto-fit,minmax(250px,1fr))]">
         {/* card for the total balance */}
         <SummaryCard
           title="Total Balanace"
@@ -148,7 +150,7 @@ const SummaryContainer = () => {
         />
       </div>
 
-      <div className="grid grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-4">
+      <div className="grid grid-cols-[repeat(auto-fit,minmax(170px,1fr))] gap-4 md:grid-cols-[repeat(auto-fit,minmax(250px,1fr))]">
         {/* card for the expense */}
         <SummaryCard
           title="Expense"
