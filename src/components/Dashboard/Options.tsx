@@ -8,13 +8,13 @@ const Options = ({ selected, setSelected, setIsAdding }: props) => {
   return (
     <div className="flex justify-between py-5">
       {/* filter option */}
-      <div className="flex gap-3">
+      <div className="flex flex-wrap gap-4">
         {/* this month button */}
         <button
           onClick={() => {
             setSelected("month");
           }}
-          className={`cursor-pointer rounded-full border border-[var(--border-default)] p-2 px-4 capitalize ${selected === "month" ? "bg-[var(--accent-primary)] text-[var(--text-inverse)]" : "hover:bg-[var(--accent-subtle)]"} `}
+          className={`cursor-pointer rounded-full border border-[var(--border-default)] p-2 px-5 text-sm capitalize md:p-2 md:px-4 md:text-base ${selected === "month" ? "bg-[var(--accent-primary)] text-[var(--text-inverse)]" : "hover:bg-[var(--accent-subtle)]"} `}
         >
           this month
         </button>
@@ -24,19 +24,19 @@ const Options = ({ selected, setSelected, setIsAdding }: props) => {
           onClick={() => {
             setSelected("week");
           }}
-          className={`cursor-pointer rounded-full border border-[var(--border-default)] p-2 px-4  capitalize ${selected === "week" ? "bg-[var(--accent-primary)] text-[var(--text-inverse)]" : "hover:bg-[var(--accent-subtle)]"} `}
+          className={`cursor-pointer rounded-full border border-[var(--border-default)] p-2 px-5 text-sm capitalize md:p-2 md:px-4 md:text-base ${selected === "week" ? "bg-[var(--accent-primary)] text-[var(--text-inverse)]" : "hover:bg-[var(--accent-subtle)]"} `}
         >
           past 7 days
         </button>
       </div>
 
       {/* add */}
-      <div>
+      <div className="self-center">
         <button
           onClick={() => {
             setIsAdding(true);
           }}
-          className={`cursor-pointer  rounded-full border border-[var(--border-default)] bg-[var(--accent-primary)] p-2 px-4 text-[var(--text-inverse)] capitalize`}
+          className={`cursor-pointer rounded-full border border-[var(--border-default)] bg-[var(--accent-primary)] p-1 text-sm text-[var(--text-inverse)] capitalize md:p-2 md:px-4 md:text-base`}
         >
           + add transaction
         </button>
