@@ -87,20 +87,25 @@ const BarChartCard = ({ selected }: props) => {
   return (
     <div className="h-100 w-full rounded-4xl border border-[var(--border-default)]">
       <div className="flex items-center justify-between p-5">
-        <h2 className="text-2xl font-semibold">Money Flow</h2>
+        <h2 className="text-lg font-semibold md:text-2xl">Money Flow</h2>
         <div className="flex gap-2.5">
           <div className="flex items-center gap-1">
-            <div className="h-4 w-4 rounded-full bg-[var(--accent-primary)]"></div>
-            <span>Income</span>
+            <div className="h-3 w-3 rounded-full bg-[var(--accent-primary)]"></div>
+            <span className="text-sm md:text-base">Income</span>
           </div>
           <div className="flex items-center gap-1">
-            <div className="h-4 w-4 rounded-full bg-[var(--accent-primary-hover)]"></div>
-            <span>Exxpense</span>
+            <div className="h-3 w-3 rounded-full bg-[var(--accent-primary-hover)]"></div>
+            <span className="text-sm md:text-base">Expense</span>
           </div>
         </div>
       </div>
       <ResponsiveContainer height="80%" width="100%">
-        <BarChart data={result} barCategoryGap="10%" barGap={5}>
+        <BarChart
+          className="text-xs md:text-base"
+          data={result}
+          barCategoryGap="10%"
+          barGap={5}
+        >
           <XAxis dataKey="label" tickMargin={10} />
           <YAxis />
           <Bar
