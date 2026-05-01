@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { useTransaction } from "../../../hooks/useTransaction";
 import { sortTransactions } from "../../../utils/sortTransactionUtil";
 
@@ -19,9 +20,12 @@ const RecentTransaction = () => {
           Recent Transactions
         </h1>
         <div>
-          <button className="cursor-pointer rounded-full border border-[var(--border-default)] px-3">
+          <Link
+            to={"/transactions"}
+            className="cursor-pointer rounded-full border border-[var(--border-default)] px-3 py-1"
+          >
             see all ›
-          </button>
+          </Link>
         </div>
       </div>
 
