@@ -1,5 +1,5 @@
-import React from "react";
 import { useTransaction } from "../../hooks/useTransaction";
+import { Link } from "react-router-dom";
 
 type summuryCardData = {
   title: string;
@@ -19,7 +19,10 @@ const SummaryCard = ({
       {/* heading link */}
       <div className="flex justify-between">
         <h3 className="pt-1 text-2xl font-semibold capitalize">{title}</h3>
-        <button className="cursor-pointer rounded-full border border-[var(--border-default)] p-2">
+        <Link
+          to={"/transactions"}
+          className="cursor-pointer rounded-full border border-[var(--border-default)] p-2"
+        >
           <svg
             className="fill-[var(--text-primary)]"
             xmlns="http://www.w3.org/2000/svg"
@@ -30,7 +33,7 @@ const SummaryCard = ({
           >
             <path d="m256-240-56-56 384-384H240v-80h480v480h-80v-344L256-240Z" />
           </svg>
-        </button>
+        </Link>
       </div>
 
       {/* amount message */}
