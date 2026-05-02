@@ -62,7 +62,7 @@ const Dropdown = ({
                 onChange(opt);
                 setIsOpen(!isOpen);
               }}
-              className="rounded-full bg-[var(--bg-primary)] p-0.5 pl-2 text-[var(--text-primary)] transition-all duration-200 hover:bg-[var(--accent-soft)] md:p-1"
+              className="rounded-full bg-[var(--bg-primary)] p-0.5 pl-2 text-[var(--text-primary)] transition-all duration-200 hover:bg-[var(--accent-soft)] md:p-1 md:pl-2"
             >
               {opt["label"]}
             </div>
