@@ -26,7 +26,7 @@ const Dropdown = ({
       {/* dropdown label */}
       <div
         onClick={() => setIsOpen(!isOpen)}
-        className={`flex ${error === true ? "border-[var(--danger)]" : ""} min-w-40 cursor-pointer rounded-full border border-[var(--border-default)] py-1.5 text-center shadow-xl hover:bg-[var(--accent-subtle)]`}
+        className={`flex items-center text-sm md:text-base ${error === true ? "border-[var(--danger)]" : ""} min-w-fit cursor-pointer rounded-full border border-[var(--border-default)] py-1 text-center shadow-xl hover:bg-[var(--accent-subtle)] md:min-w-40 md:py-1.5`}
       >
         <div className="grow border-r border-r-[var(--border-default)] px-3">
           {selected["value"] !== options[0]["value"]
@@ -35,7 +35,7 @@ const Dropdown = ({
         </div>
         {/* down icon */}
         <span
-          className={`px-2 transition-all duration-200 ${isOpen ? "rotate-180" : ""}`}
+          className={`transition-all duration-200 md:px-2 ${isOpen ? "rotate-180" : ""}`}
         >
           <svg
             className="fill-[var(--text-primary)]"
@@ -62,7 +62,7 @@ const Dropdown = ({
                 onChange(opt);
                 setIsOpen(!isOpen);
               }}
-              className="rounded-full bg-[var(--bg-primary)] p-1 pl-2 text-[var(--text-primary)] transition-all duration-200 hover:bg-[var(--accent-soft)]"
+              className="rounded-full bg-[var(--bg-primary)] p-0.5 pl-2 text-[var(--text-primary)] transition-all duration-200 hover:bg-[var(--accent-soft)] md:p-1"
             >
               {opt["label"]}
             </div>

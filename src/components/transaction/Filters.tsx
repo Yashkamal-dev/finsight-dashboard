@@ -32,7 +32,7 @@ const Filters = ({
   };
 
   return (
-    <div className="flex items-center gap-2">
+    <div className="flex flex-wrap items-center gap-2">
       {/* dropdown for types */}
       <Dropdown
         options={types}
@@ -66,7 +66,7 @@ const Filters = ({
       {/* reset Button */}
       <button
         onClick={resetBtnFun}
-        className="mx-2 flex cursor-pointer items-center gap-1.5 rounded-full hover:shadow-xl"
+        className="mx-1 flex cursor-pointer items-center gap-1 rounded-full hover:shadow-xl md:mx-2 md:gap-1.5"
       >
         {/* reset logo */}
         <svg
@@ -81,7 +81,9 @@ const Filters = ({
         </svg>
 
         {/* reset text */}
-        <p className="text-l text-[var(--accent-primary)]">Reset all</p>
+        <p className="text-sm text-[var(--accent-primary)] md:text-base">
+          Reset all
+        </p>
       </button>
     </div>
   );
