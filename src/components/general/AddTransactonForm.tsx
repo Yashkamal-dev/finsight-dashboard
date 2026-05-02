@@ -206,7 +206,7 @@ const AddTransactonForm = ({ setIsAdding }: prop) => {
                     onClick={() => {
                       setType(typ);
                     }}
-                    className={`cursor-pointer rounded-full text-sm shadow-lg md:text-base md:text-lg ${type === typ ? "bg-[var(--accent-primary)] text-[var(--text-inverse)]" : "hover:bg-[var(--accent-subtle)]"} border border-[var(--border-default)] px-3.5 py-1`}
+                    className={`cursor-pointer rounded-full text-sm shadow-lg md:text-lg ${type === typ ? "bg-[var(--accent-primary)] text-[var(--text-inverse)]" : "hover:bg-[var(--accent-subtle)]"} border border-[var(--border-default)] px-3.5 py-1`}
                   >
                     {typ}
                   </button>

@@ -144,15 +144,15 @@ const EditTransactionForm = ({ prevTxn, setIsEditing }: props) => {
   };
 
   return (
-    <div className="relative flex w-125 flex-col gap-5 rounded-3xl bg-[var(--bg-primary)] px-5 py-4 shadow-xl">
+    <div className="relative flex w-95 flex-col gap-5 rounded-3xl bg-[var(--bg-primary)] px-4 py-2.5 shadow-xl md:w-125 md:px-5 md:py-4">
       {/* form heading */}
       <div className="flex flex-col items-center justify-center gap-1">
         {/* title */}
-        <h1 className="text-2xl font-semibold text-[var(--text-primary)]">
+        <h1 className="text-xl font-semibold text-[var(--text-primary)] md:text-2xl">
           Edit Transaction
         </h1>
         {/* subttle */}
-        <h2 className="text- text-[var(--text-secondary)]">
+        <h2 className="text-center text-sm text-[var(--text-secondary)] md:text-base">
           Edit the details below to keep your records accurate
         </h2>
       </div>
@@ -165,7 +165,7 @@ const EditTransactionForm = ({ prevTxn, setIsEditing }: props) => {
         <div className="flex grow flex-col gap-2">
           {/* name label */}
           <div className="flex items-center gap-2">
-            <p className="text-lg font-medium">Name</p>
+            <p className="font-medium md:text-lg">Name</p>
             {errors["name"] && (
               // text to show on error - (if empty)
               <span className="text-lg text-[var(--danger)]">*</span>
@@ -183,14 +183,14 @@ const EditTransactionForm = ({ prevTxn, setIsEditing }: props) => {
               });
               setName(e.target.value);
             }}
-            className={`grow rounded-full ${errors["name"] === true ? "border-[var(--danger)]" : ""} border border-[var(--border-default)] py-2 pl-5 text-lg shadow-lg focus:outline-0`}
+            className={`grow rounded-full ${errors["name"] === true ? "border-[var(--danger)]" : ""} border border-[var(--border-default)] py-2 pl-5 text-sm shadow-lg focus:outline-0 md:text-lg`}
           />
         </div>
 
         {/* note container */}
         <div className="flex grow flex-col gap-2">
           {/* note label */}
-          <p className="text-lg font-medium"> Note</p>
+          <p className="font-medium md:text-lg"> Note</p>
 
           {/* note input */}
           <textarea
@@ -199,7 +199,7 @@ const EditTransactionForm = ({ prevTxn, setIsEditing }: props) => {
             onChange={(e) => {
               setNote(e.target.value);
             }}
-            className="w h-13 grow resize-none rounded-full border border-[var(--border-default)] py-2 pl-5 text-lg shadow-lg focus:outline-0"
+            className="h-10 grow resize-none rounded-full border border-[var(--border-default)] py-2 pl-5 text-sm shadow-lg focus:outline-0 md:h-13 md:text-lg"
           ></textarea>
         </div>
       </div>
@@ -210,7 +210,7 @@ const EditTransactionForm = ({ prevTxn, setIsEditing }: props) => {
         <div className="flex flex-1 flex-col gap-2">
           {/* amount label */}
           <div className="flex items-center gap-2">
-            <p className="text-lg font-medium">Amount</p>
+            <p className="font-medium md:text-lg">Amount</p>
             {errors["amount"] && (
               // text to show on error - (if empty)
               <span className="text-lg text-[var(--danger)]">
@@ -230,14 +230,14 @@ const EditTransactionForm = ({ prevTxn, setIsEditing }: props) => {
               });
               return setAmount(Number(e.target.value));
             }}
-            className={`w-full rounded-full ${errors["amount"] === true ? "border-[var(--danger)]" : ""} border border-[var(--border-default)] py-2 pl-3 shadow-lg focus:outline-0`}
+            className={`w-full rounded-full text-sm md:text-base ${errors["amount"] === true ? "border-[var(--danger)]" : ""} border border-[var(--border-default)] py-2 pl-3 shadow-lg focus:outline-0`}
           />
         </div>
 
         {/* Date */}
         <div className="flex flex-1 flex-col gap-2">
           {/* Date label */}
-          <p className="text-lg font-medium">Date</p>
+          <p className="font-medium md:text-lg">Date</p>
 
           {/* button container for Date */}
           <div className="flex gap-3">
@@ -248,7 +248,7 @@ const EditTransactionForm = ({ prevTxn, setIsEditing }: props) => {
               <PopoverTrigger asChild>
                 {/* custom date button */}
                 <button
-                  className={`grow cursor-pointer rounded-full border border-[var(--border-default)] px-5 py-1 text-lg shadow-lg`}
+                  className={`grow cursor-pointer rounded-full border border-[var(--border-default)] px-5 py-1 text-sm shadow-lg md:text-lg`}
                 >
                   {date.toLocaleDateString("en-CA")}
                   {/* Pick Date */}
@@ -273,10 +273,10 @@ const EditTransactionForm = ({ prevTxn, setIsEditing }: props) => {
       {/* method - category container */}
       <div className="flex gap-3">
         {/* method */}
-        <div className="flex grow flex-col gap-2.5">
+        <div className="flex flex-1 flex-col gap-2.5">
           <div className="flex items-center gap-2">
             {/* method label */}
-            <p className="text-lg font-medium">Method</p>
+            <p className="font-medium md:text-lg">Method</p>
             {errors["method"] && (
               // text to show on error - (if empty)
               <span className="text-lg text-[var(--danger)]">*</span>
@@ -299,10 +299,10 @@ const EditTransactionForm = ({ prevTxn, setIsEditing }: props) => {
         </div>
 
         {/* category */}
-        <div className="flex grow flex-col gap-2.5">
+        <div className="flex flex-1 flex-col gap-2.5">
           <div className="flex items-center gap-2">
             {/* category method */}
-            <p className="text-lg font-medium">Category</p>
+            <p className="font-medium md:text-lg">Category</p>
             {errors["category"] && (
               // text to show on error - (if empty)
               <span className="text-lg text-[var(--danger)]">*</span>
@@ -326,13 +326,13 @@ const EditTransactionForm = ({ prevTxn, setIsEditing }: props) => {
       </div>
 
       {/* cancel and save button */}
-      <div className="mt-1 flex gap-3 border-t border-[var(--border-default)] pt-4.5 pb-1">
+      <div className="mt-1 flex gap-1.5 border-t border-[var(--border-default)] pt-3 pb-1 md:gap-3 md:pt-4.5">
         {/* cancel button */}
         <button
           onClick={() => {
             setIsEditing(false);
           }}
-          className="grow cursor-pointer rounded-full border border-[var(--border-default)] bg-[var(--bg-primary)] py-2.5 text-[var(--text-primary)] shadow-xl"
+          className="flex-1 cursor-pointer rounded-full border border-[var(--border-default)] bg-[var(--bg-primary)] py-1 text-[var(--text-primary)] shadow-xl md:py-2.5"
         >
           Cancel
         </button>
@@ -340,7 +340,7 @@ const EditTransactionForm = ({ prevTxn, setIsEditing }: props) => {
         {/* save button */}
         <button
           onClick={updateTransaction}
-          className="grow cursor-pointer rounded-full border border-[var(--border-default)] bg-[var(--accent-primary)] py-2.5 text-[var(--text-inverse)] shadow-xl"
+          className="flex-1 cursor-pointer rounded-full border border-[var(--border-default)] bg-[var(--accent-primary)] py-1 text-[var(--text-inverse)] shadow-xl md:py-2.5"
         >
           Save changes
         </button>
