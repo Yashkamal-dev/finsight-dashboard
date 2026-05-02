@@ -77,14 +77,14 @@ const GoalCard = ({
   return (
     <div
       ref={containerRef}
-      className={`relative flex flex-col gap-6 rounded-4xl border border-[var(--border-default)] px-5 py-4 shadow-lg`}
+      className={`relative flex flex-col gap-4 rounded-4xl border border-[var(--border-default)] px-3 py-3 shadow-lg md:gap-6 md:px-5 md:py-4`}
     >
       {/* header of the card */}
       <header>
-        <h1 className="text-2xl font-semibold text-[var(--text-primary)]">
+        <h1 className="text-xl font-semibold text-[var(--text-primary)] md:text-2xl">
           {goal["title"]}
         </h1>
-        <p className={`text-[var(--text-secondary)]`}>
+        <p className={`text-sm text-[var(--text-secondary)] md:text-base`}>
           {" "}
           Due date -{" "}
           {goal["deadline"] ? formatDate(goal["deadline"]) : "No Deadline"}
@@ -93,24 +93,22 @@ const GoalCard = ({
 
       {/* amounts container */}
       <div>
-        <span className={`text-4xl font-bold`}>
+        <span className={`text-3xl font-bold md:text-4xl`}>
           ₹{goal["savedAmount"].toLocaleString("en-IN")}
-          <span className={`text-4xl font-bold text-[var(--text-muted)]`}>
-            .00
-          </span>
+          <span className={`font-bold text-[var(--text-muted)]`}>.00</span>
         </span>
         <span
-          className={`text-lg ${goal["status"] === "completed" ? "text-[var(--success)]" : goal["status"] === "not-started" ? "text-[var(--text-primary)]" : ""} text-[var(--accent-text)]`}
+          className={`text-base md:text-lg ${goal["status"] === "completed" ? "text-[var(--success)]" : goal["status"] === "not-started" ? "text-[var(--text-primary)]" : ""} text-[var(--accent-text)]`}
         >
           /₹{goal["targetAmount"].toLocaleString("en-IN")}
         </span>
       </div>
 
       {/* progrss bar and Remaining amount */}
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-3 md:gap-2">
         {/* progress bar */}
         <div
-          className={`h-7 w-full ${goal["status"] === "not-started" ? "bg-[var(--warning-bg)]" : "bg-[var(--accent-progress)]"} rounded-full`}
+          className={`h-6 w-full md:h-7 ${goal["status"] === "not-started" ? "bg-[var(--warning-bg)]" : "bg-[var(--accent-progress)]"} rounded-full`}
         >
           {/* inner div - based on progress */}
           <div
@@ -123,7 +121,7 @@ const GoalCard = ({
         </div>
 
         {/* remaining amount */}
-        <div className="flex justify-between">
+        <div className="flex justify-between text-sm md:text-base">
           {/* remaining label */}
           <span className="text-[var(--text-muted)]">
             Left to complete the goal
@@ -158,7 +156,7 @@ const GoalCard = ({
           onClick={() => {
             setIsOptionOpen(!isOptionOpen);
           }}
-          className="flex cursor-pointer items-center justify-center rounded-full border border-[var(--border-default)] p-2.5 font-extrabold shadow-lg"
+          className="flex cursor-pointer items-center justify-center rounded-full border border-[var(--border-default)] p-1.5 md:p-2.5 font-extrabold shadow-lg"
         >
           {isOptionOpen === true ? <X /> : <Ellipsis />}
         </button>
@@ -166,7 +164,7 @@ const GoalCard = ({
         {/* conditional rendering using id to prevent global state effect */}
         {isOptionOpen === true && (
           // options dropdown
-          <div className="-bottom absolute right-0 z-10 mt-1 flex w-35 flex-col gap-2 rounded-xl border border-[var(--border-default)] bg-[var(--bg-primary)] p-1 shadow-lg">
+          <div className="-bottom absolute right-0 z-10 mt-1 flex text-sm md:text-base w-30 md:w-35 flex-col gap-2 rounded-xl border border-[var(--border-default)] bg-[var(--bg-primary)] p-1 shadow-lg">
             {/* contribute button */}
             {goal["status"] !== "completed" && (
               <button

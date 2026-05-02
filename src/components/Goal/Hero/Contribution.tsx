@@ -81,7 +81,9 @@ const Contribution = ({
         {/* contribution amount label */}
         <div className="flex gap-2">
           {/* label */}
-          <p className="text-lg font-medium">Contribution Amount</p>
+          <p className="text-base font-medium md:text-lg">
+            Contribution Amount
+          </p>
           {errors["contributionAmount"] && (
             // text to show on error - (if empty)
             <span className="text-lg text-[var(--danger)]">
@@ -108,7 +110,7 @@ const Contribution = ({
           }}
           placeholder="e.g. 1,000"
           type="number"
-          className={`rounded-full ${errors["contributionAmount"] == true ? "border-[var(--danger)]" : ""} border border-[var(--border-default)] py-2 pl-3 shadow-lg focus:outline-0`}
+          className={`rounded-full text-sm md:text-base ${errors["contributionAmount"] == true ? "border-[var(--danger)]" : ""} border border-[var(--border-default)] py-2 pl-3 shadow-lg focus:outline-0`}
         />
       </div>
 
@@ -119,7 +121,7 @@ const Contribution = ({
           onClick={() => {
             setIsContributing(false);
           }}
-          className="grow cursor-pointer rounded-full border border-[var(--border-default)] bg-[var(--bg-primary)] py-2.5 text-[var(--text-primary)] shadow-xl"
+          className="grow cursor-pointer rounded-full border border-[var(--border-default)] bg-[var(--bg-primary)] py-2 text-sm text-[var(--text-primary)] shadow-xl md:py-2.5 md:text-base"
         >
           Cancel
         </button>
@@ -127,7 +129,7 @@ const Contribution = ({
         {/* save button */}
         <button
           onClick={handleAddContribution}
-          className={`grow cursor-pointer rounded-full border border-[var(--border-default)] py-2.5 text-[var(--text-inverse)] ${status === "not-started" ? "bg-[var(--warning-bg-secondary)]" : "bg-[var(--accent-primary)]"} shadow-xl`}
+          className={`grow cursor-pointer rounded-full border border-[var(--border-default)] py-2 text-sm text-[var(--text-inverse)] md:py-2.5 md:text-base ${status === "not-started" ? "bg-[var(--warning-bg-secondary)]" : "bg-[var(--accent-primary)]"} shadow-xl`}
         >
           Contribute
         </button>
