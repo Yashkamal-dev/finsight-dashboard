@@ -15,13 +15,15 @@ const SummaryCard = ({
   totalTransaction,
 }: summuryCardData) => {
   return (
-    <div className="inline-flex min-w-65 grow flex-col gap-4 rounded-4xl border border-[var(--border-default)] p-2 pb-4 pl-4">
+    <div className="inline-flex min-w-65 grow flex-col gap-3 rounded-4xl border border-[var(--border-default)] p-2 pb-4 pl-4 md:gap-4">
       {/* heading link */}
       <div className="flex justify-between">
-        <h3 className="pt-1 text-2xl font-semibold capitalize">{title}</h3>
+        <h3 className="pt-1 text-xl font-semibold capitalize md:text-2xl">
+          {title}
+        </h3>
         <Link
           to={"/transactions"}
-          className="cursor-pointer rounded-full border border-[var(--border-default)] p-2"
+          className="cursor-pointer rounded-full border border-[var(--border-default)] p-1 md:p-2"
         >
           <svg
             className="fill-[var(--text-primary)]"
@@ -37,8 +39,8 @@ const SummaryCard = ({
       </div>
 
       {/* amount message */}
-      <div className="flex flex-col gap-6">
-        <p className="text-4xl font-bold">
+      <div className="flex flex-col gap-4 md:gap-6">
+        <p className="text-[28px] font-bold md:text-4xl">
           {amount.toLocaleString("en-IN")}
           <span className="text-[var(--text-muted)]">.00</span>
         </p>
@@ -46,20 +48,20 @@ const SummaryCard = ({
         {/* percentage and no of transction */}
         <div className="flex flex-wrap items-center text-[var(--text-secondary)]">
           {/* percentage con */}
-          <div className="grow">
+          <div className="grow text-sm md:text-base">
             <span
               className={`rounded-full px-1.5 ${percentageChange > 0 ? (title === "Expense" ? "bg-[var(--danger-bg)] text-[var(--danger)]" : "bg-[var(--success-bg)] text-[var(--success)]") : title === "Expense" ? "bg-[var(--success-bg)] text-[var(--success)]" : "bg-[var(--danger-bg)] text-[var(--danger)]"} `}
             >
               {percentageChange > 0 ? "↑ " : "↓ "}
               {Math.abs(percentageChange)}%
-            </span>
+            </span>{" "}
             vs last month
           </div>
 
           {/* no of transasction container */}
-          <div className="flex grow items-center justify-center gap-2">
+          <div className="flex grow items-center justify-center gap-2 text-sm md:text-base">
             <svg
-              className="h-8 rounded-full bg-[var(--accent-soft)] fill-[var(--accent-text)] p-1"
+              className="h-7 rounded-full bg-[var(--accent-soft)] fill-[var(--accent-text)] p-1 md:h-8"
               xmlns="http://www.w3.org/2000/svg"
               //   height="24px"
               viewBox="0 -960 960 960"
@@ -167,7 +169,7 @@ const SummaryCon = () => {
   };
 
   return (
-    <div className="flex w-full flex-wrap gap-4 py-2">
+    <div className="flex w-full flex-wrap gap-3 md:gap-4 py-2">
       {/* card for the total balance */}
       <SummaryCard
         title="Total Balanace"
