@@ -41,9 +41,9 @@ const Filter = ({
   }
 
   return (
-    <div className="flex justify-between">
+    <div className="flex items-center justify-between">
       {/* buttons for status filtering */}
-      <div className="flex gap-2 py-3">
+      <div className="flex flex-wrap gap-2 py-2 text-sm md:py-3 md:text-base">
         {/* All button */}
         <button
           onClick={() => {
@@ -52,7 +52,7 @@ const Filter = ({
             setCompleted(false);
             setnotStarted(false);
           }}
-          className={`mx-1 ${all ? "bg-[var(--accent-primary)] text-[var(--text-inverse)]" : "text-[var(--text-primary)]"} cursor-pointer rounded-full border border-[var(--border-default)] px-5 py-2 shadow-lg transition-all duration-100 ease-in active:scale-99`}
+          className={`mx-1 ${all ? "bg-[var(--accent-primary)] text-[var(--text-inverse)]" : "text-[var(--text-primary)]"} cursor-pointer rounded-full border border-[var(--border-default)] px-3 py-2 shadow-lg transition-all duration-100 ease-in active:scale-99 md:px-5 md:py-2`}
         >
           All
         </button>
@@ -63,7 +63,7 @@ const Filter = ({
             setAll(false);
             setInProgress(!inProgress);
           }}
-          className={` ${inProgress ? "bg-[var(--accent-primary)] text-[var(--text-inverse)]" : "text-[var(--text-primary)]"} cursor-pointer rounded-full border border-[var(--border-default)] px-5 py-2 shadow-lg transition-all duration-100 ease-in active:scale-99`}
+          className={` ${inProgress ? "bg-[var(--accent-primary)] text-[var(--text-inverse)]" : "text-[var(--text-primary)]"} cursor-pointer rounded-full border border-[var(--border-default)] px-3 py-2 shadow-lg transition-all duration-100 ease-in active:scale-99 md:px-5 md:py-2`}
         >
           In progress
         </button>
@@ -74,7 +74,7 @@ const Filter = ({
             setAll(false);
             setCompleted(!completed);
           }}
-          className={` ${completed ? "bg-[var(--accent-primary)] text-[var(--text-inverse)]" : "text-[var(--text-primary)]"} cursor-pointer rounded-full border border-[var(--border-default)] px-5 py-2 shadow-lg transition-all duration-100 ease-in active:scale-99`}
+          className={` ${completed ? "bg-[var(--accent-primary)] text-[var(--text-inverse)]" : "text-[var(--text-primary)]"} cursor-pointer rounded-full border border-[var(--border-default)] px-3 py-2 shadow-lg transition-all duration-100 ease-in active:scale-99 md:px-5 md:py-2`}
         >
           Completed
         </button>
@@ -85,7 +85,7 @@ const Filter = ({
             setAll(false);
             setnotStarted(!notStarted);
           }}
-          className={` ${notStarted ? "bg-[var(--accent-primary)] text-[var(--text-inverse)]" : "text-[var(--text-primary)]"} cursor-pointer rounded-full border border-[var(--border-default)] px-5 py-2 shadow-lg transition-all duration-100 ease-in active:scale-99`}
+          className={` ${notStarted ? "bg-[var(--accent-primary)] text-[var(--text-inverse)]" : "text-[var(--text-primary)]"} cursor-pointer rounded-full border border-[var(--border-default)] px-3 py-2 shadow-lg transition-all duration-100 ease-in active:scale-99 md:px-5 md:py-2`}
         >
           Not Started
         </button>
@@ -98,7 +98,7 @@ const Filter = ({
           onClick={() => {
             setIsAdding(true);
           }}
-          className="cursor-pointer rounded-full bg-[var(--accent-primary)] px-5 py-2 text-[var(--text-inverse)] shadow-lg active:scale-99"
+          className="cursor-pointer rounded-full bg-[var(--accent-primary)] px-3 py-2 text-sm whitespace-nowrap text-[var(--text-inverse)] shadow-lg active:scale-99 md:px-5 md:py-2 md:text-base"
         >
           + Add new goal
         </button>
