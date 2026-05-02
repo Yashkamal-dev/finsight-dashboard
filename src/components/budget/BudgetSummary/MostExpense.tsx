@@ -56,9 +56,9 @@ const MostExpense = ({ selectedDate, allBudget }: props) => {
   }
 
   return (
-    <div className="flex flex-col gap-5 rounded-4xl border border-[var(--border-default)] p-5">
+    <div className="flex flex-col gap-5 rounded-4xl border border-[var(--border-default)] p-3 md:p-5">
       {/* header */}
-      <header className="flex items-center justify-between text-2xl font-bold">
+      <header className="flex items-center justify-between text-xl font-bold md:text-2xl">
         {/* title */}
         <h1>Most Expense</h1>
 
@@ -89,28 +89,30 @@ const MostExpense = ({ selectedDate, allBudget }: props) => {
           return (
             <div
               key={crypto.randomUUID()}
-              className="flex items-center justify-between border-b border-b-[var(--border-default)] p-3"
+              className="flex items-center justify-between border-b border-b-[var(--border-default)] p-2 md:p-3"
             >
               {/* amount and category container */}
               <div className="">
                 {/* amount */}
-                <p className="text-xl font-bold">₹{bdgt["spent"]}</p>
+                <p className="text-lg font-bold md:text-xl">
+                  ₹{bdgt["spent"].toLocaleString("en-IN")}
+                </p>
 
                 {/* category */}
-                <p className="text-lg text-[var(--text-secondary)] capitalize">
+                <p className="text-base text-[var(--text-secondary)] capitalize md:text-lg">
                   {bdgt["category"]}
                 </p>
               </div>
 
               {/* difference */}
               <div
-                className={`min-w-25 rounded-full text-center ${
+                className={`min-w-18 rounded-full text-center text-xs md:min-w-25 md:text-base ${
                   bdgt["status"]! === 0
                     ? "bg-[var(--warning-bg)] text-[var(--warning)]"
                     : bdgt["status"]! < 0
                       ? "bg-[var(--success-bg)] text-[var(--success)]"
                       : "bg-[var(--danger-bg)] text-[var(--danger)]"
-                } px-2 py-0.5`}
+                } px-1 py-0.5 md:px-2`}
               >
                 {bdgt["status"]! === 0 ? "≈" : bdgt["status"]! < 0 ? "↓" : "↑"}{" "}
                 {Math.abs(
