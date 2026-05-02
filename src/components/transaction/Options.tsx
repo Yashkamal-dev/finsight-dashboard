@@ -20,20 +20,25 @@ const Options = ({ selectedDate, setSelectedDate, setIsAdding }: props) => {
   return (
     <div className="flex items-center justify-between py-4">
       {/* month setter container */}
-      <div className="flex gap-2">
+      <div className="flex items-center gap-1.5 md:gap-2">
+        {/* prev month button */}
         <button
           onClick={prevMonth}
-          className="cursor-pointer rounded-full border border-[var(--border-default)] p-1 px-3 text-xl font-extrabold text-[var(--text-primary)] shadow-md hover:bg-[var(--accent-subtle)] active:scale-97"
+          className="h-min cursor-pointer rounded-full border border-[var(--border-default)] px-1 text-lg font-extrabold text-[var(--text-primary)] shadow-md hover:bg-[var(--accent-subtle)] active:scale-97 md:p-1 md:px-3 md:text-xl"
         >
           ◂
         </button>
-        <div className="flex w-45 justify-center rounded-full border border-[var(--border-default)] p-2 text-[var(--text-primary)] uppercase shadow-md">
+
+        {/* month seleccted */}
+        <div className="flex w-45 justify-center rounded-full border border-[var(--border-default)] p-1 text-sm text-[var(--text-primary)] uppercase shadow-md md:p-2 md:text-base">
           {selectedDate.toLocaleDateString("default", { month: "long" })} -{" "}
           {selectedDate.getFullYear()}
         </div>
+
+        {/* next month button */}
         <button
           onClick={nextMonth}
-          className="cursor-pointer rounded-full border border-[var(--border-default)] p-1 px-3 text-xl font-extrabold text-[var(--text-primary)] shadow-md hover:bg-[var(--accent-subtle)] active:scale-97"
+          className="h-min cursor-pointer rounded-full border border-[var(--border-default)] px-1 text-lg font-extrabold text-[var(--text-primary)] shadow-md hover:bg-[var(--accent-subtle)] active:scale-97 md:p-1 md:px-3 md:text-xl"
         >
           ▸
         </button>
@@ -46,7 +51,7 @@ const Options = ({ selectedDate, setSelectedDate, setIsAdding }: props) => {
           onClick={() => {
             setIsAdding(true);
           }}
-          className="cursor-pointer rounded-full bg-[var(--accent-primary)] px-5 py-2 text-[var(--text-inverse)] shadow-lg active:scale-99"
+          className="cursor-pointer rounded-full bg-[var(--accent-primary)] px-3 py-1.5 text-sm text-[var(--text-inverse)] shadow-lg active:scale-99 md:px-5 md:py-2 md:text-base"
         >
           + Add New
         </button>
