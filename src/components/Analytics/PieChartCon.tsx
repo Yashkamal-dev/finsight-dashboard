@@ -77,7 +77,7 @@ const PieChartCon = () => {
     <div className="flex flex-[1_1_450px] flex-col gap-2 rounded-4xl border border-[var(--border-default)] p-4">
       {/* header of the chart container */}
       <header>
-        <h1 className="text-2xl font-semibold">Statistics</h1>
+        <h1 className="text-xl font-semibold md:text-2xl">Statistics</h1>
       </header>
 
       {/* mounting graph container */}
@@ -86,11 +86,11 @@ const PieChartCon = () => {
       {/* color and type indicator */}
       <div className="flex justify-evenly">
         <div className="flex items-center gap-1 text-lg">
-          <div className="h-3 w-3 rounded-full bg-[#412ebe] text-xl"></div>{" "}
+          <div className="h-3 w-3 rounded-full bg-[var(--accent-primary)] text-xl"></div>{" "}
           Remaining
         </div>
         <div className="flex items-center gap-1 text-lg">
-          <div className="h-3 w-3 rounded-full bg-[#8470ff] text-xl"></div>{" "}
+          <div className="h-3 w-3 rounded-full bg-[var(--accent-soft)] text-xl"></div>{" "}
           Expense
         </div>
         <div className="flex items-center gap-1 text-lg">
