@@ -51,7 +51,7 @@ const Budget = () => {
       <TopBar pageTitle="Budget" message="Set limits and track your spending" />
 
       {/* hero component container */}
-      <div className="flex flex-wrap gap-5">
+      <div className="flex flex-wrap gap-1 md:gap-5">
         {/* budgetManager component compnent */}
         <BudgetManagerCon
           selectedDate={selectedDate}
