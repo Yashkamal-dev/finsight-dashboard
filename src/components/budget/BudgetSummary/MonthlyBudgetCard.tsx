@@ -27,17 +27,15 @@ const MonthlyBudgetCard = ({ allBudget }: props) => {
   ];
 
   return (
-    <div className="flex flex-col gap-5 rounded-4xl border border-[var(--border-default)] p-5">
+    <div className="flex flex-col gap-2.5 rounded-4xl border border-[var(--border-default)] p-5 md:gap-5">
       {/* title */}
-      <h1 className="text-2xl font-bold">Monthly budget</h1>
+      <h1 className="text-xl font-bold md:text-2xl">Monthly budget</h1>
 
       {/* amount and status container */}
-      <div className="flex flex-col gap-2">
-        <span className={`text-4xl font-bold`}>
-          ₹{totalLimit}
-          <span className={`text-4xl font-bold text-[var(--text-muted)]`}>
-            .00
-          </span>
+      <div className="flex flex-col gap-2 text-3xl md:text-4xl">
+        <span className={`font-bold`}>
+          ₹{totalLimit.toLocaleString("en-IN")}
+          <span className={`font-bold text-[var(--text-muted)]`}>.00</span>
         </span>
         <span
           className={` ${
@@ -89,11 +87,13 @@ const MonthlyBudgetCard = ({ allBudget }: props) => {
 
         {/* spent and status percentage container */}
         <div className="absolute bottom-5 left-1/2 flex -translate-x-1/2 flex-col items-center">
-          <span className="text-[var(--text-muted)]">
+          <span className="text-sm text-[var(--text-muted)] md:text-base">
             {Number.isInteger(status) ? status : Math.round(status * 100) / 100}
             % spent
           </span>
-          <span className="text-4xl font-bold">₹{spent}</span>
+          <span className="text-3xl font-bold md:text-4xl">
+            ₹{spent.toLocaleString("en-IN")}
+          </span>
         </div>
       </div>
     </div>
