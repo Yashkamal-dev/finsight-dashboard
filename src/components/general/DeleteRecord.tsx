@@ -16,27 +16,27 @@ const DeleteRecord = ({ entity, setIsDeleting, deleteFun }: props) => {
       ></div>
 
       {/* modal to delete */}
-      <div className="relative flex w-125 flex-col gap-5 rounded-3xl border-[var(--danger)] bg-[var(--bg-primary)] px-5 py-4 shadow-lg">
+      <div className="relative flex w-95 flex-col gap-5 rounded-3xl border-[var(--danger)] bg-[var(--bg-primary)] px-5 py-3 md:py-4 shadow-lg md:w-125">
         <header className="flex flex-col justify-center gap-1">
           {/* main title to delete record */}
-          <h2 className="text-2xl font-semibold text-[var(--text-primary)]">
+          <h2 className="text-xl font-semibold text-[var(--text-primary)] md:text-2xl">
             Delete {entity}
           </h2>
 
           {/* sub title */}
-          <p className="text- text-[var(--text-secondary)]">
+          <p className="text-sm text-[var(--text-secondary)] md:text-base">
             This action cannot be undone.
           </p>
         </header>
 
         {/* cancel and delete container */}
-        <div className="mt-1 flex gap-3 border-t border-[var(--border-default)] pt-4.5 pb-1">
+        <div className="mt-0 flex gap-3 border-t border-[var(--border-default)] pt-3 md:pt-4.5 pb-1 md:mt-1">
           {/* cancel button */}
           <button
             onClick={() => {
               setIsDeleting(false);
             }}
-            className="grow cursor-pointer rounded-full border border-[var(--border-default)] bg-[var(--bg-primary)] py-2.5 text-lg text-[var(--text-primary)] shadow-xl"
+            className="grow cursor-pointer rounded-full border border-[var(--border-default)] bg-[var(--bg-primary)] py-1.5 text-base text-[var(--text-primary)] shadow-xl md:py-2.5 md:text-lg"
           >
             Cancel
           </button>
@@ -47,7 +47,7 @@ const DeleteRecord = ({ entity, setIsDeleting, deleteFun }: props) => {
               deleteFun();
               setIsDeleting(false);
             }}
-            className="grow cursor-pointer rounded-full border border-[var(--border-default)] bg-[var(--danger)] py-2.5 text-lg text-[var(--text-inverse)] shadow-xl"
+            className="grow cursor-pointer rounded-full border border-[var(--border-default)] bg-[var(--danger)] py-1.5 text-base text-[var(--text-inverse)] shadow-xl md:py-2.5 md:text-lg"
           >
             Delete
           </button>
