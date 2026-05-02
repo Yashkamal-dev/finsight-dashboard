@@ -132,16 +132,16 @@ const AddBudgetForm = ({ setIsAdding, setAllBudget }: props) => {
 
   return (
     <div
-      className={`relative flex w-125 flex-col gap-5 rounded-3xl bg-[var(--bg-primary)] px-5 py-4 shadow-xl`}
+      className={`relative flex w-95 flex-col gap-5 rounded-3xl bg-[var(--bg-primary)] px-5 py-4 shadow-xl md:w-125`}
     >
       {/* header of the add budget form */}
       <header className="flex flex-col items-center justify-center gap-1">
         {/* title */}
-        <h1 className="text-2xl font-semibold text-[var(--text-primary)]">
+        <h1 className="text-xl font-semibold text-[var(--text-primary)] md:text-2xl">
           Add budgets
         </h1>
         {/* subttle */}
-        <h2 className="text-[var(--text-secondary)]">
+        <h2 className="text-sm text-[var(--text-secondary)] md:text-base">
           Set spending limits for your categories
         </h2>
 
@@ -165,7 +165,7 @@ const AddBudgetForm = ({ setIsAdding, setAllBudget }: props) => {
         {/* limit and category container */}
         <div className="flex gap-5">
           {/* limit container */}
-          <div className="flex flex-col gap-2">
+          <div className="flex min-w-0 flex-1 flex-col gap-2">
             {/* limit label */}
             <div className="flex gap-2">
               {/* label */}
@@ -189,12 +189,12 @@ const AddBudgetForm = ({ setIsAdding, setAllBudget }: props) => {
                 setLimit(Number(e.target.value));
               }}
               type="number"
-              className={`rounded-full ${errors["limit"] === true ? "border-[var(--danger)]" : ""} border border-[var(--border-default)] py-2 pl-3 shadow-lg focus:outline-0`}
+              className={`rounded-full text-sm md:text-base ${errors["limit"] === true ? "border-[var(--danger)]" : ""} border border-[var(--border-default)] py-2 pl-3 shadow-lg focus:outline-0`}
             />
           </div>
 
           {/* category container */}
-          <div className="flex grow flex-col gap-2">
+          <div className="flex min-w-0 flex-1 flex-col gap-2">
             {/* category label */}
             <div className="flex gap-2">
               {/* label */}
@@ -224,7 +224,7 @@ const AddBudgetForm = ({ setIsAdding, setAllBudget }: props) => {
         </div>
 
         {/* cancel and save button */}
-        <div className="mt-1 flex gap-3 border-t border-[var(--border-default)] pt-4.5 pb-1">
+        <div className="mt-1 flex gap-3 border-t border-[var(--border-default)] pt-4.5 pb-1 text-sm md:text-base">
           {/* cancel button */}
           <button
             onClick={() => {
