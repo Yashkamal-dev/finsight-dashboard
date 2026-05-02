@@ -26,7 +26,7 @@ const Dropdown = ({
       {/* dropdown label */}
       <div
         onClick={() => setIsOpen(!isOpen)}
-        className={`flex items-center text-sm md:text-base ${error === true ? "border-[var(--danger)]" : ""} min-w-fit cursor-pointer rounded-full border border-[var(--border-default)] py-1 text-center shadow-xl hover:bg-[var(--accent-subtle)] md:min-w-40 md:py-1.5`}
+        className={`flex items-center text-sm md:text-base ${error === true ? "border-[var(--danger)]" : ""} min-w-fit cursor-pointer rounded-full border border-[var(--border-default)] py-1 text-center shadow-md hover:bg-[var(--accent-subtle)] md:min-w-40 md:py-1.5 md:shadow-xl`}
       >
         <div className="grow border-r border-r-[var(--border-default)] px-3">
           {selected["value"] !== options[0]["value"]

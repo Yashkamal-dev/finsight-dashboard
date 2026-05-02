@@ -56,18 +56,18 @@ const TransactionList = ({
 
   return (
     <div className="flex flex-col gap-2 py-4">
-      <p className="px-2 text-[var(--text-secondary)]">
+      <p className="px-2 text-sm text-[var(--text-secondary)] md:text-base">
         {displayedTransactions.length} Items
       </p>
       <div className="">
         {/* table header */}
-        <div className="grid grid-cols-[1fr_1fr_3fr_1fr_2fr_1fr_0.5fr] gap-4 rounded-full bg-[var(--accent-subtle)] px-4 py-3 text-[var(--accent-text)]">
+        <div className="grid grid-cols-[1fr_1fr_3fr_0.5fr] gap-4 rounded-full bg-[var(--accent-subtle)] px-4 py-1.5 text-sm text-[var(--accent-text)] md:grid-cols-[1fr_1fr_3fr_1fr_2fr_1fr_0.5fr] md:py-3 md:text-base">
           <h3 className="uppercase">Date</h3>
           <h3 className="uppercase">amount</h3>
           <h3 className="uppercase">payment name</h3>
-          <h3 className="uppercase">method</h3>
-          <h3 className="uppercase">category</h3>
-          <h3 className="uppercase">type</h3>
+          <h3 className="hidden uppercase md:block">method</h3>
+          <h3 className="hidden uppercase md:block">category</h3>
+          <h3 className="hidden uppercase md:block">type</h3>
           <h3 className="uppercase">options</h3>
         </div>
 
@@ -76,12 +76,12 @@ const TransactionList = ({
           // if no records for the selected month
           <div className="flex flex-col items-center py-10">
             {/* main text if no records found for selected month */}
-            <p className="text-lg text-[var(--text-primary)]">
+            <p className="text-base text-[var(--text-primary)] md:text-lg">
               No transactions yet for this month.
             </p>
 
             {/* sub text if no records found for selected month */}
-            <p className="text-base text-[var(--text-muted)]">
+            <p className="text-sm text-[var(--text-muted)] md:text-base">
               Start by adding your first transaction.
             </p>
           </div>
@@ -89,12 +89,12 @@ const TransactionList = ({
           // if no records for the filter
           <div className="flex flex-col items-center py-10">
             {/* main text if no records found for specified filter */}
-            <p className="text-lg text-[var(--text-primary)]">
+            <p className="text-base text-[var(--text-primary)] md:text-lg">
               No transactions match your filters.
             </p>
 
             {/* sub text if no records found for specified filter */}
-            <p className="text-base text-[var(--text-muted)]">
+            <p className="text-sm text-[var(--text-muted)] md:text-base">
               Try adjusting or clearing filters.
             </p>
           </div>
@@ -105,7 +105,7 @@ const TransactionList = ({
               return (
                 <div
                   key={txn["id"]}
-                  className={`grid grid-cols-[1fr_1fr_3fr_1fr_2fr_1fr_0.5fr] gap-4 rounded-full px-3 py-3 transition-all duration-300 ease-in-out ${isOptionOpen === txn["id"] ? "border border-[var(--accent-primary)]" : "border-b border-b-[var(--border-subtle)]"} `}
+                  className={`grid grid-cols-[1fr_1fr_3fr_0.5fr] gap-2 rounded-full px-4 py-2 text-sm transition-all duration-300 ease-in-out md:grid-cols-[1fr_1fr_3fr_1fr_2fr_1fr_0.5fr] md:gap-4 md:py-3 md:text-base ${isOptionOpen === txn["id"] ? "border border-[var(--accent-primary)]" : "border-b border-b-[var(--border-subtle)]"} `}
                 >
                   {/* date */}
                   <p className="text-[var(--text-primary)]">{txn["date"]}</p>
@@ -136,18 +136,18 @@ const TransactionList = ({
                   <p className="text-[var(--text-primary)]">{txn["title"]}</p>
 
                   {/* method */}
-                  <p className="text-[var(--text-primary)] capitalize">
+                  <p className="hidden text-[var(--text-primary)] capitalize md:block">
                     {txn["paymentMethod"]}
                   </p>
 
                   {/* category */}
-                  <p className="text-[var(--text-primary)] capitalize">
+                  <p className="hidden text-[var(--text-primary)] capitalize md:block">
                     {txn["category"]}
                   </p>
 
                   {/* type */}
                   <p
-                    className={`${
+                    className={`hidden md:block ${
                       txn["type"] === "Income"
                         ? "bg-[var(--success-bg)] text-[var(--success)]"
                         : txn["type"] === "Expense"
@@ -155,7 +155,7 @@ const TransactionList = ({
                           : txn["type"] === "Goal"
                             ? "bg-[var(--warning-bg)] text-[var(--warning)]"
                             : ""
-                    } flex h-min w-max min-w-20 items-center justify-center rounded-full px-2`}
+                    } items-center8 flex h-min w-max min-w-20 justify-center rounded-full px-2 text-center`}
                   >
                     {txn["type"]}
                   </p>
@@ -170,7 +170,7 @@ const TransactionList = ({
                           setIsOptionOpen(txn["id"]);
                         }
                       }}
-                      className="cursor-pointer font-extrabold"
+                      className="cursor-pointer text-xs font-extrabold md:text-base"
                     >
                       {isOptionOpen === txn["id"] ? "✕" : ". . ."}
                     </button>
@@ -178,7 +178,7 @@ const TransactionList = ({
                     {/* conditional rendering using id to prevent global state effect */}
                     {isOptionOpen === txn["id"] && (
                       // options dropdown
-                      <div className="-bottom absolute -right-2/3 z-10 flex w-35 flex-col gap-2 rounded-xl border border-[var(--border-default)] bg-[var(--bg-primary)] p-1">
+                      <div className="-bottom absolute -right-2/3 z-10 flex w-30 flex-col gap-2 rounded-xl border border-[var(--border-default)] bg-[var(--bg-primary)] p-1 md:w-35">
                         {/* Edit button */}
                         <button
                           onClick={() => {
