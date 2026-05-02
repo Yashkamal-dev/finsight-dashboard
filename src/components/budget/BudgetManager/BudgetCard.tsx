@@ -82,7 +82,9 @@ const BudgetCard = ({
       {/* name container */}
       <div className="">
         {/* budget title */}
-        <h2 className={`text-2xl font-semibold capitalize`}>{category}</h2>
+        <h2 className={`text-xl font-semibold capitalize md:text-2xl`}>
+          {category}
+        </h2>
       </div>
 
       {/* summary */}
@@ -132,24 +134,25 @@ const BudgetCard = ({
         {/* information */}
         <div className={`gap flex flex-col gap-0.5`}>
           {/* span for "left" word */}
-          <span className={`text-[var(--text-secondary)]`}>Left</span>
+          <span className={`text-sm text-[var(--text-secondary)] md:text-base`}>
+            Left
+          </span>
 
           {/* amount Container */}
           <div className={`flex items-end`}>
-            <span className={`text-4xl font-bold`}>
+            <span className={`text-3xl font-bold md:text-4xl`}>
               {limit - spent}
-              <span className={`text-4xl font-bold text-[var(--text-muted)]`}>
-                .00
-              </span>
+              <span className={`font-bold text-[var(--text-muted)]`}>.00</span>
             </span>
-            <span className={`font-medium text-[var(--accent-text)]`}>
+            <span className={`text-base font-medium text-[var(--accent-text)]`}>
+              {" "}
               /{limit}
             </span>
           </div>
 
           {/* status */}
           <span
-            className={`mt-3 ${
+            className={`mt-1 md:mt-3 ${
               status < 70
                 ? "bg-[var(--success-bg)] text-[var(--success)]"
                 : status < 100
@@ -177,7 +180,7 @@ const BudgetCard = ({
           onClick={() => {
             setIsOptionOpen(!isOptionOpen);
           }}
-          className="flex cursor-pointer items-center justify-center rounded-full border border-[var(--border-default)] p-2.5 font-extrabold shadow-lg"
+          className="flex cursor-pointer items-center justify-center rounded-full border border-[var(--border-default)] p-2 font-extrabold shadow-lg md:p-2.5"
         >
           {isOptionOpen === true ? <X /> : <Ellipsis />}
         </button>
@@ -185,7 +188,7 @@ const BudgetCard = ({
         {/* conditional rendering using id to prevent global state effect */}
         {isOptionOpen === true && (
           // options dropdown
-          <div className="-bottom absolute right-0 z-10 mt-1 flex w-35 flex-col gap-2 rounded-xl border border-[var(--border-default)] bg-[var(--bg-primary)] p-1 shadow-lg">
+          <div className="-bottom absolute right-0 z-10 mt-1 flex w-30 flex-col gap-2 rounded-xl border border-[var(--border-default)] bg-[var(--bg-primary)] p-1 text-sm shadow-lg md:w-35">
             {/* Edit button */}
             <button
               onClick={() => {

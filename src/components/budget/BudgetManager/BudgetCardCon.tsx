@@ -41,18 +41,18 @@ const BudgetCardCon = ({
   }, [selectedOption, allBudget]);
 
   return (
-    <div className="grid grid-cols-[repeat(auto-fit,minmax(440px,1fr))] gap-6 py-5">
+    <div className="grid grid-cols-[repeat(auto-fit,minmax(340px,1fr))] md:gap-6 gap-4 py-5 md:grid-cols-[repeat(auto-fit,minmax(450px,1fr))]">
       {/* if no budget found */}
       {allBudget.length === 0 ? (
         // if no records for the selected month
         <div className="flex flex-col items-center py-10">
           {/* main text if no records found for selected month */}
-          <p className="text-lg text-[var(--text-primary)]">
+          <p className="text-[var(--text-primary)] md:text-lg">
             No budgets for this month
           </p>
 
           {/* sub text if no records found for selected month */}
-          <p className="text-base text-[var(--text-muted)]">
+          <p className="text-center text-sm text-[var(--text-muted)] md:text-base">
             Start by creating a budget to track your spending and stay on top of
             your finances
           </p>
