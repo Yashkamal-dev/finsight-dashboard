@@ -105,15 +105,15 @@ const EditGoalForm = ({ setIsEditing, goal }: props) => {
   };
 
   return (
-    <div className="relative flex w-125 flex-col gap-5 rounded-3xl bg-[var(--bg-primary)] px-5 py-4 shadow-xl">
+    <div className="relative flex w-95 flex-col gap-3 rounded-3xl bg-[var(--bg-primary)] px-5 py-4 shadow-xl md:w-125 md:gap-5">
       {/* form heading */}
-      <div className="flex flex-col items-center justify-center gap-1">
+      <div className="flex flex-col items-center justify-center md:gap-1">
         {/* title */}
-        <h1 className="text-2xl font-semibold text-[var(--text-primary)]">
+        <h1 className="text-xl font-semibold text-[var(--text-primary)] md:text-2xl">
           Edit Goal
         </h1>
         {/* subttle */}
-        <h2 className="text- text-[var(--text-secondary)]">
+        <h2 className="text-sm text-[var(--text-secondary)] md:text-base">
           Modify your goal details anytime
         </h2>
       </div>
@@ -122,13 +122,13 @@ const EditGoalForm = ({ setIsEditing, goal }: props) => {
       <form
         action="\"
         onSubmit={(e) => submitHandler(e)}
-        className="flex flex-col gap-5"
+        className="flex flex-col gap-3 md:gap-5"
       >
         {/* name container */}
         <div className="flex grow flex-col gap-2">
           {/* name label */}
           <div className="flex items-center gap-2">
-            <p className="text-lg font-medium">Title</p>
+            <p className="font-medium md:text-lg">Title</p>
             {errors["title"] && (
               // text to show on error - (if empty)
               <span className="text-lg text-[var(--danger)]">*</span>
@@ -146,20 +146,20 @@ const EditGoalForm = ({ setIsEditing, goal }: props) => {
               });
               setTitle(e.target.value);
             }}
-            className={`grow rounded-full ${errors["title"] === true ? "border-[var(--danger)]" : ""} border border-[var(--border-default)] py-2 pl-5 text-lg shadow-lg focus:outline-0`}
+            className={`grow rounded-full ${errors["title"] === true ? "border-[var(--danger)]" : ""} border border-[var(--border-default)] py-2 pl-5 text-sm shadow-lg focus:outline-0 md:text-lg`}
           />
         </div>
 
         {/* target amount & deadline container */}
         <div className="flex h-fit items-center gap-3">
           {/* amount */}
-          <div className="flex flex-1 flex-col gap-2">
+          <div className="flex min-w-0 flex-1 flex-col gap-2">
             {/* amount label */}
             <div className="flex items-center gap-2">
-              <p className="text-lg font-medium">Amount</p>
+              <p className="font-medium md:text-lg">Amount</p>
               {(errors["targetAmount"] || errors["belowSaved"]) && (
                 // text to show on error - (if empty)
-                <span className="text-lg text-[var(--danger)]">
+                <span className="text-sm text-[var(--danger)] md:text-lg">
                   {targetAmount == undefined
                     ? "*"
                     : errors["belowSaved"] === true
@@ -180,24 +180,24 @@ const EditGoalForm = ({ setIsEditing, goal }: props) => {
                 });
                 return setTargetAmount(Number(e.target.value));
               }}
-              className={`rounded-full ${errors["targetAmount"] === true ? "border-[var(--danger)]" : ""} border border-[var(--border-default)] py-2 pl-3 shadow-lg focus:outline-0`}
+              className={`rounded-full ${errors["targetAmount"] === true ? "border-[var(--danger)]" : ""} border border-[var(--border-default)] py-2 pl-3 text-sm shadow-lg focus:outline-0 md:text-lg`}
             />
           </div>
 
           {/* date container */}
-          <div className="flex flex-1 flex-col gap-2">
+          <div className="flex min-w-0 flex-1 flex-col gap-2">
             {/* deadline / date label */}
             <div className="flex items-center gap-2">
-              <p className="text-lg font-medium">Deadline</p>
+              <p className="font-medium md:text-lg">Deadline</p>
             </div>
 
             {/* date popover and label container */}
             <Popover>
               <PopoverTrigger asChild>
                 <div className="cursor-pointer rounded-full border border-[var(--border-default)] p-2 px-4 shadow-lg">
-                  <button className="flex gap-4">
+                  <button className="flex items-center gap-4">
                     <CalendarDays className="cursor-pointer text-[var(--text-secondary)]" />
-                    <p className="cursor-pointer">
+                    <p className="cursor-pointer text-sm md:text-lg">
                       {date ? formatDate(date) : "No Deadline"}
                     </p>
                   </button>
@@ -218,7 +218,7 @@ const EditGoalForm = ({ setIsEditing, goal }: props) => {
         </div>
 
         {/* cancel and save button */}
-        <div className="mt-1 flex gap-3 border-t border-[var(--border-default)] pt-4.5 pb-1">
+        <div className="mt-1 flex gap-3 border-t border-[var(--border-default)] pt-4.5 pb-1 text-sm md:text-base">
           {/* cancel button */}
           <button
             onClick={() => {
